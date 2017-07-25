@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<BugCollection version="3.0.1-dev-20150306-5afe4d1" sequence="5" timestamp="1501008848154" analysisTimestamp="1501008847561" release="">
+  <Project projectName="org.wso2.charon3.core">
+    <Jar>C:\Ak\Development\Scim_WSO2\charon\modules\charon-core\target\classes\org\wso2\charon3\core\protocol\endpoints\UserResourceManager.class</Jar>
+    <AuxClasspathEntry>C:\Ak\Development\Scim_WSO2\charon\modules\charon-core\target\classes</AuxClasspathEntry>
+    <AuxClasspathEntry>C:\Ak\Development\Scim_WSO2\charon\modules\charon-core\target\test-classes</AuxClasspathEntry>
+    <AuxClasspathEntry>C:\Users\AkshathaKadri\.m2\repository\org\json\json\20090211\json-20090211.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>C:\Users\AkshathaKadri\.m2\repository\commons-logging\commons-logging\1.2\commons-logging-1.2.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>C:\Users\AkshathaKadri\.m2\repository\org\apache\ws\commons\axiom\axiom-api\1.2.11\axiom-api-1.2.11.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>C:\Users\AkshathaKadri\.m2\repository\org\apache\geronimo\specs\geronimo-activation_1.1_spec\1.0.2\geronimo-activation_1.1_spec-1.0.2.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>C:\Users\AkshathaKadri\.m2\repository\org\apache\geronimo\specs\geronimo-javamail_1.4_spec\1.6\geronimo-javamail_1.4_spec-1.6.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>C:\Users\AkshathaKadri\.m2\repository\jaxen\jaxen\1.1.1\jaxen-1.1.1.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>C:\Users\AkshathaKadri\.m2\repository\org\apache\geronimo\specs\geronimo-stax-api_1.0_spec\1.0.1\geronimo-stax-api_1.0_spec-1.0.1.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>C:\Users\AkshathaKadri\.m2\repository\org\apache\ws\commons\axiom\axiom-impl\1.2.11\axiom-impl-1.2.11.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>C:\Users\AkshathaKadri\.m2\repository\org\codehaus\woodstox\wstx-asl\3.2.9\wstx-asl-3.2.9.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>C:\Users\AkshathaKadri\.m2\repository\junit\junit\4.8.1\junit-4.8.1.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>C:\Users\AkshathaKadri\.m2\repository\org\slf4j\slf4j-api\1.7.21\slf4j-api-1.7.21.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>C:\Program Files\Java\jre1.8.0_131\lib\rt.jar</AuxClasspathEntry>
+    <SrcDir>C:\Ak\Development\Scim_WSO2\charon\modules\charon-core\src\main\java</SrcDir>
+    <SrcDir>\org.wso2.charon3.core\src\test\java</SrcDir>
+    <Cloud id="edu.umd.cs.findbugs.cloud.doNothingCloud" online="false"></Cloud>
+  </Project>
+  <BugInstance type="DLS_DEAD_LOCAL_STORE" priority="3" rank="20" abbrev="DLS" category="STYLE" first="3">
+    <Class classname="org.wso2.charon3.core.protocol.endpoints.UserResourceManager">
+      <SourceLine classname="org.wso2.charon3.core.protocol.endpoints.UserResourceManager" sourcefile="UserResourceManager.java" sourcepath="org/wso2/charon3/core/protocol/endpoints/UserResourceManager.java"/>
+    </Class>
+    <Method classname="org.wso2.charon3.core.protocol.endpoints.UserResourceManager" name="updateWithPUT" signature="(Ljava/lang/String;Ljava/lang/String;Lorg/wso2/charon3/core/extensions/UserManager;Ljava/lang/String;Ljava/lang/String;)Lorg/wso2/charon3/core/protocol/SCIMResponse;" isStatic="false">
+      <SourceLine classname="org.wso2.charon3.core.protocol.endpoints.UserResourceManager" start="443" end="509" startBytecode="0" endBytecode="149" sourcefile="UserResourceManager.java" sourcepath="org/wso2/charon3/core/protocol/endpoints/UserResourceManager.java"/>
+    </Method>
+    <LocalVariable name="updatedUser" register="11" pc="80" role="LOCAL_VARIABLE_NAMED"/>
+    <SourceLine classname="org.wso2.charon3.core.protocol.endpoints.UserResourceManager" start="463" end="463" startBytecode="78" endBytecode="78" sourcefile="UserResourceManager.java" sourcepath="org/wso2/charon3/core/protocol/endpoints/UserResourceManager.java"/>
+    <SourceLine classname="org.wso2.charon3.core.protocol.endpoints.UserResourceManager" start="463" end="463" startBytecode="78" endBytecode="78" sourcefile="UserResourceManager.java" sourcepath="org/wso2/charon3/core/protocol/endpoints/UserResourceManager.java"/>
+    <Property name="edu.umd.cs.findbugs.detect.DeadLocalStoreProperty.KILLED_BY_SUBSEQUENT_STORE" value="true"/>
+    <Property name="edu.umd.cs.findbugs.detect.DeadLocalStoreProperty.LOCAL_NAME" value="updatedUser"/>
+    <Property name="edu.umd.cs.findbugs.detect.DeadLocalStoreProperty.METHOD_RESULT" value="true"/>
+  </BugInstance>
+  <Errors errors="0" missingClasses="0"></Errors>
+  <FindBugsSummary timestamp="Tue, 25 Jul 2017 13:54:07 -0500" total_classes="1" referenced_classes="47" total_bugs="1" total_size="316" num_packages="1" java_version="1.8.0_131" vm_version="25.131-b11" cpu_seconds="1.38" clock_seconds="0.59" peak_mbytes="1039.51" alloc_mbytes="1024.00" gc_seconds="0.04" priority_3="1">
+    <PackageStats package="org.wso2.charon3.core.protocol.endpoints" total_bugs="1" total_types="1" total_size="316" priority_3="1">
+      <ClassStats class="org.wso2.charon3.core.protocol.endpoints.UserResourceManager" sourceFile="UserResourceManager.java" interface="false" size="316" bugs="1" priority_3="1"/>
+    </PackageStats>
+    <FindBugsProfile>
+      <ClassProfile name="de.tobject.findbugs.builder.FindBugs2Eclipse" totalMilliseconds="118" invocations="2" avgMicrosecondsPerInvocation="59416" maxMicrosecondsPerInvocation="112431" standardDeviationMircosecondsPerInvocation="53014"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.ClassInfoAnalysisEngine" totalMilliseconds="89" invocations="423" avgMicrosecondsPerInvocation="211" maxMicrosecondsPerInvocation="5137" standardDeviationMircosecondsPerInvocation="439"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.TypeDataflowFactory" totalMilliseconds="49" invocations="17" avgMicrosecondsPerInvocation="2933" maxMicrosecondsPerInvocation="15198" standardDeviationMircosecondsPerInvocation="3758"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.ClassDataAnalysisEngine" totalMilliseconds="42" invocations="425" avgMicrosecondsPerInvocation="100" maxMicrosecondsPerInvocation="310" standardDeviationMircosecondsPerInvocation="49"/>
+      <ClassProfile name="edu.umd.cs.findbugs.OpcodeStack$JumpInfoFactory" totalMilliseconds="39" invocations="153" avgMicrosecondsPerInvocation="256" maxMicrosecondsPerInvocation="2742" standardDeviationMircosecondsPerInvocation="461"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FieldItemSummary" totalMilliseconds="23" invocations="47" avgMicrosecondsPerInvocation="494" maxMicrosecondsPerInvocation="5955" standardDeviationMircosecondsPerInvocation="992"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.ValueNumberDataflowFactory" totalMilliseconds="22" invocations="17" avgMicrosecondsPerInvocation="1340" maxMicrosecondsPerInvocation="5798" standardDeviationMircosecondsPerInvocation="1493"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.IsNullValueDataflowFactory" totalMilliseconds="21" invocations="10" avgMicrosecondsPerInvocation="2125" maxMicrosecondsPerInvocation="8068" standardDeviationMircosecondsPerInvocation="2363"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindNoSideEffectMethods" totalMilliseconds="18" invocations="47" avgMicrosecondsPerInvocation="383" maxMicrosecondsPerInvocation="2768" standardDeviationMircosecondsPerInvocation="614"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindRefComparison$SpecialTypeAnalysis" totalMilliseconds="15" invocations="10" avgMicrosecondsPerInvocation="1574" maxMicrosecondsPerInvocation="8730" standardDeviationMircosecondsPerInvocation="2505"/>
+      <ClassProfile name="edu.umd.cs.findbugs.ba.npe.NullDerefAndRedundantComparisonFinder" totalMilliseconds="11" invocations="10" avgMicrosecondsPerInvocation="1160" maxMicrosecondsPerInvocation="4092" standardDeviationMircosecondsPerInvocation="1137"/>
+    </FindBugsProfile>
+  </FindBugsSummary>
+  <ClassFeatures></ClassFeatures>
+  <History>
+    <AppVersion sequence="0" timestamp="1500934148101" release="" codeSize="0" numClasses="0"/>
+    <AppVersion sequence="1" timestamp="1500934148101" release="" codeSize="7844" numClasses="86"/>
+    <AppVersion sequence="2" timestamp="1501008739701" release="" codeSize="274" numClasses="1"/>
+    <AppVersion sequence="3" timestamp="1501008757049" release="" codeSize="317" numClasses="1"/>
+    <AppVersion sequence="4" timestamp="1501008844631" release="" codeSize="315" numClasses="1"/>
+  </History>
+</BugCollection>

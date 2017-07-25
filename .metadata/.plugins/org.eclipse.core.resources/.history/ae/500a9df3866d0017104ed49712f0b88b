@@ -1,0 +1,225 @@
+package org.wso2.charon3.utils.ldapmanager;
+
+import java.io.UnsupportedEncodingException;
+import java.security.Security;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import org.wso2.charon3.core.attributes.Attribute;
+import org.wso2.charon3.core.attributes.ComplexAttribute;
+import org.wso2.charon3.core.attributes.MultiValuedAttribute;
+import org.wso2.charon3.core.attributes.SimpleAttribute;
+import org.wso2.charon3.core.exceptions.CharonException;
+import org.wso2.charon3.core.objects.User;
+import org.wso2.charon3.core.schema.SCIMDefinitions;
+
+import com.novell.ldap.LDAPAttribute;
+import com.novell.ldap.LDAPAttributeSet;
+import com.novell.ldap.LDAPConnection;
+import com.novell.ldap.LDAPEntry;
+import com.novell.ldap.LDAPException;
+import com.novell.ldap.LDAPJSSESecureSocketFactory;
+import com.novell.ldap.LDAPSocketFactory;
+
+/**
+ * 
+ * @author AkshathaKadri
+ *
+ */
+public class LdapConnectUtil {
+
+	static final String KEYSTORE = "C:\\Program Files\\Java\\jdk1.8.0_131\\jre\\lib\\security\\cacerts1";
+
+	public static LDAPConnection getConnection() {
+		return getConnection(false);
+	}
+	@SuppressWarnings("restriction")
+	public static LDAPConnection getConnection(boolean isTest) {
+		int ldapPort 		  = LDAPConnection.DEFAULT_SSL_PORT;
+
+		int ldapVersion		  = LDAPConnection.LDAP_V3;
+
+		String ldapHost, loginDN, password;
+		if (!isTest) {
+			ldapHost       = "192.168.1.11";
+			loginDN        = "cn=admin,ou=services,o=system";
+			password       = "admin123";
+		} else {
+			ldapHost       = "10.0.8.54";
+			loginDN        = "cn=admin,ou=services,o=system";
+			password       = "abcd1234";
+		}
+
+		try {
+			// Dynamically set JSSE as a security provider
+			Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
+
+			// Dynamically set the property that JSSE uses to identify
+			// the keystore that holds trusted root certificates
+			System.setProperty("javax.net.ssl.trustStore", KEYSTORE);
+
+			LDAPSocketFactory ssf = new LDAPJSSESecureSocketFactory();
+
+			// Set the socket factory as the default for all future connections
+			LDAPConnection.setSocketFactory(ssf);
+
+			LDAPConnection lc = new LDAPConnection();
+			// Note: the socket factory can also be passed in as a parameter
+			// connect to the server
+			lc.connect (ldapHost, ldapPort);
+
+			// authenticate to the server
+			lc.bind(ldapVersion, loginDN, password.getBytes("UTF8"));
+
+			// at this point you are connected with a secure connection
+			System.out.println("Successful SSL bind with server.");
+
+			return lc;
+		} catch( LDAPException e ) {
+			System.out.println( "Error: " + e.toString() );
+		} catch( UnsupportedEncodingException e ) {
+			System.out.println( "Error: " + e.toString() );
+		}
+		return null;
+	}
+
+	public static LDAPEntry copyUserToLdap0(User user) throws CharonException{
+		System.out.println(user);
+		LDAPAttributeSet attributeSet = new LDAPAttributeSet();
+		attributeSet.add(new LDAPAttribute("uid",user.getId()));
+
+		Map<String, Attribute> attributes = user.getAttributeList();
+		Set<String> keys = attributes.keySet();
+		for(String key:keys){
+			attributeSet.add(new LDAPAttribute(key,attributes.get(key).toString()));
+		}
+		String dn = "cn="+user.getId()+",ou=users,o=people";
+		LDAPEntry entry = new LDAPEntry(dn,attributeSet);
+		//attributeSet.addAll((Collection) user.getAttributeList());
+		//(LDAPAttributeSet) CopyUtil.deepCopy(map);   
+		return entry;
+	}
+	public static User convertLdapToUser(LDAPEntry nextEntry) {
+		return new User();
+	}
+
+	public LDAPAttributeSet copyUserToLdap(User user) {
+		LDAPAttributeSet attributeSet = new LDAPAttributeSet();
+
+		Map<String, Attribute> attributeList = user.getAttributeList();
+		for (Attribute attribute : attributeList.values()) {
+			if (attribute instanceof SimpleAttribute) {
+				attributeSet = simpleAttributeToString(attributeSet, attribute);
+
+			} else if (attribute instanceof ComplexAttribute) {
+				ComplexAttribute complexAttribute = (ComplexAttribute) attribute;
+				Map<String, Attribute> subAttributes = complexAttribute.getSubAttributesList();
+				for (Attribute subAttribute : subAttributes.values()) {
+					if (subAttribute instanceof SimpleAttribute) {
+						attributeSet = simpleAttributeToString(attributeSet,
+								(Attribute) ((SimpleAttribute) subAttribute));
+
+					} else if (subAttribute instanceof MultiValuedAttribute) {
+						if (!subAttribute.getType().equals(SCIMDefinitions.DataType.COMPLEX)) {
+							attributeSet = multiValuedPrimitiveAttributeToString(
+									((MultiValuedAttribute) subAttribute).getAttributePrimitiveValues(),
+									subAttribute.getName(), attributeSet);
+						} else {
+							List<Attribute> subAttributeList  =
+									((MultiValuedAttribute) (subAttribute)).getAttributeValues();
+
+							for (Attribute subValue : subAttributeList) {
+
+								ComplexAttribute complexSubAttribute = (ComplexAttribute) subValue;
+								Map<String, Attribute> subSubAttributes = complexSubAttribute.getSubAttributesList();
+
+								for (Attribute subSubAttribute : subSubAttributes.values()) {
+									if (subSubAttribute instanceof SimpleAttribute) {
+
+										attributeSet =  simpleAttributeToString(attributeSet,
+												(Attribute) ((SimpleAttribute) subSubAttribute));
+
+									} else if (subSubAttribute instanceof MultiValuedAttribute) {
+										attributeSet = multiValuedPrimitiveAttributeToString(
+												((MultiValuedAttribute) subSubAttribute).getAttributePrimitiveValues(),
+												subSubAttribute.getName(),attributeSet);
+									}
+								}
+							}
+						}
+					} else if (subAttribute instanceof ComplexAttribute) {
+						ComplexAttribute complexSubAttribute = (ComplexAttribute) subAttribute;
+						Map<String, Attribute> subSubAttributes = complexSubAttribute.getSubAttributesList();
+
+						for (Attribute subSubAttribute : subSubAttributes.values()) {
+							if (subSubAttribute instanceof SimpleAttribute) {
+								attributeSet = simpleAttributeToString(attributeSet,
+										(Attribute) ((SimpleAttribute) subSubAttribute));
+
+							} else if (subSubAttribute instanceof MultiValuedAttribute) {
+								attributeSet = multiValuedPrimitiveAttributeToString(
+										((MultiValuedAttribute) subSubAttribute).getAttributePrimitiveValues(),
+										subSubAttribute.getName(),attributeSet);
+							}
+						}
+					}
+				}
+			} else if (attribute instanceof MultiValuedAttribute) {
+				MultiValuedAttribute multiValuedAttribute = (MultiValuedAttribute) attribute;
+				if (multiValuedAttribute.getType().equals(SCIMDefinitions.DataType.COMPLEX)) {
+					List<Attribute> subAttributeList  = multiValuedAttribute.getAttributeValues();
+					for (Attribute subAttribute : subAttributeList) {
+						ComplexAttribute complexSubAttribute = (ComplexAttribute) subAttribute;
+						Map<String, Attribute> subSubAttributes = complexSubAttribute.getSubAttributesList();
+						for (Attribute subSubAttribute : subSubAttributes.values()) {
+							if (subSubAttribute instanceof SimpleAttribute) {
+
+								attributeSet = simpleAttributeToString(attributeSet,
+										(Attribute) ((SimpleAttribute) subSubAttribute));
+
+							} else if (subSubAttribute instanceof MultiValuedAttribute) {
+								attributeSet = multiValuedPrimitiveAttributeToString(
+										((MultiValuedAttribute) subSubAttribute).getAttributePrimitiveValues(),
+										subSubAttribute.getName(),attributeSet);
+							}
+						}
+					}
+				} else {
+					List<Object> primitiveValueList = multiValuedAttribute.getAttributePrimitiveValues();
+					attributeSet = multiValuedPrimitiveAttributeToString(primitiveValueList,
+							multiValuedAttribute.getName(),attributeSet);
+				}
+
+			}
+		}
+		return attributeSet;
+	}
+
+	private LDAPAttributeSet simpleAttributeToString (LDAPAttributeSet attributeSet, Attribute attribute) {
+		SimpleAttribute simpleAttribute = (SimpleAttribute) attribute;
+		try{
+			LdapScimAttrMap name = LdapScimAttrMap.valueOf(simpleAttribute.getName());
+			if(name != null && attributeSet != null) {
+				attributeSet.add(new LDAPAttribute(name.getValue(),simpleAttribute.getValue().toString()));
+			}
+		} catch (Exception e){
+			System.out.println("Mapping for '"+simpleAttribute.getName()+"' missing!");
+		}
+		return attributeSet;
+	}
+
+	private LDAPAttributeSet multiValuedPrimitiveAttributeToString(List<Object> attributePrimitiveValues, String attributeName,LDAPAttributeSet attributeSet) {
+		try{
+			LdapScimAttrMap name = LdapScimAttrMap.valueOf(attributeName);
+			if(name != null && attributeSet != null) {
+				for (Object item  : attributePrimitiveValues) {
+					attributeSet.add(new LDAPAttribute(name.getValue(),(String) item));
+				}
+			}
+		} catch (Exception e){
+			System.out.println("Mapping for '"+attributeName+"' missing!");
+		}
+		return attributeSet;
+	}
+}

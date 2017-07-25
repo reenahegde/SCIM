@@ -1,0 +1,736 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<BugCollection version="3.0.1-dev-20150306-5afe4d1" sequence="224" timestamp="1501011481627" analysisTimestamp="1501011481159" release="">
+  <Project projectName="org.wso2.charon3.utils">
+    <Jar>C:\Ak\Development\Scim_WSO2\charon\modules\charon-utils\target\classes\org\wso2\charon3\utils\ldapmanager\LdapManager.class</Jar>
+    <AuxClasspathEntry>C:\Ak\Development\Scim_WSO2\charon\modules\charon-utils\target\classes</AuxClasspathEntry>
+    <AuxClasspathEntry>C:\Ak\Development\Scim_WSO2\charon\modules\charon-utils\target\test-classes</AuxClasspathEntry>
+    <AuxClasspathEntry>C:\Users\AkshathaKadri\.m2\repository\javax\ws\rs\jsr311-api\1.1.1\jsr311-api-1.1.1.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>C:\Users\AkshathaKadri\.m2\repository\org\apache\ws\commons\axiom\axiom-api\1.2.11\axiom-api-1.2.11.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>C:\Users\AkshathaKadri\.m2\repository\org\apache\geronimo\specs\geronimo-activation_1.1_spec\1.0.2\geronimo-activation_1.1_spec-1.0.2.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>C:\Users\AkshathaKadri\.m2\repository\org\apache\geronimo\specs\geronimo-javamail_1.4_spec\1.6\geronimo-javamail_1.4_spec-1.6.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>C:\Users\AkshathaKadri\.m2\repository\jaxen\jaxen\1.1.1\jaxen-1.1.1.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>C:\Users\AkshathaKadri\.m2\repository\org\apache\geronimo\specs\geronimo-stax-api_1.0_spec\1.0.1\geronimo-stax-api_1.0_spec-1.0.1.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>C:\Ak\Development\Scim_WSO2\charon\modules\charon-core\target\classes</AuxClasspathEntry>
+    <AuxClasspathEntry>C:\Ak\Development\Scim_WSO2\charon\modules\charon-core\target\test-classes</AuxClasspathEntry>
+    <AuxClasspathEntry>C:\Users\AkshathaKadri\.m2\repository\org\json\json\20090211\json-20090211.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>C:\Users\AkshathaKadri\.m2\repository\commons-logging\commons-logging\1.2\commons-logging-1.2.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>C:\Users\AkshathaKadri\.m2\repository\org\apache\ws\commons\axiom\axiom-impl\1.2.11\axiom-impl-1.2.11.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>C:\Users\AkshathaKadri\.m2\repository\org\codehaus\woodstox\wstx-asl\3.2.9\wstx-asl-3.2.9.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>C:\Users\AkshathaKadri\.m2\repository\junit\junit\4.8.1\junit-4.8.1.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>C:\Users\AkshathaKadri\.m2\repository\org\slf4j\slf4j-api\1.7.21\slf4j-api-1.7.21.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>C:\Users\AkshathaKadri\.m2\repository\com\novell\ldap\jldap\4.3\jldap-4.3.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>C:\Program Files\Java\jre1.8.0_131\lib\rt.jar</AuxClasspathEntry>
+    <SrcDir>C:\Ak\Development\Scim_WSO2\charon\modules\charon-utils\src\main\java</SrcDir>
+    <SrcDir>\org.wso2.charon3.utils\src\test\java</SrcDir>
+    <Cloud id="edu.umd.cs.findbugs.cloud.doNothingCloud" online="false"></Cloud>
+  </Project>
+  <BugInstance type="DLS_DEAD_LOCAL_STORE" priority="1" rank="15" abbrev="DLS" category="STYLE" first="195" last="195" removedByChange="true">
+    <Class classname="org.wso2.charon3.utils.ldapmanager.LdapManager">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapManager" sourcefile="LdapManager.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapManager.java"/>
+    </Class>
+    <Method classname="org.wso2.charon3.utils.ldapmanager.LdapManager" name="updateUser" signature="(Lorg/wso2/charon3/core/objects/User;Ljava/util/Map;)Lorg/wso2/charon3/core/objects/User;" isStatic="false">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapManager" start="178" end="200" startBytecode="0" endBytecode="86" sourcefile="LdapManager.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapManager.java"/>
+    </Method>
+    <LocalVariable name="dbUser" register="6" pc="55" role="LOCAL_VARIABLE_NAMED"/>
+    <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapManager" start="184" end="184" startBytecode="53" endBytecode="53" sourcefile="LdapManager.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapManager.java"/>
+    <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapManager" start="184" end="184" startBytecode="53" endBytecode="53" sourcefile="LdapManager.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapManager.java"/>
+    <Property name="edu.umd.cs.findbugs.detect.DeadLocalStoreProperty.DEAD_OBJECT_STORE" value="true"/>
+    <Property name="edu.umd.cs.findbugs.detect.DeadLocalStoreProperty.LOCAL_NAME" value="dbUser"/>
+    <Property name="edu.umd.cs.findbugs.detect.DeadLocalStoreProperty.METHOD_RESULT" value="true"/>
+  </BugInstance>
+  <BugInstance type="DLS_DEAD_LOCAL_STORE" priority="2" rank="17" abbrev="DLS" category="STYLE" first="169" last="174" removedByChange="true">
+    <Class classname="org.wso2.charon3.utils.ldapmanager.LdapManager">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapManager" sourcefile="LdapManager.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapManager.java"/>
+    </Class>
+    <Method classname="org.wso2.charon3.utils.ldapmanager.LdapManager" name="updateUser" signature="(Lorg/wso2/charon3/core/objects/User;Ljava/util/Map;)Lorg/wso2/charon3/core/objects/User;" isStatic="false">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapManager" start="177" end="199" startBytecode="0" endBytecode="63" sourcefile="LdapManager.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapManager.java"/>
+    </Method>
+    <LocalVariable name="modList" register="5" pc="25" role="LOCAL_VARIABLE_NAMED"/>
+    <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapManager" start="184" end="184" startBytecode="23" endBytecode="23" sourcefile="LdapManager.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapManager.java"/>
+    <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapManager" start="184" end="184" startBytecode="23" endBytecode="23" sourcefile="LdapManager.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapManager.java"/>
+    <Property name="edu.umd.cs.findbugs.detect.DeadLocalStoreProperty.LOCAL_NAME" value="modList"/>
+    <Property name="edu.umd.cs.findbugs.detect.DeadLocalStoreProperty.METHOD_RESULT" value="true"/>
+    <Property name="edu.umd.cs.findbugs.detect.DeadLocalStoreProperty.NO_LOADS" value="true"/>
+  </BugInstance>
+  <BugInstance type="DLS_DEAD_LOCAL_STORE" priority="2" rank="17" abbrev="DLS" category="STYLE" first="211" last="211" removedByChange="true">
+    <Class classname="org.wso2.charon3.utils.ldapmanager.LdapManager">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapManager" sourcefile="LdapManager.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapManager.java"/>
+    </Class>
+    <Method classname="org.wso2.charon3.utils.ldapmanager.LdapManager" name="updateUser" signature="(Lorg/wso2/charon3/core/objects/User;Ljava/util/Map;)Lorg/wso2/charon3/core/objects/User;" isStatic="false">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapManager" start="177" end="203" startBytecode="0" endBytecode="58" sourcefile="LdapManager.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapManager.java"/>
+    </Method>
+    <LocalVariable name="mods" register="7" pc="70" role="LOCAL_VARIABLE_NAMED"/>
+    <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapManager" start="193" end="193" startBytecode="68" endBytecode="68" sourcefile="LdapManager.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapManager.java"/>
+    <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapManager" start="193" end="193" startBytecode="68" endBytecode="68" sourcefile="LdapManager.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapManager.java"/>
+    <Property name="edu.umd.cs.findbugs.detect.DeadLocalStoreProperty.LOCAL_NAME" value="mods"/>
+    <Property name="edu.umd.cs.findbugs.detect.DeadLocalStoreProperty.TWO_STORES_MULTIPLE_LOADS" value="true"/>
+  </BugInstance>
+  <BugInstance type="DLS_DEAD_LOCAL_STORE" priority="3" rank="20" abbrev="DLS" category="STYLE" first="1">
+    <Class classname="org.wso2.charon3.utils.ldapmanager.LdapManager">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapManager" sourcefile="LdapManager.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapManager.java"/>
+    </Class>
+    <Method classname="org.wso2.charon3.utils.ldapmanager.LdapManager" name="getUser" signature="(Ljava/lang/String;Ljava/util/Map;)Lorg/wso2/charon3/core/objects/User;" isStatic="false">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapManager" start="82" end="93" startBytecode="0" endBytecode="35" sourcefile="LdapManager.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapManager.java"/>
+    </Method>
+    <LocalVariable name="searchResult" register="6" pc="39" role="LOCAL_VARIABLE_NAMED"/>
+    <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapManager" start="86" end="86" startBytecode="37" endBytecode="37" sourcefile="LdapManager.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapManager.java"/>
+    <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapManager" start="86" end="86" startBytecode="37" endBytecode="37" sourcefile="LdapManager.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapManager.java"/>
+    <Property name="edu.umd.cs.findbugs.detect.DeadLocalStoreProperty.KILLED_BY_SUBSEQUENT_STORE" value="true"/>
+    <Property name="edu.umd.cs.findbugs.detect.DeadLocalStoreProperty.LOCAL_NAME" value="searchResult"/>
+    <Property name="edu.umd.cs.findbugs.detect.DeadLocalStoreProperty.METHOD_RESULT" value="true"/>
+    <Property name="edu.umd.cs.findbugs.detect.DeadLocalStoreProperty.NO_LOADS" value="true"/>
+  </BugInstance>
+  <BugInstance type="DLS_DEAD_LOCAL_STORE" priority="3" rank="20" abbrev="DLS" category="STYLE" first="190" last="200" removedByChange="true">
+    <Class classname="org.wso2.charon3.utils.ldapmanager.LdapManager">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapManager" sourcefile="LdapManager.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapManager.java"/>
+    </Class>
+    <Method classname="org.wso2.charon3.utils.ldapmanager.LdapManager" name="updateUser" signature="(Lorg/wso2/charon3/core/objects/User;Ljava/util/Map;)Lorg/wso2/charon3/core/objects/User;" isStatic="false">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapManager" start="178" end="199" startBytecode="0" endBytecode="86" sourcefile="LdapManager.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapManager.java"/>
+    </Method>
+    <LocalVariable name="searchResult" register="5" pc="46" role="LOCAL_VARIABLE_NAMED"/>
+    <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapManager" start="182" end="182" startBytecode="44" endBytecode="44" sourcefile="LdapManager.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapManager.java"/>
+    <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapManager" start="182" end="182" startBytecode="44" endBytecode="44" sourcefile="LdapManager.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapManager.java"/>
+    <Property name="edu.umd.cs.findbugs.detect.DeadLocalStoreProperty.KILLED_BY_SUBSEQUENT_STORE" value="true"/>
+    <Property name="edu.umd.cs.findbugs.detect.DeadLocalStoreProperty.LOCAL_NAME" value="searchResult"/>
+    <Property name="edu.umd.cs.findbugs.detect.DeadLocalStoreProperty.METHOD_RESULT" value="true"/>
+  </BugInstance>
+  <BugInstance type="RCN_REDUNDANT_NULLCHECK_OF_NONNULL_VALUE" priority="2" rank="18" abbrev="RCN" category="STYLE" first="205" last="214" removedByChange="true">
+    <Class classname="org.wso2.charon3.utils.ldapmanager.LdapManager">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapManager" sourcefile="LdapManager.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapManager.java"/>
+    </Class>
+    <Method classname="org.wso2.charon3.utils.ldapmanager.LdapManager" name="updateUser" signature="(Lorg/wso2/charon3/core/objects/User;Ljava/util/Map;)Lorg/wso2/charon3/core/objects/User;" isStatic="false">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapManager" start="177" end="202" startBytecode="0" endBytecode="389" sourcefile="LdapManager.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapManager.java"/>
+    </Method>
+    <LocalVariable name="id" register="3" pc="4" role="LOCAL_VARIABLE_VALUE_OF"/>
+    <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapManager" start="178" end="178" startBytecode="5" endBytecode="5" sourcefile="LdapManager.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapManager.java" role="SOURCE_REDUNDANT_NULL_CHECK"/>
+    <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapManager" start="178" end="178" startBytecode="5" endBytecode="5" sourcefile="LdapManager.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapManager.java" role="SOURCE_REDUNDANT_NULL_CHECK"/>
+  </BugInstance>
+  <BugInstance type="UPM_UNCALLED_PRIVATE_METHOD" priority="3" rank="20" abbrev="UPM" category="PERFORMANCE" first="215" last="222" removedByChange="true">
+    <Class classname="org.wso2.charon3.utils.ldapmanager.LdapManager">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapManager" sourcefile="LdapManager.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapManager.java"/>
+    </Class>
+    <Method classname="org.wso2.charon3.utils.ldapmanager.LdapManager" name="listGroups" signature="(Ljava/util/Map;)Ljava/util/List;" isStatic="false">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapManager" start="274" end="274" startBytecode="0" endBytecode="51" sourcefile="LdapManager.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapManager.java"/>
+    </Method>
+  </BugInstance>
+  <BugInstance type="UPM_UNCALLED_PRIVATE_METHOD" priority="3" rank="20" abbrev="UPM" category="PERFORMANCE" first="215" last="222" removedByChange="true">
+    <Class classname="org.wso2.charon3.utils.ldapmanager.LdapManager">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapManager" sourcefile="LdapManager.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapManager.java"/>
+    </Class>
+    <Method classname="org.wso2.charon3.utils.ldapmanager.LdapManager" name="listUsers" signature="(Ljava/util/Map;)Ljava/util/List;" isStatic="false">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapManager" start="150" end="150" startBytecode="0" endBytecode="51" sourcefile="LdapManager.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapManager.java"/>
+    </Method>
+  </BugInstance>
+  <BugInstance type="UUF_UNUSED_FIELD" priority="2" rank="18" abbrev="UuF" category="PERFORMANCE" first="215" last="222" removedByChange="true">
+    <Class classname="org.wso2.charon3.utils.ldapmanager.LdapManager">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapManager" sourcefile="LdapManager.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapManager.java"/>
+    </Class>
+    <Field classname="org.wso2.charon3.utils.ldapmanager.LdapManager" name="inMemoryGroupList" signature="Ljava/util/concurrent/ConcurrentHashMap;" isStatic="false">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapManager" start="53" end="53" startBytecode="0" endBytecode="0" sourcefile="LdapManager.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapManager.java"/>
+    </Field>
+  </BugInstance>
+  <BugInstance type="UUF_UNUSED_FIELD" priority="2" rank="18" abbrev="UuF" category="PERFORMANCE" first="215" last="222" removedByChange="true">
+    <Class classname="org.wso2.charon3.utils.ldapmanager.LdapManager">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapManager" sourcefile="LdapManager.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapManager.java"/>
+    </Class>
+    <Field classname="org.wso2.charon3.utils.ldapmanager.LdapManager" name="inMemoryUserList" signature="Ljava/util/concurrent/ConcurrentHashMap;" isStatic="false">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapManager" start="52" end="52" startBytecode="0" endBytecode="0" sourcefile="LdapManager.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapManager.java"/>
+    </Field>
+  </BugInstance>
+  <BugInstance type="UUF_UNUSED_FIELD" priority="2" rank="18" abbrev="UuF" category="PERFORMANCE" first="215" last="222" removedByChange="true">
+    <Class classname="org.wso2.charon3.utils.ldapmanager.LdapManager">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapManager" sourcefile="LdapManager.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapManager.java"/>
+    </Class>
+    <Field classname="org.wso2.charon3.utils.ldapmanager.LdapManager" name="logger" signature="Lorg/slf4j/Logger;" isStatic="true">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapManager" start="50" end="50" startBytecode="0" endBytecode="0" sourcefile="LdapManager.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapManager.java"/>
+    </Field>
+  </BugInstance>
+  <BugInstance type="ME_ENUM_FIELD_SETTER" priority="2" rank="16" abbrev="ME" category="BAD_PRACTICE" first="1">
+    <Class classname="org.wso2.charon3.utils.ldapmanager.LdapScimAttrMap">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapScimAttrMap" sourcefile="LdapScimAttrMap.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapScimAttrMap.java"/>
+    </Class>
+    <Method classname="org.wso2.charon3.utils.ldapmanager.LdapScimAttrMap" name="setSet" signature="(Z)V" isStatic="false">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapScimAttrMap" start="80" end="81" startBytecode="0" endBytecode="61" sourcefile="LdapScimAttrMap.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapScimAttrMap.java"/>
+    </Method>
+    <Field classname="org.wso2.charon3.utils.ldapmanager.LdapScimAttrMap" name="isSet" signature="Z" isStatic="false">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapScimAttrMap" sourcefile="LdapScimAttrMap.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapScimAttrMap.java"/>
+    </Field>
+    <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapScimAttrMap" start="80" end="80" startBytecode="2" endBytecode="2" sourcefile="LdapScimAttrMap.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapScimAttrMap.java"/>
+  </BugInstance>
+  <BugInstance type="DLS_DEAD_LOCAL_STORE" priority="1" rank="15" abbrev="DLS" category="STYLE" first="93" last="93" removedByChange="true">
+    <Class classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper" sourcefile="LdapUpdateHelper.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUpdateHelper.java"/>
+    </Class>
+    <Method classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper" name="addSimpleAttribute" signature="(Ljava/lang/String;Lorg/wso2/charon3/core/attributes/Attribute;Ljava/util/List;I)Ljava/util/List;" isStatic="true">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper" start="152" end="163" startBytecode="0" endBytecode="36" sourcefile="LdapUpdateHelper.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUpdateHelper.java"/>
+    </Method>
+    <LocalVariable name="name" register="0" pc="16" role="LOCAL_VARIABLE_NAMED"/>
+    <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper" start="156" end="156" startBytecode="15" endBytecode="15" sourcefile="LdapUpdateHelper.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUpdateHelper.java"/>
+    <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper" start="156" end="156" startBytecode="15" endBytecode="15" sourcefile="LdapUpdateHelper.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUpdateHelper.java"/>
+    <Property name="edu.umd.cs.findbugs.detect.DeadLocalStoreProperty.BASE_VALUE" value="true"/>
+    <Property name="edu.umd.cs.findbugs.detect.DeadLocalStoreProperty.IS_PARAMETER" value="true"/>
+    <Property name="edu.umd.cs.findbugs.detect.DeadLocalStoreProperty.LOCAL_NAME" value="name"/>
+    <Property name="edu.umd.cs.findbugs.detect.DeadLocalStoreProperty.METHOD_RESULT" value="true"/>
+    <Property name="edu.umd.cs.findbugs.detect.DeadLocalStoreProperty.TWO_STORES_MULTIPLE_LOADS" value="true"/>
+  </BugInstance>
+  <BugInstance type="REC_CATCH_EXCEPTION" priority="3" rank="20" abbrev="REC" category="STYLE" first="47" last="48" removedByChange="true">
+    <Class classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper" sourcefile="LdapUpdateHelper.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUpdateHelper.java"/>
+    </Class>
+    <Method classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper" name="addMultiValuedPrimitiveAttribute" signature="(Ljava/util/List;Ljava/lang/String;Lcom/novell/ldap/LDAPAttributeSet;)Lcom/novell/ldap/LDAPAttributeSet;" isStatic="true">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper" start="170" end="179" startBytecode="0" endBytecode="291" sourcefile="LdapUpdateHelper.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUpdateHelper.java"/>
+    </Method>
+    <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper" start="176" end="176" startBytecode="64" endBytecode="64" sourcefile="LdapUpdateHelper.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUpdateHelper.java"/>
+    <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper" start="176" end="176" startBytecode="64" endBytecode="64" sourcefile="LdapUpdateHelper.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUpdateHelper.java"/>
+  </BugInstance>
+  <BugInstance type="REC_CATCH_EXCEPTION" priority="3" rank="20" abbrev="REC" category="STYLE" first="107">
+    <Class classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper" sourcefile="LdapUpdateHelper.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUpdateHelper.java"/>
+    </Class>
+    <Method classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper" name="addMultiValuedPrimitiveAttribute" signature="(Ljava/util/List;Ljava/lang/String;Ljava/util/List;I)Ljava/util/List;" isStatic="true">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper" start="148" end="155" startBytecode="0" endBytecode="301" sourcefile="LdapUpdateHelper.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUpdateHelper.java"/>
+    </Method>
+    <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper" start="152" end="152" startBytecode="55" endBytecode="55" sourcefile="LdapUpdateHelper.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUpdateHelper.java"/>
+    <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper" start="152" end="152" startBytecode="55" endBytecode="55" sourcefile="LdapUpdateHelper.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUpdateHelper.java"/>
+  </BugInstance>
+  <BugInstance type="REC_CATCH_EXCEPTION" priority="3" rank="20" abbrev="REC" category="STYLE" first="47" last="47" removedByChange="true">
+    <Class classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper" sourcefile="LdapUpdateHelper.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUpdateHelper.java"/>
+    </Class>
+    <Method classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper" name="addSimpleAttribute" signature="(Ljava/lang/String;Lcom/novell/ldap/LDAPAttributeSet;Lorg/wso2/charon3/core/attributes/Attribute;)Lcom/novell/ldap/LDAPAttributeSet;" isStatic="true">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper" start="170" end="185" startBytecode="0" endBytecode="285" sourcefile="LdapUpdateHelper.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUpdateHelper.java"/>
+    </Method>
+    <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper" start="182" end="182" startBytecode="63" endBytecode="63" sourcefile="LdapUpdateHelper.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUpdateHelper.java"/>
+    <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper" start="182" end="182" startBytecode="63" endBytecode="63" sourcefile="LdapUpdateHelper.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUpdateHelper.java"/>
+  </BugInstance>
+  <BugInstance type="REC_CATCH_EXCEPTION" priority="3" rank="20" abbrev="REC" category="STYLE" first="93">
+    <Class classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper" sourcefile="LdapUpdateHelper.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUpdateHelper.java"/>
+    </Class>
+    <Method classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper" name="addSimpleAttribute" signature="(Ljava/lang/String;Lorg/wso2/charon3/core/attributes/Attribute;Ljava/util/List;I)Ljava/util/List;" isStatic="true">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper" start="134" end="142" startBytecode="0" endBytecode="257" sourcefile="LdapUpdateHelper.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUpdateHelper.java"/>
+    </Method>
+    <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper" start="139" end="139" startBytecode="48" endBytecode="48" sourcefile="LdapUpdateHelper.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUpdateHelper.java"/>
+    <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper" start="139" end="139" startBytecode="48" endBytecode="48" sourcefile="LdapUpdateHelper.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUpdateHelper.java"/>
+  </BugInstance>
+  <BugInstance type="SBSC_USE_STRINGBUFFER_CONCATENATION" priority="2" rank="18" abbrev="SBSC" category="PERFORMANCE" first="47">
+    <Class classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper" sourcefile="LdapUpdateHelper.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUpdateHelper.java"/>
+    </Class>
+    <Method classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper" name="getAttributeName" signature="(Lorg/wso2/charon3/core/attributes/Attribute;)Ljava/lang/String;" isStatic="true">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper" start="159" end="191" startBytecode="0" endBytecode="634" sourcefile="LdapUpdateHelper.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUpdateHelper.java"/>
+    </Method>
+    <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper" start="173" end="173" startBytecode="258" endBytecode="258" sourcefile="LdapUpdateHelper.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUpdateHelper.java"/>
+  </BugInstance>
+  <BugInstance type="UPM_UNCALLED_PRIVATE_METHOD" priority="3" rank="20" abbrev="UPM" category="PERFORMANCE" first="78" last="152" removedByChange="true">
+    <Class classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper" sourcefile="LdapUpdateHelper.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUpdateHelper.java"/>
+    </Class>
+    <Method classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper" name="LDAPModHelper" signature="(ILjava/lang/String;Ljava/lang/String;Ljava/util/List;)Ljava/util/List;" isStatic="true">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper" start="183" end="183" startBytecode="0" endBytecode="41" sourcefile="LdapUpdateHelper.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUpdateHelper.java"/>
+    </Method>
+  </BugInstance>
+  <BugInstance type="UPM_UNCALLED_PRIVATE_METHOD" priority="3" rank="20" abbrev="UPM" category="PERFORMANCE" first="48" last="48" removedByChange="true">
+    <Class classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper" sourcefile="LdapUpdateHelper.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUpdateHelper.java"/>
+    </Class>
+    <Method classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper" name="addMultiValuedPrimitiveAttribute" signature="(Ljava/util/List;Ljava/lang/String;Lcom/novell/ldap/LDAPAttributeSet;)Lcom/novell/ldap/LDAPAttributeSet;" isStatic="true">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper" start="170" end="179" startBytecode="0" endBytecode="291" sourcefile="LdapUpdateHelper.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUpdateHelper.java"/>
+    </Method>
+  </BugInstance>
+  <BugInstance type="UPM_UNCALLED_PRIVATE_METHOD" priority="3" rank="20" abbrev="UPM" category="PERFORMANCE" first="49" last="50" removedByChange="true">
+    <Class classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper" sourcefile="LdapUpdateHelper.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUpdateHelper.java"/>
+    </Class>
+    <Method classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper" name="addMultiValuedPrimitiveAttribute" signature="(Ljava/util/List;Ljava/lang/String;Lcom/novell/ldap/LDAPAttributeSet;)Ljava/util/List;" isStatic="true">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper" start="180" end="180" startBytecode="0" endBytecode="41" sourcefile="LdapUpdateHelper.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUpdateHelper.java"/>
+    </Method>
+  </BugInstance>
+  <BugInstance type="UPM_UNCALLED_PRIVATE_METHOD" priority="3" rank="20" abbrev="UPM" category="PERFORMANCE" first="51" last="103" removedByChange="true">
+    <Class classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper" sourcefile="LdapUpdateHelper.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUpdateHelper.java"/>
+    </Class>
+    <Method classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper" name="addMultiValuedPrimitiveAttribute" signature="(Ljava/util/List;Ljava/lang/String;Ljava/util/List;)Ljava/util/List;" isStatic="true">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper" start="167" end="167" startBytecode="0" endBytecode="41" sourcefile="LdapUpdateHelper.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUpdateHelper.java"/>
+    </Method>
+  </BugInstance>
+  <BugInstance type="UPM_UNCALLED_PRIVATE_METHOD" priority="3" rank="20" abbrev="UPM" category="PERFORMANCE" first="104" last="152" removedByChange="true">
+    <Class classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper" sourcefile="LdapUpdateHelper.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUpdateHelper.java"/>
+    </Class>
+    <Method classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper" name="addMultiValuedPrimitiveAttribute" signature="(Ljava/util/List;Ljava/lang/String;Ljava/util/List;I)Ljava/util/List;" isStatic="true">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper" start="129" end="129" startBytecode="0" endBytecode="41" sourcefile="LdapUpdateHelper.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUpdateHelper.java"/>
+    </Method>
+  </BugInstance>
+  <BugInstance type="UPM_UNCALLED_PRIVATE_METHOD" priority="3" rank="20" abbrev="UPM" category="PERFORMANCE" first="48" last="65" removedByChange="true">
+    <Class classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper" sourcefile="LdapUpdateHelper.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUpdateHelper.java"/>
+    </Class>
+    <Method classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper" name="addSimpleAttribute" signature="(Ljava/lang/String;Lcom/novell/ldap/LDAPAttributeSet;Lorg/wso2/charon3/core/attributes/Attribute;)Ljava/util/List;" isStatic="true">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper" start="166" end="166" startBytecode="0" endBytecode="41" sourcefile="LdapUpdateHelper.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUpdateHelper.java"/>
+    </Method>
+  </BugInstance>
+  <BugInstance type="UPM_UNCALLED_PRIVATE_METHOD" priority="3" rank="20" abbrev="UPM" category="PERFORMANCE" first="66" last="72" removedByChange="true">
+    <Class classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper" sourcefile="LdapUpdateHelper.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUpdateHelper.java"/>
+    </Class>
+    <Method classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper" name="addSimpleAttribute" signature="(Ljava/lang/String;Ljava/util/List;Lorg/wso2/charon3/core/attributes/Attribute;)Ljava/util/List;" isStatic="true">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper" start="163" end="163" startBytecode="0" endBytecode="41" sourcefile="LdapUpdateHelper.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUpdateHelper.java"/>
+    </Method>
+  </BugInstance>
+  <BugInstance type="UPM_UNCALLED_PRIVATE_METHOD" priority="3" rank="20" abbrev="UPM" category="PERFORMANCE" first="73" last="73" removedByChange="true">
+    <Class classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper" sourcefile="LdapUpdateHelper.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUpdateHelper.java"/>
+    </Class>
+    <Method classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper" name="addSimpleAttribute" signature="(Ljava/lang/String;Ljava/util/List;Lorg/wso2/charon3/core/attributes/Attribute;Lcom/novell/ldap/LDAPModification;)Ljava/util/List;" isStatic="true">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper" start="164" end="164" startBytecode="0" endBytecode="41" sourcefile="LdapUpdateHelper.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUpdateHelper.java"/>
+    </Method>
+  </BugInstance>
+  <BugInstance type="UPM_UNCALLED_PRIVATE_METHOD" priority="3" rank="20" abbrev="UPM" category="PERFORMANCE" first="88" last="152" removedByChange="true">
+    <Class classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper" sourcefile="LdapUpdateHelper.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUpdateHelper.java"/>
+    </Class>
+    <Method classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper" name="addSimpleAttribute" signature="(Ljava/lang/String;Lorg/wso2/charon3/core/attributes/Attribute;Ljava/util/List;I)Ljava/util/List;" isStatic="true">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper" start="117" end="117" startBytecode="0" endBytecode="41" sourcefile="LdapUpdateHelper.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUpdateHelper.java"/>
+    </Method>
+  </BugInstance>
+  <BugInstance type="UPM_UNCALLED_PRIVATE_METHOD" priority="3" rank="20" abbrev="UPM" category="PERFORMANCE" first="74" last="87" removedByChange="true">
+    <Class classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper" sourcefile="LdapUpdateHelper.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUpdateHelper.java"/>
+    </Class>
+    <Method classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper" name="addSimpleAttribute" signature="(Ljava/lang/String;Lorg/wso2/charon3/core/attributes/Attribute;Ljava/util/List;Lcom/novell/ldap/LDAPModification;)Ljava/util/List;" isStatic="true">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper" start="159" end="159" startBytecode="0" endBytecode="41" sourcefile="LdapUpdateHelper.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUpdateHelper.java"/>
+    </Method>
+  </BugInstance>
+  <BugInstance type="UPM_UNCALLED_PRIVATE_METHOD" priority="3" rank="20" abbrev="UPM" category="PERFORMANCE" first="152" last="152" removedByChange="true">
+    <Class classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper" sourcefile="LdapUpdateHelper.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUpdateHelper.java"/>
+    </Class>
+    <Method classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper" name="checkHomeAddress" signature="()Z" isStatic="true">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper" start="184" end="184" startBytecode="0" endBytecode="41" sourcefile="LdapUpdateHelper.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUpdateHelper.java"/>
+    </Method>
+  </BugInstance>
+  <BugInstance type="UPM_UNCALLED_PRIVATE_METHOD" priority="3" rank="20" abbrev="UPM" category="PERFORMANCE" first="153" last="153" removedByChange="true">
+    <Class classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper" sourcefile="LdapUpdateHelper.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUpdateHelper.java"/>
+    </Class>
+    <Method classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper" name="checkHomeAddress" signature="(Ljava/lang/String;)Z" isStatic="true">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper" start="185" end="185" startBytecode="0" endBytecode="42" sourcefile="LdapUpdateHelper.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUpdateHelper.java"/>
+    </Method>
+  </BugInstance>
+  <BugInstance type="UPM_UNCALLED_PRIVATE_METHOD" priority="3" rank="20" abbrev="UPM" category="PERFORMANCE" first="48" last="152" removedByChange="true">
+    <Class classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper" sourcefile="LdapUpdateHelper.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUpdateHelper.java"/>
+    </Class>
+    <Method classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper" name="getAttributeName" signature="(Lorg/wso2/charon3/core/attributes/Attribute;)Ljava/lang/String;" isStatic="true">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper" start="142" end="142" startBytecode="0" endBytecode="41" sourcefile="LdapUpdateHelper.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUpdateHelper.java"/>
+    </Method>
+  </BugInstance>
+  <BugInstance type="WMI_WRONG_MAP_ITERATOR" priority="2" rank="18" abbrev="WMI" category="PERFORMANCE" first="47" last="47" removedByChange="true">
+    <Class classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper" sourcefile="LdapUpdateHelper.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUpdateHelper.java"/>
+    </Class>
+    <Method classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper" name="copyUserToLdap0" signature="(Lorg/wso2/charon3/core/objects/User;)Lcom/novell/ldap/LDAPEntry;" isStatic="true">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper" start="28" end="41" startBytecode="0" endBytecode="348" sourcefile="LdapUpdateHelper.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUpdateHelper.java"/>
+    </Method>
+    <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper" start="35" end="35" startBytecode="78" endBytecode="78" sourcefile="LdapUpdateHelper.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUpdateHelper.java"/>
+    <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUpdateHelper" start="35" end="35" startBytecode="78" endBytecode="78" sourcefile="LdapUpdateHelper.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUpdateHelper.java"/>
+  </BugInstance>
+  <BugInstance type="RCN_REDUNDANT_NULLCHECK_OF_NONNULL_VALUE" priority="3" rank="20" abbrev="RCN" category="STYLE" first="1" last="7" removedByChange="true">
+    <Class classname="org.wso2.charon3.utils.ldapmanager.LdapUtil">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUtil" sourcefile="LdapUtil.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUtil.java"/>
+    </Class>
+    <Method classname="org.wso2.charon3.utils.ldapmanager.LdapUtil" name="multiValuedPrimitiveAttributeToString" signature="(Ljava/util/List;Ljava/lang/String;Lcom/novell/ldap/LDAPAttributeSet;)Lcom/novell/ldap/LDAPAttributeSet;" isStatic="true">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUtil" start="220" end="229" startBytecode="0" endBytecode="291" sourcefile="LdapUtil.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUtil.java"/>
+    </Method>
+    <LocalVariable name="name" register="3" pc="5" role="LOCAL_VARIABLE_VALUE_OF"/>
+    <Method classname="org.wso2.charon3.utils.ldapmanager.LdapScimAttrMap" name="valueOf" signature="(Ljava/lang/String;)Lorg/wso2/charon3/utils/ldapmanager/LdapScimAttrMap;" isStatic="true" role="METHOD_RETURN_VALUE_OF">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapScimAttrMap" start="1" end="1" startBytecode="0" endBytecode="41" sourcefile="LdapScimAttrMap.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapScimAttrMap.java"/>
+    </Method>
+    <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUtil" start="221" end="221" startBytecode="6" endBytecode="6" sourcefile="LdapUtil.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUtil.java" role="SOURCE_REDUNDANT_NULL_CHECK"/>
+    <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUtil" start="221" end="221" startBytecode="6" endBytecode="6" sourcefile="LdapUtil.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUtil.java" role="SOURCE_REDUNDANT_NULL_CHECK"/>
+  </BugInstance>
+  <BugInstance type="RCN_REDUNDANT_NULLCHECK_OF_NONNULL_VALUE" priority="3" rank="20" abbrev="RCN" category="STYLE" first="1" last="7" removedByChange="true">
+    <Class classname="org.wso2.charon3.utils.ldapmanager.LdapUtil">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUtil" sourcefile="LdapUtil.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUtil.java"/>
+    </Class>
+    <Method classname="org.wso2.charon3.utils.ldapmanager.LdapUtil" name="simpleAttributeToString" signature="(Ljava/lang/String;Lcom/novell/ldap/LDAPAttributeSet;Lorg/wso2/charon3/core/attributes/Attribute;)Lcom/novell/ldap/LDAPAttributeSet;" isStatic="true">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUtil" start="200" end="215" startBytecode="0" endBytecode="285" sourcefile="LdapUtil.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUtil.java"/>
+    </Method>
+    <LocalVariable name="name" register="4" pc="27" role="LOCAL_VARIABLE_VALUE_OF"/>
+    <Method classname="org.wso2.charon3.utils.ldapmanager.LdapScimAttrMap" name="valueOf" signature="(Ljava/lang/String;)Lorg/wso2/charon3/utils/ldapmanager/LdapScimAttrMap;" isStatic="true" role="METHOD_RETURN_VALUE_OF">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapScimAttrMap" start="1" end="1" startBytecode="0" endBytecode="41" sourcefile="LdapScimAttrMap.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapScimAttrMap.java"/>
+    </Method>
+    <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUtil" start="209" end="209" startBytecode="29" endBytecode="29" sourcefile="LdapUtil.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUtil.java" role="SOURCE_REDUNDANT_NULL_CHECK"/>
+    <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUtil" start="209" end="209" startBytecode="29" endBytecode="29" sourcefile="LdapUtil.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUtil.java" role="SOURCE_REDUNDANT_NULL_CHECK"/>
+  </BugInstance>
+  <BugInstance type="REC_CATCH_EXCEPTION" priority="3" rank="20" abbrev="REC" category="STYLE" first="12">
+    <Class classname="org.wso2.charon3.utils.ldapmanager.LdapUtil">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUtil" sourcefile="LdapUtil.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUtil.java"/>
+    </Class>
+    <Method classname="org.wso2.charon3.utils.ldapmanager.LdapUtil" name="addMultiValuedPrimitiveAttribute" signature="(Ljava/util/List;Ljava/lang/String;Lcom/novell/ldap/LDAPAttributeSet;)Lcom/novell/ldap/LDAPAttributeSet;" isStatic="true">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUtil" start="190" end="199" startBytecode="0" endBytecode="291" sourcefile="LdapUtil.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUtil.java"/>
+    </Method>
+    <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUtil" start="196" end="196" startBytecode="64" endBytecode="64" sourcefile="LdapUtil.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUtil.java"/>
+    <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUtil" start="196" end="196" startBytecode="64" endBytecode="64" sourcefile="LdapUtil.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUtil.java"/>
+  </BugInstance>
+  <BugInstance type="REC_CATCH_EXCEPTION" priority="3" rank="20" abbrev="REC" category="STYLE" first="12">
+    <Class classname="org.wso2.charon3.utils.ldapmanager.LdapUtil">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUtil" sourcefile="LdapUtil.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUtil.java"/>
+    </Class>
+    <Method classname="org.wso2.charon3.utils.ldapmanager.LdapUtil" name="addSimpleAttribute" signature="(Ljava/lang/String;Lcom/novell/ldap/LDAPAttributeSet;Lorg/wso2/charon3/core/attributes/Attribute;)Lcom/novell/ldap/LDAPAttributeSet;" isStatic="true">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUtil" start="170" end="185" startBytecode="0" endBytecode="285" sourcefile="LdapUtil.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUtil.java"/>
+    </Method>
+    <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUtil" start="182" end="182" startBytecode="63" endBytecode="63" sourcefile="LdapUtil.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUtil.java"/>
+    <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUtil" start="182" end="182" startBytecode="63" endBytecode="63" sourcefile="LdapUtil.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUtil.java"/>
+  </BugInstance>
+  <BugInstance type="REC_CATCH_EXCEPTION" priority="3" rank="20" abbrev="REC" category="STYLE" first="9" last="11" removedByChange="true">
+    <Class classname="org.wso2.charon3.utils.ldapmanager.LdapUtil">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUtil" sourcefile="LdapUtil.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUtil.java"/>
+    </Class>
+    <Method classname="org.wso2.charon3.utils.ldapmanager.LdapUtil" name="getMultiValuedPrimitiveAttribute" signature="(Ljava/util/List;Ljava/lang/String;Lcom/novell/ldap/LDAPAttributeSet;)Lcom/novell/ldap/LDAPAttributeSet;" isStatic="true">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUtil" start="190" end="199" startBytecode="0" endBytecode="291" sourcefile="LdapUtil.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUtil.java"/>
+    </Method>
+    <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUtil" start="196" end="196" startBytecode="64" endBytecode="64" sourcefile="LdapUtil.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUtil.java"/>
+    <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUtil" start="196" end="196" startBytecode="64" endBytecode="64" sourcefile="LdapUtil.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUtil.java"/>
+  </BugInstance>
+  <BugInstance type="REC_CATCH_EXCEPTION" priority="3" rank="20" abbrev="REC" category="STYLE" first="8" last="11" removedByChange="true">
+    <Class classname="org.wso2.charon3.utils.ldapmanager.LdapUtil">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUtil" sourcefile="LdapUtil.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUtil.java"/>
+    </Class>
+    <Method classname="org.wso2.charon3.utils.ldapmanager.LdapUtil" name="getSimpleAttribute" signature="(Ljava/lang/String;Lcom/novell/ldap/LDAPAttributeSet;Lorg/wso2/charon3/core/attributes/Attribute;)Lcom/novell/ldap/LDAPAttributeSet;" isStatic="true">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUtil" start="170" end="185" startBytecode="0" endBytecode="285" sourcefile="LdapUtil.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUtil.java"/>
+    </Method>
+    <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUtil" start="182" end="182" startBytecode="63" endBytecode="63" sourcefile="LdapUtil.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUtil.java"/>
+    <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUtil" start="182" end="182" startBytecode="63" endBytecode="63" sourcefile="LdapUtil.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUtil.java"/>
+  </BugInstance>
+  <BugInstance type="REC_CATCH_EXCEPTION" priority="3" rank="20" abbrev="REC" category="STYLE" first="1" last="8" removedByChange="true">
+    <Class classname="org.wso2.charon3.utils.ldapmanager.LdapUtil">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUtil" sourcefile="LdapUtil.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUtil.java"/>
+    </Class>
+    <Method classname="org.wso2.charon3.utils.ldapmanager.LdapUtil" name="multiValuedPrimitiveAttributeToString" signature="(Ljava/util/List;Ljava/lang/String;Lcom/novell/ldap/LDAPAttributeSet;)Lcom/novell/ldap/LDAPAttributeSet;" isStatic="true">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUtil" start="220" end="229" startBytecode="0" endBytecode="291" sourcefile="LdapUtil.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUtil.java"/>
+    </Method>
+    <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUtil" start="226" end="226" startBytecode="64" endBytecode="64" sourcefile="LdapUtil.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUtil.java"/>
+    <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUtil" start="226" end="226" startBytecode="64" endBytecode="64" sourcefile="LdapUtil.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUtil.java"/>
+  </BugInstance>
+  <BugInstance type="REC_CATCH_EXCEPTION" priority="3" rank="20" abbrev="REC" category="STYLE" first="1" last="7" removedByChange="true">
+    <Class classname="org.wso2.charon3.utils.ldapmanager.LdapUtil">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUtil" sourcefile="LdapUtil.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUtil.java"/>
+    </Class>
+    <Method classname="org.wso2.charon3.utils.ldapmanager.LdapUtil" name="simpleAttributeToString" signature="(Ljava/lang/String;Lcom/novell/ldap/LDAPAttributeSet;Lorg/wso2/charon3/core/attributes/Attribute;)Lcom/novell/ldap/LDAPAttributeSet;" isStatic="true">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUtil" start="200" end="215" startBytecode="0" endBytecode="285" sourcefile="LdapUtil.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUtil.java"/>
+    </Method>
+    <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUtil" start="212" end="212" startBytecode="63" endBytecode="63" sourcefile="LdapUtil.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUtil.java"/>
+    <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUtil" start="212" end="212" startBytecode="63" endBytecode="63" sourcefile="LdapUtil.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUtil.java"/>
+  </BugInstance>
+  <BugInstance type="SBSC_USE_STRINGBUFFER_CONCATENATION" priority="2" rank="18" abbrev="SBSC" category="PERFORMANCE" first="1">
+    <Class classname="org.wso2.charon3.utils.ldapmanager.LdapUtil">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUtil" sourcefile="LdapUtil.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUtil.java"/>
+    </Class>
+    <Method classname="org.wso2.charon3.utils.ldapmanager.LdapUtil" name="getAttributeName" signature="(Lorg/wso2/charon3/core/attributes/Attribute;)Ljava/lang/String;" isStatic="true">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUtil" start="203" end="236" startBytecode="0" endBytecode="647" sourcefile="LdapUtil.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUtil.java"/>
+    </Method>
+    <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUtil" start="217" end="217" startBytecode="267" endBytecode="267" sourcefile="LdapUtil.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUtil.java"/>
+  </BugInstance>
+  <BugInstance type="UPM_UNCALLED_PRIVATE_METHOD" priority="3" rank="20" abbrev="UPM" category="PERFORMANCE" first="12" last="13" removedByChange="true">
+    <Class classname="org.wso2.charon3.utils.ldapmanager.LdapUtil">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUtil" sourcefile="LdapUtil.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUtil.java"/>
+    </Class>
+    <Method classname="org.wso2.charon3.utils.ldapmanager.LdapUtil" name="addMultiValuedPrimitiveAttribute" signature="(Ljava/util/List;Ljava/lang/String;Lcom/novell/ldap/LDAPAttributeSet;)Lcom/novell/ldap/LDAPAttributeSet;" isStatic="true">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUtil" start="190" end="199" startBytecode="0" endBytecode="291" sourcefile="LdapUtil.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUtil.java"/>
+    </Method>
+  </BugInstance>
+  <BugInstance type="UPM_UNCALLED_PRIVATE_METHOD" priority="3" rank="20" abbrev="UPM" category="PERFORMANCE" first="12" last="13" removedByChange="true">
+    <Class classname="org.wso2.charon3.utils.ldapmanager.LdapUtil">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUtil" sourcefile="LdapUtil.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUtil.java"/>
+    </Class>
+    <Method classname="org.wso2.charon3.utils.ldapmanager.LdapUtil" name="addSimpleAttribute" signature="(Ljava/lang/String;Lcom/novell/ldap/LDAPAttributeSet;Lorg/wso2/charon3/core/attributes/Attribute;)Lcom/novell/ldap/LDAPAttributeSet;" isStatic="true">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUtil" start="170" end="185" startBytecode="0" endBytecode="285" sourcefile="LdapUtil.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUtil.java"/>
+    </Method>
+  </BugInstance>
+  <BugInstance type="UPM_UNCALLED_PRIVATE_METHOD" priority="3" rank="20" abbrev="UPM" category="PERFORMANCE" first="8" last="13" removedByChange="true">
+    <Class classname="org.wso2.charon3.utils.ldapmanager.LdapUtil">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUtil" sourcefile="LdapUtil.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUtil.java"/>
+    </Class>
+    <Method classname="org.wso2.charon3.utils.ldapmanager.LdapUtil" name="getAttributeName" signature="(Lorg/wso2/charon3/core/attributes/Attribute;)Ljava/lang/String;" isStatic="true">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUtil" start="203" end="236" startBytecode="0" endBytecode="634" sourcefile="LdapUtil.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUtil.java"/>
+    </Method>
+  </BugInstance>
+  <BugInstance type="UPM_UNCALLED_PRIVATE_METHOD" priority="3" rank="20" abbrev="UPM" category="PERFORMANCE" first="9" last="11" removedByChange="true">
+    <Class classname="org.wso2.charon3.utils.ldapmanager.LdapUtil">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUtil" sourcefile="LdapUtil.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUtil.java"/>
+    </Class>
+    <Method classname="org.wso2.charon3.utils.ldapmanager.LdapUtil" name="getMultiValuedPrimitiveAttribute" signature="(Ljava/util/List;Ljava/lang/String;Lcom/novell/ldap/LDAPAttributeSet;)Lcom/novell/ldap/LDAPAttributeSet;" isStatic="true">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUtil" start="190" end="199" startBytecode="0" endBytecode="291" sourcefile="LdapUtil.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUtil.java"/>
+    </Method>
+  </BugInstance>
+  <BugInstance type="UPM_UNCALLED_PRIVATE_METHOD" priority="3" rank="20" abbrev="UPM" category="PERFORMANCE" first="8" last="11" removedByChange="true">
+    <Class classname="org.wso2.charon3.utils.ldapmanager.LdapUtil">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUtil" sourcefile="LdapUtil.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUtil.java"/>
+    </Class>
+    <Method classname="org.wso2.charon3.utils.ldapmanager.LdapUtil" name="getSimpleAttribute" signature="(Ljava/lang/String;Lcom/novell/ldap/LDAPAttributeSet;Lorg/wso2/charon3/core/attributes/Attribute;)Lcom/novell/ldap/LDAPAttributeSet;" isStatic="true">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUtil" start="170" end="185" startBytecode="0" endBytecode="285" sourcefile="LdapUtil.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUtil.java"/>
+    </Method>
+  </BugInstance>
+  <BugInstance type="UPM_UNCALLED_PRIVATE_METHOD" priority="3" rank="20" abbrev="UPM" category="PERFORMANCE" first="8" last="8" removedByChange="true">
+    <Class classname="org.wso2.charon3.utils.ldapmanager.LdapUtil">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUtil" sourcefile="LdapUtil.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUtil.java"/>
+    </Class>
+    <Method classname="org.wso2.charon3.utils.ldapmanager.LdapUtil" name="multiValuedPrimitiveAttributeToString" signature="(Ljava/util/List;Ljava/lang/String;Lcom/novell/ldap/LDAPAttributeSet;)Lcom/novell/ldap/LDAPAttributeSet;" isStatic="true">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUtil" start="220" end="229" startBytecode="0" endBytecode="291" sourcefile="LdapUtil.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUtil.java"/>
+    </Method>
+  </BugInstance>
+  <BugInstance type="WMI_WRONG_MAP_ITERATOR" priority="2" rank="18" abbrev="WMI" category="PERFORMANCE" first="1">
+    <Class classname="org.wso2.charon3.utils.ldapmanager.LdapUtil">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUtil" sourcefile="LdapUtil.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUtil.java"/>
+    </Class>
+    <Method classname="org.wso2.charon3.utils.ldapmanager.LdapUtil" name="copyUserToLdap0" signature="(Lorg/wso2/charon3/core/objects/User;)Lcom/novell/ldap/LDAPEntry;" isStatic="true">
+      <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUtil" start="28" end="41" startBytecode="0" endBytecode="348" sourcefile="LdapUtil.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUtil.java"/>
+    </Method>
+    <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUtil" start="35" end="35" startBytecode="78" endBytecode="78" sourcefile="LdapUtil.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUtil.java"/>
+    <SourceLine classname="org.wso2.charon3.utils.ldapmanager.LdapUtil" start="35" end="35" startBytecode="78" endBytecode="78" sourcefile="LdapUtil.java" sourcepath="org/wso2/charon3/utils/ldapmanager/LdapUtil.java"/>
+  </BugInstance>
+  <Errors errors="0" missingClasses="0"></Errors>
+  <FindBugsSummary timestamp="Tue, 25 Jul 2017 14:38:01 -0500" total_classes="1" referenced_classes="43" total_bugs="9" total_size="127" num_packages="1" java_version="1.8.0_131" vm_version="25.131-b11" cpu_seconds="0.70" clock_seconds="0.47" peak_mbytes="1043.64" alloc_mbytes="1024.00" gc_seconds="0.04" priority_3="5" priority_2="4">
+    <PackageStats package="org.wso2.charon3.utils.ldapmanager" total_bugs="9" total_types="4" total_size="127" priority_3="5" priority_2="4">
+      <ClassStats class="org.wso2.charon3.utils.ldapmanager.LdapManager" sourceFile="LdapManager.java" interface="false" size="127" bugs="1" priority_3="1"/>
+    </PackageStats>
+    <FindBugsProfile>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.ClassInfoAnalysisEngine" totalMilliseconds="132" invocations="553" avgMicrosecondsPerInvocation="239" maxMicrosecondsPerInvocation="35770" standardDeviationMircosecondsPerInvocation="1560"/>
+      <ClassProfile name="de.tobject.findbugs.builder.FindBugs2Eclipse" totalMilliseconds="84" invocations="2" avgMicrosecondsPerInvocation="42254" maxMicrosecondsPerInvocation="78435" standardDeviationMircosecondsPerInvocation="36181"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.ClassDataAnalysisEngine" totalMilliseconds="71" invocations="553" avgMicrosecondsPerInvocation="129" maxMicrosecondsPerInvocation="1045" standardDeviationMircosecondsPerInvocation="87"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FieldItemSummary" totalMilliseconds="22" invocations="43" avgMicrosecondsPerInvocation="519" maxMicrosecondsPerInvocation="4404" standardDeviationMircosecondsPerInvocation="908"/>
+      <ClassProfile name="edu.umd.cs.findbugs.OpcodeStack$JumpInfoFactory" totalMilliseconds="21" invocations="183" avgMicrosecondsPerInvocation="116" maxMicrosecondsPerInvocation="872" standardDeviationMircosecondsPerInvocation="131"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindNoSideEffectMethods" totalMilliseconds="15" invocations="43" avgMicrosecondsPerInvocation="352" maxMicrosecondsPerInvocation="2232" standardDeviationMircosecondsPerInvocation="464"/>
+    </FindBugsProfile>
+  </FindBugsSummary>
+  <ClassFeatures></ClassFeatures>
+  <History>
+    <AppVersion sequence="0" timestamp="1500934158802" release="" codeSize="0" numClasses="0"/>
+    <AppVersion sequence="1" timestamp="1500934158802" release="" codeSize="597" numClasses="8"/>
+    <AppVersion sequence="2" timestamp="1500934217431" release="" codeSize="114" numClasses="1"/>
+    <AppVersion sequence="3" timestamp="1500934224383" release="" codeSize="114" numClasses="1"/>
+    <AppVersion sequence="4" timestamp="1500934245309" release="" codeSize="114" numClasses="1"/>
+    <AppVersion sequence="5" timestamp="1500934263866" release="" codeSize="114" numClasses="1"/>
+    <AppVersion sequence="6" timestamp="1500934270451" release="" codeSize="114" numClasses="1"/>
+    <AppVersion sequence="7" timestamp="1500934278951" release="" codeSize="126" numClasses="1"/>
+    <AppVersion sequence="8" timestamp="1500934331582" release="" codeSize="59" numClasses="1"/>
+    <AppVersion sequence="9" timestamp="1500934343782" release="" codeSize="59" numClasses="1"/>
+    <AppVersion sequence="10" timestamp="1500934361335" release="" codeSize="59" numClasses="1"/>
+    <AppVersion sequence="11" timestamp="1500934371700" release="" codeSize="59" numClasses="1"/>
+    <AppVersion sequence="12" timestamp="1500934401835" release="" codeSize="59" numClasses="1"/>
+    <AppVersion sequence="13" timestamp="1500934427187" release="" codeSize="59" numClasses="1"/>
+    <AppVersion sequence="14" timestamp="1500934434751" release="" codeSize="139" numClasses="1"/>
+    <AppVersion sequence="15" timestamp="1500934867128" release="" codeSize="231" numClasses="1"/>
+    <AppVersion sequence="16" timestamp="1500934879069" release="" codeSize="231" numClasses="1"/>
+    <AppVersion sequence="17" timestamp="1500934903905" release="" codeSize="231" numClasses="1"/>
+    <AppVersion sequence="18" timestamp="1500934926453" release="" codeSize="231" numClasses="1"/>
+    <AppVersion sequence="19" timestamp="1500935623742" release="" codeSize="139" numClasses="1"/>
+    <AppVersion sequence="20" timestamp="1500935664889" release="" codeSize="139" numClasses="1"/>
+    <AppVersion sequence="21" timestamp="1500935691633" release="" codeSize="221" numClasses="1"/>
+    <AppVersion sequence="22" timestamp="1500935719949" release="" codeSize="141" numClasses="1"/>
+    <AppVersion sequence="23" timestamp="1500994288148" release="" codeSize="113" numClasses="1"/>
+    <AppVersion sequence="24" timestamp="1500994847209" release="" codeSize="113" numClasses="1"/>
+    <AppVersion sequence="25" timestamp="1500995880876" release="" codeSize="45" numClasses="1"/>
+    <AppVersion sequence="26" timestamp="1500995886735" release="" codeSize="45" numClasses="1"/>
+    <AppVersion sequence="27" timestamp="1500995894454" release="" codeSize="45" numClasses="1"/>
+    <AppVersion sequence="28" timestamp="1500995902689" release="" codeSize="46" numClasses="1"/>
+    <AppVersion sequence="29" timestamp="1500995908908" release="" codeSize="113" numClasses="1"/>
+    <AppVersion sequence="30" timestamp="1500995936158" release="" codeSize="139" numClasses="1"/>
+    <AppVersion sequence="31" timestamp="1500997990887" release="" codeSize="115" numClasses="1"/>
+    <AppVersion sequence="32" timestamp="1500998005330" release="" codeSize="47" numClasses="1"/>
+    <AppVersion sequence="33" timestamp="1500998021103" release="" codeSize="115" numClasses="1"/>
+    <AppVersion sequence="34" timestamp="1500998172863" release="" codeSize="115" numClasses="1"/>
+    <AppVersion sequence="35" timestamp="1500998337306" release="" codeSize="114" numClasses="1"/>
+    <AppVersion sequence="36" timestamp="1500998343065" release="" codeSize="115" numClasses="1"/>
+    <AppVersion sequence="37" timestamp="1500998391761" release="" codeSize="115" numClasses="1"/>
+    <AppVersion sequence="38" timestamp="1500998392983" release="" codeSize="115" numClasses="1"/>
+    <AppVersion sequence="39" timestamp="1500998463528" release="" codeSize="115" numClasses="1"/>
+    <AppVersion sequence="40" timestamp="1500998531053" release="" codeSize="47" numClasses="1"/>
+    <AppVersion sequence="41" timestamp="1500998536719" release="" codeSize="48" numClasses="1"/>
+    <AppVersion sequence="42" timestamp="1500998614978" release="" codeSize="114" numClasses="1"/>
+    <AppVersion sequence="43" timestamp="1500998621111" release="" codeSize="114" numClasses="1"/>
+    <AppVersion sequence="44" timestamp="1500999382288" release="" codeSize="114" numClasses="1"/>
+    <AppVersion sequence="45" timestamp="1501000733776" release="" codeSize="126" numClasses="1"/>
+    <AppVersion sequence="46" timestamp="1501000970136" release="" codeSize="126" numClasses="1"/>
+    <AppVersion sequence="47" timestamp="1501001405517" release="" codeSize="139" numClasses="1"/>
+    <AppVersion sequence="48" timestamp="1501001522295" release="" codeSize="37" numClasses="1"/>
+    <AppVersion sequence="49" timestamp="1501001525030" release="" codeSize="31" numClasses="1"/>
+    <AppVersion sequence="50" timestamp="1501001540125" release="" codeSize="31" numClasses="1"/>
+    <AppVersion sequence="51" timestamp="1501001569131" release="" codeSize="31" numClasses="1"/>
+    <AppVersion sequence="52" timestamp="1501001579583" release="" codeSize="31" numClasses="1"/>
+    <AppVersion sequence="53" timestamp="1501001585218" release="" codeSize="31" numClasses="1"/>
+    <AppVersion sequence="54" timestamp="1501001590301" release="" codeSize="31" numClasses="1"/>
+    <AppVersion sequence="55" timestamp="1501001642547" release="" codeSize="31" numClasses="1"/>
+    <AppVersion sequence="56" timestamp="1501001655841" release="" codeSize="31" numClasses="1"/>
+    <AppVersion sequence="57" timestamp="1501001663114" release="" codeSize="31" numClasses="1"/>
+    <AppVersion sequence="58" timestamp="1501001670110" release="" codeSize="31" numClasses="1"/>
+    <AppVersion sequence="59" timestamp="1501001693252" release="" codeSize="31" numClasses="1"/>
+    <AppVersion sequence="60" timestamp="1501001696928" release="" codeSize="31" numClasses="1"/>
+    <AppVersion sequence="61" timestamp="1501001702980" release="" codeSize="31" numClasses="1"/>
+    <AppVersion sequence="62" timestamp="1501001729740" release="" codeSize="31" numClasses="1"/>
+    <AppVersion sequence="63" timestamp="1501001743990" release="" codeSize="31" numClasses="1"/>
+    <AppVersion sequence="64" timestamp="1501001748657" release="" codeSize="31" numClasses="1"/>
+    <AppVersion sequence="65" timestamp="1501001764441" release="" codeSize="31" numClasses="1"/>
+    <AppVersion sequence="66" timestamp="1501001777378" release="" codeSize="31" numClasses="1"/>
+    <AppVersion sequence="67" timestamp="1501001798474" release="" codeSize="31" numClasses="1"/>
+    <AppVersion sequence="68" timestamp="1501001800762" release="" codeSize="31" numClasses="1"/>
+    <AppVersion sequence="69" timestamp="1501001802989" release="" codeSize="31" numClasses="1"/>
+    <AppVersion sequence="70" timestamp="1501001811385" release="" codeSize="31" numClasses="1"/>
+    <AppVersion sequence="71" timestamp="1501001824015" release="" codeSize="31" numClasses="1"/>
+    <AppVersion sequence="72" timestamp="1501001826202" release="" codeSize="31" numClasses="1"/>
+    <AppVersion sequence="73" timestamp="1501001844529" release="" codeSize="31" numClasses="1"/>
+    <AppVersion sequence="74" timestamp="1501001856159" release="" codeSize="31" numClasses="1"/>
+    <AppVersion sequence="75" timestamp="1501001862206" release="" codeSize="31" numClasses="1"/>
+    <AppVersion sequence="76" timestamp="1501001877391" release="" codeSize="31" numClasses="1"/>
+    <AppVersion sequence="77" timestamp="1501003801647" release="" codeSize="31" numClasses="1"/>
+    <AppVersion sequence="78" timestamp="1501004504917" release="" codeSize="36" numClasses="1"/>
+    <AppVersion sequence="79" timestamp="1501004561668" release="" codeSize="36" numClasses="1"/>
+    <AppVersion sequence="80" timestamp="1501004583254" release="" codeSize="36" numClasses="1"/>
+    <AppVersion sequence="81" timestamp="1501004617158" release="" codeSize="36" numClasses="1"/>
+    <AppVersion sequence="82" timestamp="1501004650054" release="" codeSize="36" numClasses="1"/>
+    <AppVersion sequence="83" timestamp="1501004652189" release="" codeSize="36" numClasses="1"/>
+    <AppVersion sequence="84" timestamp="1501004670788" release="" codeSize="36" numClasses="1"/>
+    <AppVersion sequence="85" timestamp="1501004681800" release="" codeSize="36" numClasses="1"/>
+    <AppVersion sequence="86" timestamp="1501004787200" release="" codeSize="36" numClasses="1"/>
+    <AppVersion sequence="87" timestamp="1501004824324" release="" codeSize="36" numClasses="1"/>
+    <AppVersion sequence="88" timestamp="1501004848181" release="" codeSize="36" numClasses="1"/>
+    <AppVersion sequence="89" timestamp="1501004867299" release="" codeSize="36" numClasses="1"/>
+    <AppVersion sequence="90" timestamp="1501004896855" release="" codeSize="36" numClasses="1"/>
+    <AppVersion sequence="91" timestamp="1501004971570" release="" codeSize="36" numClasses="1"/>
+    <AppVersion sequence="92" timestamp="1501005005227" release="" codeSize="36" numClasses="1"/>
+    <AppVersion sequence="93" timestamp="1501005009852" release="" codeSize="43" numClasses="1"/>
+    <AppVersion sequence="94" timestamp="1501005064212" release="" codeSize="43" numClasses="1"/>
+    <AppVersion sequence="95" timestamp="1501005157787" release="" codeSize="43" numClasses="1"/>
+    <AppVersion sequence="96" timestamp="1501005175228" release="" codeSize="43" numClasses="1"/>
+    <AppVersion sequence="97" timestamp="1501005177251" release="" codeSize="43" numClasses="1"/>
+    <AppVersion sequence="98" timestamp="1501005222638" release="" codeSize="44" numClasses="1"/>
+    <AppVersion sequence="99" timestamp="1501005226754" release="" codeSize="42" numClasses="1"/>
+    <AppVersion sequence="100" timestamp="1501005230671" release="" codeSize="42" numClasses="1"/>
+    <AppVersion sequence="101" timestamp="1501005377612" release="" codeSize="42" numClasses="1"/>
+    <AppVersion sequence="102" timestamp="1501005384732" release="" codeSize="42" numClasses="1"/>
+    <AppVersion sequence="103" timestamp="1501005391857" release="" codeSize="42" numClasses="1"/>
+    <AppVersion sequence="104" timestamp="1501005405687" release="" codeSize="42" numClasses="1"/>
+    <AppVersion sequence="105" timestamp="1501005414133" release="" codeSize="42" numClasses="1"/>
+    <AppVersion sequence="106" timestamp="1501005433599" release="" codeSize="42" numClasses="1"/>
+    <AppVersion sequence="107" timestamp="1501005435827" release="" codeSize="47" numClasses="1"/>
+    <AppVersion sequence="108" timestamp="1501005473291" release="" codeSize="47" numClasses="1"/>
+    <AppVersion sequence="109" timestamp="1501005498323" release="" codeSize="47" numClasses="1"/>
+    <AppVersion sequence="110" timestamp="1501005537465" release="" codeSize="47" numClasses="1"/>
+    <AppVersion sequence="111" timestamp="1501005540330" release="" codeSize="47" numClasses="1"/>
+    <AppVersion sequence="112" timestamp="1501006517082" release="" codeSize="47" numClasses="1"/>
+    <AppVersion sequence="113" timestamp="1501006542275" release="" codeSize="47" numClasses="1"/>
+    <AppVersion sequence="114" timestamp="1501006548926" release="" codeSize="47" numClasses="1"/>
+    <AppVersion sequence="115" timestamp="1501006566384" release="" codeSize="47" numClasses="1"/>
+    <AppVersion sequence="116" timestamp="1501006588961" release="" codeSize="47" numClasses="1"/>
+    <AppVersion sequence="117" timestamp="1501006602044" release="" codeSize="47" numClasses="1"/>
+    <AppVersion sequence="118" timestamp="1501006607049" release="" codeSize="47" numClasses="1"/>
+    <AppVersion sequence="119" timestamp="1501006611203" release="" codeSize="47" numClasses="1"/>
+    <AppVersion sequence="120" timestamp="1501006619695" release="" codeSize="47" numClasses="1"/>
+    <AppVersion sequence="121" timestamp="1501006622642" release="" codeSize="47" numClasses="1"/>
+    <AppVersion sequence="122" timestamp="1501006626410" release="" codeSize="47" numClasses="1"/>
+    <AppVersion sequence="123" timestamp="1501006638376" release="" codeSize="47" numClasses="1"/>
+    <AppVersion sequence="124" timestamp="1501006640566" release="" codeSize="47" numClasses="1"/>
+    <AppVersion sequence="125" timestamp="1501006646339" release="" codeSize="47" numClasses="1"/>
+    <AppVersion sequence="126" timestamp="1501006658624" release="" codeSize="47" numClasses="1"/>
+    <AppVersion sequence="127" timestamp="1501006664225" release="" codeSize="47" numClasses="1"/>
+    <AppVersion sequence="128" timestamp="1501006668897" release="" codeSize="47" numClasses="1"/>
+    <AppVersion sequence="129" timestamp="1501006675686" release="" codeSize="47" numClasses="1"/>
+    <AppVersion sequence="130" timestamp="1501006686632" release="" codeSize="47" numClasses="1"/>
+    <AppVersion sequence="131" timestamp="1501006692847" release="" codeSize="47" numClasses="1"/>
+    <AppVersion sequence="132" timestamp="1501006707450" release="" codeSize="47" numClasses="1"/>
+    <AppVersion sequence="133" timestamp="1501006710450" release="" codeSize="47" numClasses="1"/>
+    <AppVersion sequence="134" timestamp="1501006714210" release="" codeSize="47" numClasses="1"/>
+    <AppVersion sequence="135" timestamp="1501006737118" release="" codeSize="47" numClasses="1"/>
+    <AppVersion sequence="136" timestamp="1501006752604" release="" codeSize="47" numClasses="1"/>
+    <AppVersion sequence="137" timestamp="1501006758500" release="" codeSize="119" numClasses="1"/>
+    <AppVersion sequence="138" timestamp="1501006766107" release="" codeSize="119" numClasses="1"/>
+    <AppVersion sequence="139" timestamp="1501006774662" release="" codeSize="119" numClasses="1"/>
+    <AppVersion sequence="140" timestamp="1501006778751" release="" codeSize="118" numClasses="1"/>
+    <AppVersion sequence="141" timestamp="1501006783234" release="" codeSize="117" numClasses="1"/>
+    <AppVersion sequence="142" timestamp="1501006792871" release="" codeSize="117" numClasses="1"/>
+    <AppVersion sequence="143" timestamp="1501006804302" release="" codeSize="117" numClasses="1"/>
+    <AppVersion sequence="144" timestamp="1501006808124" release="" codeSize="117" numClasses="1"/>
+    <AppVersion sequence="145" timestamp="1501006816137" release="" codeSize="117" numClasses="1"/>
+    <AppVersion sequence="146" timestamp="1501006823956" release="" codeSize="117" numClasses="1"/>
+    <AppVersion sequence="147" timestamp="1501006826571" release="" codeSize="117" numClasses="1"/>
+    <AppVersion sequence="148" timestamp="1501006831258" release="" codeSize="117" numClasses="1"/>
+    <AppVersion sequence="149" timestamp="1501006838113" release="" codeSize="117" numClasses="1"/>
+    <AppVersion sequence="150" timestamp="1501006853113" release="" codeSize="117" numClasses="1"/>
+    <AppVersion sequence="151" timestamp="1501006857879" release="" codeSize="117" numClasses="1"/>
+    <AppVersion sequence="152" timestamp="1501006911289" release="" codeSize="14" numClasses="1"/>
+    <AppVersion sequence="153" timestamp="1501006914573" release="" codeSize="103" numClasses="1"/>
+    <AppVersion sequence="154" timestamp="1501006938068" release="" codeSize="117" numClasses="1"/>
+    <AppVersion sequence="155" timestamp="1501006944754" release="" codeSize="117" numClasses="1"/>
+    <AppVersion sequence="156" timestamp="1501006949738" release="" codeSize="116" numClasses="1"/>
+    <AppVersion sequence="157" timestamp="1501006982059" release="" codeSize="116" numClasses="1"/>
+    <AppVersion sequence="158" timestamp="1501006986054" release="" codeSize="116" numClasses="1"/>
+    <AppVersion sequence="159" timestamp="1501006988049" release="" codeSize="116" numClasses="1"/>
+    <AppVersion sequence="160" timestamp="1501006998670" release="" codeSize="116" numClasses="1"/>
+    <AppVersion sequence="161" timestamp="1501007086606" release="" codeSize="114" numClasses="1"/>
+    <AppVersion sequence="162" timestamp="1501007096240" release="" codeSize="114" numClasses="1"/>
+    <AppVersion sequence="163" timestamp="1501007108367" release="" codeSize="114" numClasses="1"/>
+    <AppVersion sequence="164" timestamp="1501007116336" release="" codeSize="114" numClasses="1"/>
+    <AppVersion sequence="165" timestamp="1501007181004" release="" codeSize="127" numClasses="1"/>
+    <AppVersion sequence="166" timestamp="1501007189979" release="" codeSize="128" numClasses="1"/>
+    <AppVersion sequence="167" timestamp="1501007204200" release="" codeSize="128" numClasses="1"/>
+    <AppVersion sequence="168" timestamp="1501007229702" release="" codeSize="114" numClasses="1"/>
+    <AppVersion sequence="169" timestamp="1501007239208" release="" codeSize="128" numClasses="1"/>
+    <AppVersion sequence="170" timestamp="1501007249867" release="" codeSize="114" numClasses="1"/>
+    <AppVersion sequence="171" timestamp="1501007252028" release="" codeSize="128" numClasses="1"/>
+    <AppVersion sequence="172" timestamp="1501007297641" release="" codeSize="126" numClasses="1"/>
+    <AppVersion sequence="173" timestamp="1501007304853" release="" codeSize="127" numClasses="1"/>
+    <AppVersion sequence="174" timestamp="1501007308996" release="" codeSize="127" numClasses="1"/>
+    <AppVersion sequence="175" timestamp="1501007324014" release="" codeSize="114" numClasses="1"/>
+    <AppVersion sequence="176" timestamp="1501007326152" release="" codeSize="114" numClasses="1"/>
+    <AppVersion sequence="177" timestamp="1501007351733" release="" codeSize="114" numClasses="1"/>
+    <AppVersion sequence="178" timestamp="1501007360785" release="" codeSize="114" numClasses="1"/>
+    <AppVersion sequence="179" timestamp="1501007365164" release="" codeSize="114" numClasses="1"/>
+    <AppVersion sequence="180" timestamp="1501007374434" release="" codeSize="114" numClasses="1"/>
+    <AppVersion sequence="181" timestamp="1501007376590" release="" codeSize="114" numClasses="1"/>
+    <AppVersion sequence="182" timestamp="1501007405616" release="" codeSize="114" numClasses="1"/>
+    <AppVersion sequence="183" timestamp="1501007411944" release="" codeSize="126" numClasses="1"/>
+    <AppVersion sequence="184" timestamp="1501007489878" release="" codeSize="114" numClasses="1"/>
+    <AppVersion sequence="185" timestamp="1501007571420" release="" codeSize="114" numClasses="1"/>
+    <AppVersion sequence="186" timestamp="1501007575383" release="" codeSize="114" numClasses="1"/>
+    <AppVersion sequence="187" timestamp="1501007581305" release="" codeSize="128" numClasses="1"/>
+    <AppVersion sequence="188" timestamp="1501007587569" release="" codeSize="128" numClasses="1"/>
+    <AppVersion sequence="189" timestamp="1501007651676" release="" codeSize="114" numClasses="1"/>
+    <AppVersion sequence="190" timestamp="1501007663479" release="" codeSize="129" numClasses="1"/>
+    <AppVersion sequence="191" timestamp="1501007666068" release="" codeSize="129" numClasses="1"/>
+    <AppVersion sequence="192" timestamp="1501007683355" release="" codeSize="114" numClasses="1"/>
+    <AppVersion sequence="193" timestamp="1501007694451" release="" codeSize="114" numClasses="1"/>
+    <AppVersion sequence="194" timestamp="1501007711142" release="" codeSize="114" numClasses="1"/>
+    <AppVersion sequence="195" timestamp="1501007716437" release="" codeSize="130" numClasses="1"/>
+    <AppVersion sequence="196" timestamp="1501007722428" release="" codeSize="130" numClasses="1"/>
+    <AppVersion sequence="197" timestamp="1501007735011" release="" codeSize="130" numClasses="1"/>
+    <AppVersion sequence="198" timestamp="1501007743589" release="" codeSize="130" numClasses="1"/>
+    <AppVersion sequence="199" timestamp="1501007751371" release="" codeSize="114" numClasses="1"/>
+    <AppVersion sequence="200" timestamp="1501007753512" release="" codeSize="130" numClasses="1"/>
+    <AppVersion sequence="201" timestamp="1501007824103" release="" codeSize="114" numClasses="1"/>
+    <AppVersion sequence="202" timestamp="1501007840430" release="" codeSize="126" numClasses="1"/>
+    <AppVersion sequence="203" timestamp="1501007847625" release="" codeSize="126" numClasses="1"/>
+    <AppVersion sequence="204" timestamp="1501008902223" release="" codeSize="127" numClasses="1"/>
+    <AppVersion sequence="205" timestamp="1501008910239" release="" codeSize="127" numClasses="1"/>
+    <AppVersion sequence="206" timestamp="1501008917021" release="" codeSize="127" numClasses="1"/>
+    <AppVersion sequence="207" timestamp="1501009772699" release="" codeSize="127" numClasses="1"/>
+    <AppVersion sequence="208" timestamp="1501009836470" release="" codeSize="127" numClasses="1"/>
+    <AppVersion sequence="209" timestamp="1501009844045" release="" codeSize="127" numClasses="1"/>
+    <AppVersion sequence="210" timestamp="1501009971347" release="" codeSize="128" numClasses="1"/>
+    <AppVersion sequence="211" timestamp="1501009974469" release="" codeSize="127" numClasses="1"/>
+    <AppVersion sequence="212" timestamp="1501010012605" release="" codeSize="127" numClasses="1"/>
+    <AppVersion sequence="213" timestamp="1501011246856" release="" codeSize="127" numClasses="1"/>
+    <AppVersion sequence="214" timestamp="1501011252312" release="" codeSize="127" numClasses="1"/>
+    <AppVersion sequence="215" timestamp="1501011400478" release="" codeSize="41" numClasses="1"/>
+    <AppVersion sequence="216" timestamp="1501011405665" release="" codeSize="42" numClasses="1"/>
+    <AppVersion sequence="217" timestamp="1501011409203" release="" codeSize="42" numClasses="1"/>
+    <AppVersion sequence="218" timestamp="1501011425770" release="" codeSize="41" numClasses="1"/>
+    <AppVersion sequence="219" timestamp="1501011435593" release="" codeSize="41" numClasses="1"/>
+    <AppVersion sequence="220" timestamp="1501011439509" release="" codeSize="42" numClasses="1"/>
+    <AppVersion sequence="221" timestamp="1501011442643" release="" codeSize="42" numClasses="1"/>
+    <AppVersion sequence="222" timestamp="1501011454802" release="" codeSize="42" numClasses="1"/>
+    <AppVersion sequence="223" timestamp="1501011478484" release="" codeSize="127" numClasses="1"/>
+  </History>
+</BugCollection>

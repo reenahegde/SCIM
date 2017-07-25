@@ -1,0 +1,12 @@
+package org.wso2.charon3.utils.ldapmanager;
+
+/**
+ * 
+ * @author AkshathaKadri
+ *
+ */
+public class LdapConstants {
+	
+	
+	
+}

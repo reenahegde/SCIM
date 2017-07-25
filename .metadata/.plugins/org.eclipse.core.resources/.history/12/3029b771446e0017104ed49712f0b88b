@@ -1,0 +1,50 @@
+/**
+ * 
+ */
+package org.wso2.charon3.utils.ldapmanager;
+
+/**
+ * @author AkshathaKadri
+ *
+ */
+public enum LdapScimAttrMap {
+	
+	//id("uid"), externalId("x500UniqueIdentifier"), userName("mail"), password("userPassword"),givenName("cn"),familyName("sn"),nickName("givenName");
+	
+	externalId("x500UniqueIdentifier"), id("uid"), userName("cn"), familyName("sn"), password("userPassword"), profileUrl("labeledUri"),
+	displayName("displayName"), nickName("givenName"),formatted("fullName"), givenName("givenName"), middleName("Initials"), active("loginDisabled"),
+	userType("employeeType"), title("title"), employeeNumber("employeeNumber"), costCenter("costCenter"),
+	
+	phoneNumbers_work("telephoneNumber"), phoneNumbers_mobile("homePhone"),
+	emails_work("mail"), emails_home("x121Address"),
+	photos_photo("localityName"), photos_photo("Description"), 
+	
+	resourceType("carLicense"), created("businessCategory") ,version("revision"),lastModified("company"),
+	honorificPrefix("Initials"), preferredLanguage("preferredLanguage"), locale("physicalDeliveryOfficeName"),
+	organization("o"), division("ou"), department("organizationalUnitName"),
+	timezone("Timezone"),ims("instantMessagingID"), x509Certificates("userCertificate"), location("audio"), 
+	honorificSuffix("description"),
+	streetAddress("street"),locality("l"), region("st"), postalCode("postalCode"), country("destinationIndicator"), 
+	groups("groupMembership");
+	
+	//BAD JUJU
+	/*
+	 
+	 manager("manager"),  */
+	
+	private final String value;
+	private boolean isSet;
+	LdapScimAttrMap(String value) {
+		this.value = value;
+	}
+
+	public String getValue() {
+		return value;
+	}
+	public boolean isSet() {
+		return isSet;
+	}
+	public void setSet(boolean isSet) {
+		this.isSet = isSet;
+	}
+}
