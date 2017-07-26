@@ -81,12 +81,16 @@ public class LdapManager implements UserManager {
 	public User getUser(String id, Map<String, Boolean> map)
 			throws CharonException, BadRequestException, NotFoundException {
 
+		//Added by Reena Hegde
+		
 		LDAPConnection lc = LdapConnectUtil.getConnection(false);
-		User user = null;
-		String dn = "uid="+id+",ou=users,o=people";
+		List<LDAPEntry> userList = new ArrayList<>();
+		User user = new User();
+		
 		try {
-			LDAPEntry searchResult = lc.read(dn);
-
+			LDAPEntry searchResult = lc.read("uid="+id+",ou=users,o=people");
+			user = LdapUtil.convertLdapToUser(searchResult);
+			user.setSchemas();
 			lc.disconnect();
 		} catch (LDAPException e) {
 			throw new NotFoundException("No user with the id : " + id);
