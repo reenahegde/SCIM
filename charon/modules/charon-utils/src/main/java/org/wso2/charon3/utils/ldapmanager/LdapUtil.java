@@ -1,5 +1,7 @@
 package org.wso2.charon3.utils.ldapmanager;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -20,8 +22,11 @@ import com.novell.ldap.LDAPEntry;
 /**
  * 
  * @author AkshathaKadri
+ * 
+ * @author ReenaHegde
  *
  */
+
 public class LdapUtil {
 
 	public static LDAPEntry copyUserToLdap0(User user) throws CharonException{
@@ -40,8 +45,43 @@ public class LdapUtil {
 		//(LDAPAttributeSet) CopyUtil.deepCopy(map);   
 		return entry;
 	}
-	public static User convertLdapToUser(LDAPEntry nextEntry) {
-		return new User();
+	
+	public static User convertLdapToUser(LDAPEntry entry) {
+
+  		User user = new User();
+  		try{
+  			 LDAPAttributeSet attributeSet = entry.getAttributeSet();
+  			 
+             user.setId(attributeSet.getAttribute(LdapScimAttrMap.id.getValue()).getStringValue());
+             user.setUserName(attributeSet.getAttribute(LdapScimAttrMap.userName.getValue()).getStringValue());
+                  
+             SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
+
+				if (attributeSet.getAttribute(LdapScimAttrMap.created.getValue()) != null) {
+					Date createdDate = formatter.parse(attributeSet.getAttribute(LdapScimAttrMap.created.getValue()).getStringValue());
+					user.setCreatedDate(createdDate);
+				} 
+				else {
+					user.setCreatedDate(new Date());
+				}
+				if (attributeSet.getAttribute(LdapScimAttrMap.lastModified.getValue()) != null) {
+					Date lastModified = formatter.parse(attributeSet.getAttribute(LdapScimAttrMap.lastModified.getValue()).getStringValue());
+					user.setLastModified(lastModified);
+				} else {
+					user.setLastModified(new Date());
+				}
+
+				if (attributeSet.getAttribute(LdapScimAttrMap.location.getValue()) != null) {
+					user.setLocation(attributeSet.getAttribute(LdapScimAttrMap.location.getValue()).getStringValue());
+				} else {
+					user.setLocation("http://localhost:8080/scim/v2/Users/" + user.getId());
+				}
+             
+  		}
+  		catch(Exception e){
+  			System.out.println(e);
+  		}
+  		return user;
 	}
 
 	public static LDAPAttributeSet copyUserToLdap(User user) {
@@ -235,4 +275,7 @@ public class LdapUtil {
 		}
 		return parent;
 	}
+	
+
+	
 }
