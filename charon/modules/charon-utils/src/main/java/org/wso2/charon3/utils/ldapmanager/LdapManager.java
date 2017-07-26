@@ -37,11 +37,13 @@ import org.wso2.charon3.core.utils.CopyUtil;
 import org.wso2.charon3.core.utils.codeutils.Node;
 import org.wso2.charon3.core.utils.codeutils.SearchRequest;
 
+
 import com.novell.ldap.LDAPAttributeSet;
 import com.novell.ldap.LDAPConnection;
 import com.novell.ldap.LDAPEntry;
 import com.novell.ldap.LDAPException;
 import com.novell.ldap.LDAPModification;
+import com.novell.ldap.LDAPSearchResults;
 
 /**
  * This is a ldap user store.
@@ -148,7 +150,7 @@ public class LdapManager implements UserManager {
 	}
 
 	private List<Object> listUsers(Map<String, Boolean> requiredAttributes) {
-		List<Object> userList = new ArrayList<>();
+		/*List<Object> userList = new ArrayList<>();
 		userList.add(0);
 		//first item should contain the number of total results
 		for (Map.Entry<String, User> entry : inMemoryUserList.entrySet()) {
@@ -160,6 +162,64 @@ public class LdapManager implements UserManager {
 		} catch (CharonException e) {
 			logger.error("Error in listing users");
 			return  null;
+		}*/
+		
+		//Added by Reena Hegde
+		
+		List<Object> userList = new ArrayList<>();
+		User u = new User();
+		try {
+
+			LDAPConnection lc = LdapConnectUtil.getConnection(false);
+
+			LDAPSearchResults searchResults =
+
+					lc.search("ou=users,o=people", // container to search
+
+							LDAPConnection.SCOPE_ONE, // search scope
+
+							"cn=*", // search filter
+
+							null, // "1.1" returns entry name only
+
+							false); // no attributes are returned
+			userList.add(0);
+			while (searchResults.hasMore()) {
+
+				LDAPEntry nextEntry = null;
+
+				try {
+
+					nextEntry = searchResults.next();
+					u = LdapUtil.convertLdapToUser(nextEntry);
+					userList.add(u);
+
+				}
+
+				catch (LDAPException e) {
+
+					System.out.println("Error: " + e.toString());
+
+					// Exception is thrown, go for next entry
+
+					continue;
+
+				}
+				userList.set(0, userList.size() - 1);
+				System.out.println("\n" + nextEntry.getDN());
+
+			}
+
+			lc.disconnect();
+
+			return (List<Object>) CopyUtil.deepCopy(userList);
+		} catch (CharonException e) {
+
+			return null;
+		} catch (LDAPException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
 		}
 
 	}
