@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<BugCollection version="3.0.1-dev-20150306-5afe4d1" sequence="7" timestamp="1501008368583" analysisTimestamp="1501008368161" release="">
+<BugCollection version="3.0.1-dev-20150306-5afe4d1" sequence="1" timestamp="1501102831898" analysisTimestamp="1501102824313" release="">
   <Project projectName="org.wso2.charon3.impl">
-    <Jar>C:\Ak\Development\Scim_WSO2\charon\modules\charon-impl\target\classes\org\wso2\charon3\impl\provider\resources\GroupResource.class</Jar>
+    <Jar>C:\Ak\Development\Scim_WSO2\charon\modules\charon-impl\target\classes</Jar>
+    <Jar>C:\Ak\Development\Scim_WSO2\charon\modules\charon-impl\target\test-classes</Jar>
     <AuxClasspathEntry>C:\Ak\Development\Scim_WSO2\charon\modules\charon-impl\target\classes</AuxClasspathEntry>
     <AuxClasspathEntry>C:\Ak\Development\Scim_WSO2\charon\modules\charon-impl\target\test-classes</AuxClasspathEntry>
     <AuxClasspathEntry>C:\Users\AkshathaKadri\.m2\repository\org\wso2\msf4j\msf4j-core\2.1.0\msf4j-core-2.1.0.jar</AuxClasspathEntry>
@@ -78,25 +79,43 @@
     <Cloud id="edu.umd.cs.findbugs.cloud.doNothingCloud" online="false"></Cloud>
   </Project>
   <Errors errors="0" missingClasses="0"></Errors>
-  <FindBugsSummary timestamp="Tue, 25 Jul 2017 13:46:08 -0500" total_classes="1" referenced_classes="44" total_bugs="0" total_size="48" num_packages="1" java_version="1.8.0_131" vm_version="25.131-b11" cpu_seconds="0.70" clock_seconds="0.42" peak_mbytes="1028.74" alloc_mbytes="1024.00" gc_seconds="0.00">
-    <PackageStats package="org.wso2.charon3.impl.provider.resources" total_bugs="0" total_types="1" total_size="48">
+  <FindBugsSummary timestamp="Wed, 26 Jul 2017 16:00:25 -0500" total_classes="10" referenced_classes="64" total_bugs="0" total_size="213" num_packages="5" java_version="1.8.0_131" vm_version="25.131-b11" cpu_seconds="29.33" clock_seconds="7.59" peak_mbytes="669.92" alloc_mbytes="1024.00" gc_seconds="0.57">
+    <PackageStats package="org.wso2.charon3.impl.jaxrs.designator" total_bugs="0" total_types="1" total_size="1">
+      <ClassStats class="org.wso2.charon3.impl.jaxrs.designator.PATCH" sourceFile="PATCH.java" interface="true" size="1" bugs="0"/>
+    </PackageStats>
+    <PackageStats package="org.wso2.charon3.impl.provider.impl" total_bugs="0" total_types="1" total_size="11">
+      <ClassStats class="org.wso2.charon3.impl.provider.impl.ApplicationInitializer" sourceFile="ApplicationInitializer.java" interface="false" size="11" bugs="0"/>
+    </PackageStats>
+    <PackageStats package="org.wso2.charon3.impl.provider.mappers" total_bugs="0" total_types="4" total_size="40">
+      <ClassStats class="org.wso2.charon3.impl.provider.mappers.CharonMapper" sourceFile="CharonMapper.java" interface="false" size="10" bugs="0"/>
+      <ClassStats class="org.wso2.charon3.impl.provider.mappers.ConflictMapper" sourceFile="ConflictMapper.java" interface="false" size="10" bugs="0"/>
+      <ClassStats class="org.wso2.charon3.impl.provider.mappers.FormatNotSupportedMapper" sourceFile="FormatNotSupportedMapper.java" interface="false" size="10" bugs="0"/>
+      <ClassStats class="org.wso2.charon3.impl.provider.mappers.NotFoundMapper" sourceFile="NotFoundMapper.java" interface="false" size="10" bugs="0"/>
+    </PackageStats>
+    <PackageStats package="org.wso2.charon3.impl.provider.resources" total_bugs="0" total_types="3" total_size="131">
+      <ClassStats class="org.wso2.charon3.impl.provider.resources.AbstractResource" sourceFile="AbstractResource.java" interface="false" size="35" bugs="0"/>
       <ClassStats class="org.wso2.charon3.impl.provider.resources.GroupResource" sourceFile="GroupResource.java" interface="false" size="48" bugs="0"/>
+      <ClassStats class="org.wso2.charon3.impl.provider.resources.UserResource" sourceFile="UserResource.java" interface="false" size="48" bugs="0"/>
+    </PackageStats>
+    <PackageStats package="org.wso2.charon3.impl.provider.util" total_bugs="0" total_types="1" total_size="30">
+      <ClassStats class="org.wso2.charon3.impl.provider.util.SCIMProviderConstants" sourceFile="SCIMProviderConstants.java" interface="false" size="30" bugs="0"/>
     </PackageStats>
     <FindBugsProfile>
-      <ClassProfile name="de.tobject.findbugs.builder.FindBugs2Eclipse" totalMilliseconds="137" invocations="2" avgMicrosecondsPerInvocation="68612" maxMicrosecondsPerInvocation="131004" standardDeviationMircosecondsPerInvocation="62392"/>
-      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.ClassInfoAnalysisEngine" totalMilliseconds="87" invocations="401" avgMicrosecondsPerInvocation="217" maxMicrosecondsPerInvocation="3957" standardDeviationMircosecondsPerInvocation="396"/>
-      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.ClassDataAnalysisEngine" totalMilliseconds="84" invocations="407" avgMicrosecondsPerInvocation="206" maxMicrosecondsPerInvocation="1988" standardDeviationMircosecondsPerInvocation="127"/>
-      <ClassProfile name="edu.umd.cs.findbugs.detect.FieldItemSummary" totalMilliseconds="13" invocations="44" avgMicrosecondsPerInvocation="295" maxMicrosecondsPerInvocation="6012" standardDeviationMircosecondsPerInvocation="926"/>
+      <ClassProfile name="de.tobject.findbugs.builder.FindBugs2Eclipse" totalMilliseconds="2124" invocations="2" avgMicrosecondsPerInvocation="1062465" maxMicrosecondsPerInvocation="1270094" standardDeviationMircosecondsPerInvocation="207629"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.ClassInfoAnalysisEngine" totalMilliseconds="679" invocations="449" avgMicrosecondsPerInvocation="1514" maxMicrosecondsPerInvocation="127838" standardDeviationMircosecondsPerInvocation="8947"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.ClassDataAnalysisEngine" totalMilliseconds="512" invocations="455" avgMicrosecondsPerInvocation="1125" maxMicrosecondsPerInvocation="67358" standardDeviationMircosecondsPerInvocation="5799"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.CheckRelaxingNullnessAnnotation" totalMilliseconds="203" invocations="10" avgMicrosecondsPerInvocation="20348" maxMicrosecondsPerInvocation="115437" standardDeviationMircosecondsPerInvocation="38525"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindReturnRef" totalMilliseconds="186" invocations="10" avgMicrosecondsPerInvocation="18644" maxMicrosecondsPerInvocation="184613" standardDeviationMircosecondsPerInvocation="55323"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.BuildObligationPolicyDatabase" totalMilliseconds="186" invocations="64" avgMicrosecondsPerInvocation="2910" maxMicrosecondsPerInvocation="172166" standardDeviationMircosecondsPerInvocation="21327"/>
+      <ClassProfile name="edu.umd.cs.findbugs.OpcodeStack$JumpInfoFactory" totalMilliseconds="149" invocations="114" avgMicrosecondsPerInvocation="1315" maxMicrosecondsPerInvocation="71010" standardDeviationMircosecondsPerInvocation="6767"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindNoSideEffectMethods" totalMilliseconds="148" invocations="64" avgMicrosecondsPerInvocation="2326" maxMicrosecondsPerInvocation="78321" standardDeviationMircosecondsPerInvocation="10582"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.UnconditionalValueDerefDataflowFactory" totalMilliseconds="147" invocations="37" avgMicrosecondsPerInvocation="3987" maxMicrosecondsPerInvocation="114893" standardDeviationMircosecondsPerInvocation="18546"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindPuzzlers" totalMilliseconds="137" invocations="10" avgMicrosecondsPerInvocation="13754" maxMicrosecondsPerInvocation="135172" standardDeviationMircosecondsPerInvocation="40473"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.LoadOfKnownNullValue" totalMilliseconds="133" invocations="10" avgMicrosecondsPerInvocation="13354" maxMicrosecondsPerInvocation="118102" standardDeviationMircosecondsPerInvocation="35064"/>
     </FindBugsProfile>
   </FindBugsSummary>
   <ClassFeatures></ClassFeatures>
   <History>
-    <AppVersion sequence="0" timestamp="1500934202231" release="" codeSize="0" numClasses="0"/>
-    <AppVersion sequence="1" timestamp="1500934202231" release="" codeSize="213" numClasses="10"/>
-    <AppVersion sequence="2" timestamp="1501008311290" release="" codeSize="48" numClasses="1"/>
-    <AppVersion sequence="3" timestamp="1501008321629" release="" codeSize="15" numClasses="1"/>
-    <AppVersion sequence="4" timestamp="1501008329893" release="" codeSize="48" numClasses="1"/>
-    <AppVersion sequence="5" timestamp="1501008349718" release="" codeSize="48" numClasses="1"/>
-    <AppVersion sequence="6" timestamp="1501008363904" release="" codeSize="48" numClasses="1"/>
+    <AppVersion sequence="0" timestamp="1501102831894" release="" codeSize="0" numClasses="0"/>
   </History>
 </BugCollection>

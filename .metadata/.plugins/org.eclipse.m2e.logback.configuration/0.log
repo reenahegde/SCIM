@@ -6037,3 +6037,25 @@ Caused by: org.codehaus.plexus.util.xml.pull.XmlPullParserException: Duplicated 
 2017-07-25 14:38:01,174 [Worker-113] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Ak\Development\Scim_WSO2\charon\modules\charon-utils\src\main\resources
 2017-07-25 14:38:01,174 [Worker-113] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
 2017-07-25 14:38:01,190 [Worker-113] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Ak\Development\Scim_WSO2\charon\modules\charon-utils\src\test\resources
+2017-07-26 16:00:09,537 [Worker-2] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using NULL lifecycle mapping for MavenProject: org.wso2.charon:charon-parent:3.0.6-SNAPSHOT @ C:\Ak\Development\Scim_Wso2_merge\charon\pom.xml.
+2017-07-26 16:00:10,182 [Worker-2] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: org.wso2.charon:org.wso2.charon3.core:3.0.6-SNAPSHOT @ C:\Ak\Development\Scim_WSO2\charon\modules\charon-core\pom.xml.
+2017-07-26 16:00:10,556 [Worker-2] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: org.wso2.charon:org.wso2.charon3.utils:3.0.6-SNAPSHOT @ C:\Ak\Development\Scim_WSO2\charon\modules\charon-utils\pom.xml.
+2017-07-26 16:00:10,781 [Worker-2] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: org.wso2.charon:org.wso2.charon3.samples:3.0.6-SNAPSHOT @ C:\Ak\Development\Scim_WSO2\charon\modules\charon-samples\pom.xml.
+2017-07-26 16:00:11,001 [Worker-2] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: org.wso2.charon:org.wso2.charon3.impl:3.0.6-SNAPSHOT @ C:\Ak\Development\Scim_WSO2\charon\modules\charon-impl\pom.xml.
+2017-07-26 16:00:21,986 [Worker-18] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-07-26 16:00:21,995 [Worker-18] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Ak\Development\Scim_WSO2\charon\modules\charon-core\src\main\resources
+2017-07-26 16:00:21,998 [Worker-18] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-07-26 16:00:22,014 [Worker-18] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Ak\Development\Scim_WSO2\charon\modules\charon-core\src\test\resources
+2017-07-26 16:00:22,496 [Worker-18] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-07-26 16:00:22,504 [Worker-18] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Ak\Development\Scim_WSO2\charon\modules\charon-utils\src\main\resources
+2017-07-26 16:00:22,506 [Worker-18] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-07-26 16:00:22,514 [Worker-18] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Ak\Development\Scim_WSO2\charon\modules\charon-utils\src\test\resources
+2017-07-26 16:00:23,922 [Worker-18] INFO  o.e.m.c.i.embedder.EclipseLogger - Source directory: C:\Ak\Development\Scim_WSO2\charon\modules\charon-samples\target\generated-code\src added.
+2017-07-26 16:00:23,926 [Worker-18] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-07-26 16:00:23,936 [Worker-18] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Ak\Development\Scim_WSO2\charon\modules\charon-samples\src\main\resources
+2017-07-26 16:00:23,949 [Worker-18] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-07-26 16:00:23,959 [Worker-18] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Ak\Development\Scim_WSO2\charon\modules\charon-samples\src\test\resources
+2017-07-26 16:00:24,963 [Worker-18] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-07-26 16:00:24,971 [Worker-18] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Ak\Development\Scim_WSO2\charon\modules\charon-impl\src\main\resources
+2017-07-26 16:00:25,010 [Worker-18] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2017-07-26 16:00:25,051 [Worker-18] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Ak\Development\Scim_WSO2\charon\modules\charon-impl\src\test\resources
