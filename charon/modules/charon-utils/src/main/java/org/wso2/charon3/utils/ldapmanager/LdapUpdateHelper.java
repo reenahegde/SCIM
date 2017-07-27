@@ -15,6 +15,11 @@ import org.wso2.charon3.core.schema.SCIMDefinitions;
 import com.novell.ldap.LDAPAttribute;
 import com.novell.ldap.LDAPModification;
 
+/**
+ * 
+ * @author AkshathaKadri
+ *
+ */
 public class LdapUpdateHelper {
 
 	public static List<LDAPModification> getModifications(User user, int mode) {

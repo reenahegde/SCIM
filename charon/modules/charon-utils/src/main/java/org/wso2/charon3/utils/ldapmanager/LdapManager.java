@@ -51,7 +51,7 @@ import com.novell.ldap.LDAPSearchResults;
 public class LdapManager implements UserManager {
 	private static final Logger logger = LoggerFactory.getLogger(LdapManager.class);
 	//in memory user manager stores users
-	ConcurrentHashMap<String, User> inMemoryUserList = new ConcurrentHashMap<String, User>();
+	//ConcurrentHashMap<String, User> inMemoryUserList = new ConcurrentHashMap<String, User>();
 	ConcurrentHashMap<String, Group> inMemoryGroupList = new ConcurrentHashMap<String, Group>();
 
 	@Override
@@ -82,11 +82,11 @@ public class LdapManager implements UserManager {
 			throws CharonException, BadRequestException, NotFoundException {
 
 		//Added by Reena Hegde
-		
+
 		LDAPConnection lc = LdapConnectUtil.getConnection(false);
 		List<LDAPEntry> userList = new ArrayList<>();
 		User user = new User();
-		
+
 		try {
 			LDAPEntry searchResult = lc.read("uid="+id+",ou=users,o=people");
 			user = LdapUtil.convertLdapToUser(searchResult);
@@ -167,9 +167,9 @@ public class LdapManager implements UserManager {
 			logger.error("Error in listing users");
 			return  null;
 		}*/
-		
+
 		//Added by Reena Hegde
-		
+
 		List<Object> userList = new ArrayList<>();
 		User u = new User();
 		try {
