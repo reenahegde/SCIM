@@ -9,13 +9,17 @@ import java.util.Set;
 
 import org.wso2.charon3.core.attributes.Attribute;
 import org.wso2.charon3.core.attributes.ComplexAttribute;
+import org.wso2.charon3.core.attributes.DefaultAttributeFactory;
 import org.wso2.charon3.core.attributes.MultiValuedAttribute;
 import org.wso2.charon3.core.attributes.SimpleAttribute;
+import org.wso2.charon3.core.exceptions.BadRequestException;
 import org.wso2.charon3.core.exceptions.CharonException;
 import org.wso2.charon3.core.objects.User;
 import org.wso2.charon3.core.schema.SCIMConstants.UserSchemaConstants;
+import org.wso2.charon3.core.schema.AttributeSchema;
 import org.wso2.charon3.core.schema.SCIMConstants;
 import org.wso2.charon3.core.schema.SCIMDefinitions;
+import org.wso2.charon3.core.schema.SCIMSchemaDefinitions;
 import org.wso2.charon3.core.utils.AttributeUtil;
 
 import com.novell.ldap.LDAPAttribute;
@@ -56,12 +60,18 @@ public class LdapUtil {
 			LDAPAttributeSet attributeSet = entry.getAttributeSet();
 			Date createdDate;
 			Date lastModified;
+			String createdDateStr;
+			String lastModifiedStr;
+			SimpleDateFormat ldapFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy");
+			SimpleDateFormat scimFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
 			
 			user.setId(attributeSet.getAttribute(LdapScimAttrMap.id.getValue()).getStringValue());
 			user.setUserName(attributeSet.getAttribute(LdapScimAttrMap.userName.getValue()).getStringValue());
 			
 			if (attributeSet.getAttribute(LdapScimAttrMap.created.getValue()) != null) {
-				createdDate = AttributeUtil.parseDateTime(attributeSet.getAttribute(LdapScimAttrMap.created.getValue()).getStringValue());
+				createdDate = ldapFormat.parse(attributeSet.getAttribute(LdapScimAttrMap.created.getValue()).getStringValue());
+				createdDateStr = scimFormat.format(createdDate);
+				createdDate = AttributeUtil.parseDateTime(createdDateStr);
 			} else {
 				createdDate = new Date();
 			}
@@ -69,7 +79,9 @@ public class LdapUtil {
 			user.setCreatedDate(createdDate);
 			
 			if (attributeSet.getAttribute(LdapScimAttrMap.lastModified.getValue()) != null) {
-				lastModified = AttributeUtil.parseDateTime(attributeSet.getAttribute(LdapScimAttrMap.lastModified.getValue()).getStringValue());
+				lastModified = ldapFormat.parse(attributeSet.getAttribute(LdapScimAttrMap.lastModified.getValue()).getStringValue());
+				lastModifiedStr = scimFormat.format(lastModified);		
+				lastModified = AttributeUtil.parseDateTime(lastModifiedStr);
 			} else {
 				lastModified = new Date();
 			}
@@ -282,5 +294,5 @@ public class LdapUtil {
 		}
 		return parent;
 	}
-
+	
 }
