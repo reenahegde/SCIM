@@ -1,6 +1,5 @@
 package org.wso2.charon3.utils.ldapmanager;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -9,17 +8,12 @@ import java.util.Set;
 
 import org.wso2.charon3.core.attributes.Attribute;
 import org.wso2.charon3.core.attributes.ComplexAttribute;
-import org.wso2.charon3.core.attributes.DefaultAttributeFactory;
 import org.wso2.charon3.core.attributes.MultiValuedAttribute;
 import org.wso2.charon3.core.attributes.SimpleAttribute;
-import org.wso2.charon3.core.exceptions.BadRequestException;
 import org.wso2.charon3.core.exceptions.CharonException;
 import org.wso2.charon3.core.objects.User;
 import org.wso2.charon3.core.schema.SCIMConstants.UserSchemaConstants;
-import org.wso2.charon3.core.schema.AttributeSchema;
-import org.wso2.charon3.core.schema.SCIMConstants;
 import org.wso2.charon3.core.schema.SCIMDefinitions;
-import org.wso2.charon3.core.schema.SCIMSchemaDefinitions;
 import org.wso2.charon3.core.utils.AttributeUtil;
 
 import com.novell.ldap.LDAPAttribute;
@@ -53,6 +47,11 @@ public class LdapUtil {
 		return entry;
 	}
 
+	/**
+	 * Converts LDAP Entry object in to SCIM object
+	 * @param entry
+	 * @return
+	 */
 	public static User convertLdapToUser(LDAPEntry entry) {
 
 		User user = new User();
@@ -64,12 +63,13 @@ public class LdapUtil {
 			String lastModifiedStr;
 			SimpleDateFormat ldapFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy");
 			SimpleDateFormat scimFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-			
+
 			user.setId(attributeSet.getAttribute(LdapScimAttrMap.id.getValue()).getStringValue());
 			user.setUserName(attributeSet.getAttribute(LdapScimAttrMap.userName.getValue()).getStringValue());
-			
+
 			if (attributeSet.getAttribute(LdapScimAttrMap.created.getValue()) != null) {
-				createdDate = ldapFormat.parse(attributeSet.getAttribute(LdapScimAttrMap.created.getValue()).getStringValue());
+				createdDate = ldapFormat
+						.parse(attributeSet.getAttribute(LdapScimAttrMap.created.getValue()).getStringValue());
 				createdDateStr = scimFormat.format(createdDate);
 				createdDate = AttributeUtil.parseDateTime(createdDateStr);
 			} else {
@@ -77,21 +77,70 @@ public class LdapUtil {
 			}
 
 			user.setCreatedDate(createdDate);
-			
+
 			if (attributeSet.getAttribute(LdapScimAttrMap.lastModified.getValue()) != null) {
-				lastModified = ldapFormat.parse(attributeSet.getAttribute(LdapScimAttrMap.lastModified.getValue()).getStringValue());
-				lastModifiedStr = scimFormat.format(lastModified);		
+				lastModified = ldapFormat
+						.parse(attributeSet.getAttribute(LdapScimAttrMap.lastModified.getValue()).getStringValue());
+				lastModifiedStr = scimFormat.format(lastModified);
 				lastModified = AttributeUtil.parseDateTime(lastModifiedStr);
 			} else {
 				lastModified = new Date();
 			}
-			
+
 			user.setLastModified(lastModified);
-			
+
 			if (attributeSet.getAttribute(LdapScimAttrMap.location.getValue()) != null) {
 				user.setLocation(attributeSet.getAttribute(LdapScimAttrMap.location.getValue()).getStringValue());
 			} else {
 				user.setLocation("http://localhost:8080/scim/v2/Users/" + user.getId());
+			}
+
+			if(isNameSetInLdap(attributeSet)){
+				ComplexAttribute nameAttribute = createComplexAttribute(SCIMSchemaDefinitions.SCIMUserSchemaDefinition.NAME, 
+										SCIMConstants.UserSchemaConstants.NAME, user);
+				if(attributeSet.getAttribute(LdapScimAttrMap.formatted.getValue()) != null ){
+					SimpleAttribute formattedNameAttribute = createSimpleSubAttribute(SCIMConstants.UserSchemaConstants.FORMATTED_NAME, 
+														attributeSet.getAttribute(LdapScimAttrMap.formatted.getValue()).getStringValue(),
+														SCIMSchemaDefinitions.SCIMUserSchemaDefinition.FORMATTED);
+					nameAttribute.setSubAttribute(formattedNameAttribute);
+				}
+				
+				if(attributeSet.getAttribute(LdapScimAttrMap.familyName.getValue()) != null){
+					SimpleAttribute familyNameAttribute = createSimpleSubAttribute(SCIMConstants.UserSchemaConstants.FAMILY_NAME, 
+															attributeSet.getAttribute(LdapScimAttrMap.familyName.getValue()).getStringValue(),
+															SCIMSchemaDefinitions.SCIMUserSchemaDefinition.FAMILY_NAME);
+					nameAttribute.setSubAttribute(familyNameAttribute);
+				}
+				
+				if(attributeSet.getAttribute(LdapScimAttrMap.givenName.getValue()) !=null){			
+					SimpleAttribute givenNameAttribute = createSimpleSubAttribute(SCIMConstants.UserSchemaConstants.GIVEN_NAME, 
+															attributeSet.getAttribute(LdapScimAttrMap.givenName.getValue()).getStringValue(),
+															SCIMSchemaDefinitions.SCIMUserSchemaDefinition.GIVEN_NAME);
+					nameAttribute.setSubAttribute(givenNameAttribute);
+				}
+				
+				if(attributeSet.getAttribute(LdapScimAttrMap.middleName.getValue()) !=null){		
+					SimpleAttribute middleNameAttribute = createSimpleSubAttribute(SCIMConstants.UserSchemaConstants.MIDDLE_NAME, 
+															attributeSet.getAttribute(LdapScimAttrMap.middleName.getValue()).getStringValue(),
+														SCIMSchemaDefinitions.SCIMUserSchemaDefinition.MIDDLE_NAME);
+					nameAttribute.setSubAttribute(middleNameAttribute);
+				}
+			
+				if(attributeSet.getAttribute(LdapScimAttrMap.honorificPrefix.getValue()) !=null){	
+					SimpleAttribute honoroficPrefixAttribute = createSimpleSubAttribute(SCIMConstants.UserSchemaConstants.HONORIFIC_PREFIX, 
+																attributeSet.getAttribute(LdapScimAttrMap.honorificPrefix.getValue()).getStringValue(),
+																SCIMSchemaDefinitions.SCIMUserSchemaDefinition.HONORIFIC_PREFIX);
+				nameAttribute.setSubAttribute(honoroficPrefixAttribute);
+				}
+			
+				if(attributeSet.getAttribute(LdapScimAttrMap.honorificSuffix.getValue()) !=null){	
+					SimpleAttribute honoroficSuffixAttribute = createSimpleSubAttribute(SCIMConstants.UserSchemaConstants.HONORIFIC_SUFFIX, 
+																attributeSet.getAttribute(LdapScimAttrMap.honorificSuffix.getValue()).getStringValue(),
+																SCIMSchemaDefinitions.SCIMUserSchemaDefinition.HONORIFIC_SUFFIX);
+					nameAttribute.setSubAttribute(honoroficSuffixAttribute);
+				}
+			
+				user.setAttribute(nameAttribute);
 			}
 
 		} catch (Exception e) {
@@ -294,5 +343,60 @@ public class LdapUtil {
 		}
 		return parent;
 	}
+
+	/**
+	 * Creates complex SCIM attribute
+	 * 
+	 * @param schema
+	 * @param compAttr
+	 * @throws CharonException
+	 * @throws BadRequestException
+	 */
+	private static ComplexAttribute createComplexAttribute(AttributeSchema schema, String compAttrName, User u)
+			throws CharonException, BadRequestException {
+		ComplexAttribute complexAttribute;
+		if (!u.getAttributeList().containsKey(compAttrName)) {
+			complexAttribute = (ComplexAttribute) DefaultAttributeFactory.createAttribute(schema,
+					new ComplexAttribute(compAttrName));
+			u.getAttributeList().put(compAttrName, complexAttribute);
+		} else {
+			complexAttribute = (ComplexAttribute) u.getAttribute(compAttrName);
+		}
+		return complexAttribute;
+
+	}
+
+	/**
+	 * Creates simple subAttribute for SCIM
+	 * 
+	 * @param createdDate
+	 * @throws CharonException
+	 * @throws BadRequestException
+	 */
+	private static SimpleAttribute createSimpleSubAttribute(String subAttributeName, Object value,
+			AttributeSchema schema) throws CharonException, BadRequestException {
+		// create the created date attribute as defined in schema.
+		SimpleAttribute simpleAttribute = new SimpleAttribute(subAttributeName, value);
+		simpleAttribute = (SimpleAttribute) DefaultAttributeFactory.createAttribute(schema, simpleAttribute);
+
+		return simpleAttribute;
+
+	}
 	
+	private static boolean isNameSetInLdap(LDAPAttributeSet attributeSet){
+		if(attributeSet.getAttribute(LdapScimAttrMap.formatted.getValue()) != null )
+			return true;
+		else if(attributeSet.getAttribute(LdapScimAttrMap.familyName.getValue()) != null)
+			return true;
+		else if(attributeSet.getAttribute(LdapScimAttrMap.givenName.getValue()) != null)
+			return true;
+		else if(attributeSet.getAttribute(LdapScimAttrMap.middleName.getValue()) !=null)
+			return true;
+		else if(attributeSet.getAttribute(LdapScimAttrMap.honorificPrefix.getValue()) !=null)
+			return true;
+		else if(attributeSet.getAttribute(LdapScimAttrMap.honorificSuffix.getValue()) !=null)
+			return true;
+		else 
+			return false;
+	}
 }
