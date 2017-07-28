@@ -460,7 +460,6 @@ public class UserResourceManager extends AbstractResourceManager {
             User user = (User) decoder.decodeResource(scimObjectString, schema, new User());
             User updatedUser = null;
             if (userManager != null) {
-            	updatedUser = userManager.updateUser(user, requiredAttributes);
                 //retrieve the old object
                 User oldUser = userManager.getUser(existingId, ResourceManagerUtil.getAllAttributeURIs(schema));
                 if (oldUser != null) {
