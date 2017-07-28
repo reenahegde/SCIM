@@ -148,7 +148,8 @@ public class UpdateUserSample {
         //get the id of the user
         Scanner reader = new Scanner(System.in, "UTF-8");  // Reading from System.in
         System.out.print("Enter the user ID : ");
-        String id = "16600144-8cd6-49fb-9879-bafb78b5d3c9";
+        String id = reader.next();
+        reader.close();
         try {
             String url = "http://localhost:8080/scim/v2/Users/"  + id;
             URL obj = new URL(url);

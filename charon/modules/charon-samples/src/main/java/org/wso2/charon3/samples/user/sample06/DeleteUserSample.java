@@ -24,9 +24,10 @@ public class DeleteUserSample {
     public static void main(String[] args) {
         BasicConfigurator.configure();
         //get the id of the user
-        //Scanner reader = new Scanner(System.in, "UTF-8");  // Reading from System.in
+        Scanner reader = new Scanner(System.in, "UTF-8");  // Reading from System.in
         System.out.print("Enter the user ID : ");
-        String id = "92e0420d-c1e3-4131-9318-d8680bcf8f79";
+        String id = reader.next();
+        reader.close();
         try {
             String url = "http://localhost:8080/scim/v2/Users/"  + id;;
             URL obj = new URL(url);

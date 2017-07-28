@@ -27,6 +27,7 @@ public class GetUserSample {
         Scanner reader = new Scanner(System.in, "UTF-8");  // Reading from System.in
         System.out.print("Enter the user ID : ");
         String id = reader.next();
+        reader.close();
         try {
             String url = "http://localhost:8080/scim/v2/Users/" + id;
             URL obj = new URL(url);
