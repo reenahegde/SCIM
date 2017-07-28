@@ -215,8 +215,8 @@ public class LdapManager implements UserManager {
 				searchRequest.getSortBy(), searchRequest.getSortOder(), requiredAttributes);
 	}
 
-	@Override
-	public User updateUser(User user, Map<String, Boolean> map)
+	//@Override
+	public User updateUser1(User user, Map<String, Boolean> map)
 			throws NotImplementedException, CharonException, BadRequestException, NotFoundException {
 		String id = user.getId();
 		if (id == null) {
@@ -245,7 +245,24 @@ public class LdapManager implements UserManager {
 		}
 		return (User) CopyUtil.deepCopy(user);
 	}
-
+	
+	@Override
+	public User updateUser(User user, Map<String, Boolean> map)
+			throws NotImplementedException, CharonException, BadRequestException, NotFoundException {
+		String id = user.getId();
+		if (id == null) {
+			throw new NotFoundException("No user with the id : " + user.getId());
+		}
+		try {
+			deleteUser(id);
+			createUser(user, map);
+		} catch (ConflictException e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		}
+		return (User) CopyUtil.deepCopy(user);
+	}
+	
 	@Override
 	public User getMe(String s, Map<String, Boolean> map)
 			throws CharonException, BadRequestException, NotFoundException {
