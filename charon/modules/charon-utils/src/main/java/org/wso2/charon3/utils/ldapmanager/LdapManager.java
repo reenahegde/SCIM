@@ -51,7 +51,7 @@ import com.novell.ldap.LDAPSearchResults;
 public class LdapManager implements UserManager {
 	private static final Logger logger = LoggerFactory.getLogger(LdapManager.class);
 	//in memory user manager stores users
-	ConcurrentHashMap<String, User> inMemoryUserList = new ConcurrentHashMap<String, User>();
+	//ConcurrentHashMap<String, User> inMemoryUserList = new ConcurrentHashMap<String, User>();
 	ConcurrentHashMap<String, Group> inMemoryGroupList = new ConcurrentHashMap<String, Group>();
 
 	@Override
@@ -82,11 +82,11 @@ public class LdapManager implements UserManager {
 			throws CharonException, BadRequestException, NotFoundException {
 
 		//Added by Reena Hegde
-		
+
 		LDAPConnection lc = LdapConnectUtil.getConnection(false);
 		List<LDAPEntry> userList = new ArrayList<>();
 		User user = new User();
-		
+
 		try {
 			LDAPEntry searchResult = lc.read("uid="+id+",ou=users,o=people");
 			user = LdapUtil.convertLdapToUser(searchResult);
@@ -98,26 +98,6 @@ public class LdapManager implements UserManager {
 
 		return user;
 	}
-	/*LDAPConnection lc = LdapConnectUtil.getConnection(false);
-		User user = null;
-		try {
-			LDAPSearchResults searchResults = lc.search("ou=users,o=people", 
-					LDAPConnection.SCOPE_SUB, "(uid="+id+")", null, false);
-
-			if (searchResults.hasMore()) {
-				LDAPEntry nextEntry = searchResults.next();
-				user = (User) CopyUtil.deepCopy(nextEntry);   
-			}
-			// disconnect with the server
-			lc.disconnect();
-		} catch (LDAPException e) {
-			throw new NotFoundException("No user with the id : " + id);
-		}
-		if(user == null){
-			throw new NotFoundException("No user with the id : " + id);
-		}else {
-			return user;
-		}*/
 
 	@Override
 	public void deleteUser(String id)
@@ -167,9 +147,9 @@ public class LdapManager implements UserManager {
 			logger.error("Error in listing users");
 			return  null;
 		}*/
-		
+
 		//Added by Reena Hegde
-		
+
 		List<Object> userList = new ArrayList<>();
 		User u = new User();
 		try {
@@ -240,14 +220,12 @@ public class LdapManager implements UserManager {
 			throws NotImplementedException, CharonException, BadRequestException, NotFoundException {
 		String id = user.getId();
 		if (id == null) {
-			id = "16600144-8cd6-49fb-9879-bafb78b5d3c9";
-			//TODO: Enable exception
-			//throw new NotFoundException("No user with the id : " + user.getId());
+			throw new NotFoundException("No user with the id : " + user.getId());
 		}
 		LDAPConnection lc = LdapConnectUtil.getConnection(false);
 		String dn = "uid="+id+",ou=users,o=people";
 		try {
-			/*
+			/*//Delete previous attr and add new ones
 				LDAPEntry searchResult = lc.read(dn);		
 				User dbUser = new User(); //(User)searchResult;
 
