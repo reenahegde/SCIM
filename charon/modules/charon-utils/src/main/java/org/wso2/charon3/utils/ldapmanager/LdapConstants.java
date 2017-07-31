@@ -17,8 +17,8 @@ public class LdapConstants {
 	}
 	public class GroupConstants {
 		
-		public static final String name = "cn";
-		public static final String groupID = "l"; //'groupId' is Integer in Ldap
+		public static final String cn = "cn";
+		public static final String name = "l"; //'groupId' is Integer in Ldap
 		public static final String createdDate = "fullName";
 		public static final String modifiedDate = "businessCategory";
 		public static final String location = "description";

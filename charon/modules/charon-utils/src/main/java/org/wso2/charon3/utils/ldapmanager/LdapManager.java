@@ -22,7 +22,6 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -53,7 +52,7 @@ public class LdapManager implements UserManager {
 	private static final Logger logger = LoggerFactory.getLogger(LdapManager.class);
 	//in memory user manager stores users
 	//ConcurrentHashMap<String, User> inMemoryUserList = new ConcurrentHashMap<String, User>();
-	ConcurrentHashMap<String, Group> inMemoryGroupList = new ConcurrentHashMap<String, Group>();
+	//ConcurrentHashMap<String, Group> inMemoryGroupList = new ConcurrentHashMap<String, Group>();
 
 	@Override
 	public User createUser(User user, Map<String, Boolean> map)
@@ -296,8 +295,8 @@ public class LdapManager implements UserManager {
 		LDAPConnection lc = LdapConnectUtil.getConnection(false);
 		LDAPAttributeSet attributeSet = LdapUtil.copyGroupToLdap(group);
 
-		String cn = attributeSet.getAttribute(GroupConstants.name).getStringValue();
-		String dn = GroupConstants.name+"="+cn+","+LdapConstants.groupContainer;
+		String cn = attributeSet.getAttribute(GroupConstants.cn).getStringValue();
+		String dn = GroupConstants.cn+"="+cn+","+LdapConstants.groupContainer;
 		LDAPEntry entry = new LDAPEntry(dn, attributeSet);
 
 		try {
@@ -314,21 +313,73 @@ public class LdapManager implements UserManager {
 	@Override
 	public Group getGroup(String id, Map<String, Boolean> map)
 			throws NotImplementedException, BadRequestException, CharonException, NotFoundException {
-		if (inMemoryGroupList.get(id) != null) {
-			return (Group) CopyUtil.deepCopy(inMemoryGroupList.get(id));
-		} else {
+		Group group = null;
+		try {
+			LDAPConnection lc = LdapConnectUtil.getConnection(false);
+			LDAPEntry entry =lc.read(GroupConstants.cn+"="+id+","+LdapConstants.groupContainer); 
+				group =new Group();
+				LDAPAttributeSet attributeSet = entry.getAttributeSet();
+				group.setId(attributeSet.getAttribute(GroupConstants.cn).getStringValue());
+				if (attributeSet.getAttribute(GroupConstants.createdDate) != null) {
+					group.setCreatedDate(LdapUtil.parseDate(attributeSet.getAttribute(GroupConstants.createdDate).getStringValue()));
+				}
+				if (attributeSet.getAttribute(GroupConstants.modifiedDate) != null) {
+					group.setLastModified(LdapUtil.parseDate(attributeSet.getAttribute(GroupConstants.modifiedDate).getStringValue()));
+				}
+				if (attributeSet.getAttribute(GroupConstants.location) != null) {
+					group.setLocation(attributeSet.getAttribute(GroupConstants.location).getStringValue());
+				}
+				if (attributeSet.getAttribute(GroupConstants.name) != null) {
+					group.setDisplayName(attributeSet.getAttribute(GroupConstants.name).getStringValue());
+				}
+				if (attributeSet.getAttribute(GroupConstants.member) != null) {
+					String[] memIds = attributeSet.getAttribute(GroupConstants.member).getStringValueArray();
+					for(String dn :memIds){
+						try{
+							LDAPEntry userEntry = lc.read(dn);
+							LDAPAttributeSet userAttrSet = userEntry.getAttributeSet();
+							String uid, name;
+							if (userAttrSet.getAttribute(LdapScimAttrMap.id.getValue()) != null) {
+								uid = userAttrSet.getAttribute(LdapScimAttrMap.id.getValue()).getStringValue();
+								if (userAttrSet.getAttribute(LdapScimAttrMap.displayName.getValue()) != null) {
+									name = userAttrSet.getAttribute(LdapScimAttrMap.displayName.getValue()).getStringValue();
+									group.setMember(uid, name);
+								}
+							}
+						}catch (Exception e) {
+							// TODO: handle exception
+							e.printStackTrace();
+						}
+					}
+				}
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		if(group ==null) {
 			throw new NotFoundException("No user with the id : " + id);
+		} else {
+			return (Group) CopyUtil.deepCopy(group);
 		}
 	}
 
 	@Override
 	public void deleteGroup(String id)
 			throws NotFoundException, CharonException, NotImplementedException, BadRequestException {
-		if (inMemoryGroupList.get(id) == null) {
-			throw new NotFoundException("No user with the id : " + id);
-		} else {
-			inMemoryGroupList.remove(id);
+		LDAPConnection lc = LdapConnectUtil.getConnection(false);
+		try {
+			String dn = GroupConstants.cn+"="+id+","+LdapConstants.groupContainer;
+			lc.delete(dn);
+			System.out.print(dn+" Deleted");
+			lc.disconnect();
+			return;
 		}
+		catch (LDAPException e) {
+			System.out.println("Error:  " + e.toString());
+			throw new NotFoundException("No Group with the id : " + id);
+		} 
+	
 	}
 
 	@Override
@@ -346,9 +397,8 @@ public class LdapManager implements UserManager {
 		}
 	}
 
-	private List<Object> listGroups(Map<String, Boolean> requiredAttributes) {
+	private List<Object> listGroups(Map<String, Boolean> requiredAttributes) throws CharonException, BadRequestException {
 		List<Object> groupList = new ArrayList<>();
-
 		try {
 			LDAPConnection lc = LdapConnectUtil.getConnection(false);
 			LDAPSearchResults searchResults =lc.search(LdapConstants.groupContainer, LDAPConnection.SCOPE_ONE, "cn=*",null, false); 
@@ -358,7 +408,7 @@ public class LdapManager implements UserManager {
 				LDAPEntry nextEntry = searchResults.next();
 				group =new Group();
 				LDAPAttributeSet attributeSet = nextEntry.getAttributeSet();
-				group.setDisplayName(attributeSet.getAttribute(GroupConstants.name).getStringValue());
+				group.setDisplayName(attributeSet.getAttribute(GroupConstants.cn).getStringValue());
 				if (attributeSet.getAttribute(GroupConstants.createdDate) != null) {
 					group.setCreatedDate(LdapUtil.parseDate(attributeSet.getAttribute(GroupConstants.createdDate).getStringValue()));
 				}
@@ -368,8 +418,8 @@ public class LdapManager implements UserManager {
 				if (attributeSet.getAttribute(GroupConstants.location) != null) {
 					group.setLocation(attributeSet.getAttribute(GroupConstants.location).getStringValue());
 				}
-				if (attributeSet.getAttribute(GroupConstants.groupID) != null) {
-					group.setId(attributeSet.getAttribute(GroupConstants.groupID).getStringValue());
+				if (attributeSet.getAttribute(GroupConstants.name) != null) {
+					group.setId(attributeSet.getAttribute(GroupConstants.name).getStringValue());
 				}
 				if (attributeSet.getAttribute(GroupConstants.member) != null) {
 					String[] memIds = attributeSet.getAttribute(GroupConstants.member).getStringValueArray();
@@ -377,10 +427,11 @@ public class LdapManager implements UserManager {
 						try{
 							LDAPEntry entry = lc.read(dn);
 							LDAPAttributeSet userAttrSet = entry.getAttributeSet();
+							String uid, name;
 							if (userAttrSet.getAttribute(LdapScimAttrMap.id.getValue()) != null) {
-								String uid = userAttrSet.getAttribute(LdapScimAttrMap.id.getValue()).getStringValue();
+								uid = userAttrSet.getAttribute(LdapScimAttrMap.id.getValue()).getStringValue();
 								if (userAttrSet.getAttribute(LdapScimAttrMap.displayName.getValue()) != null) {
-									String name = userAttrSet.getAttribute(LdapScimAttrMap.displayName.getValue()).getStringValue();
+									name = userAttrSet.getAttribute(LdapScimAttrMap.displayName.getValue()).getStringValue();
 									group.setMember(uid, name);
 								}
 							}
@@ -393,13 +444,6 @@ public class LdapManager implements UserManager {
 				groupList.add(group);
 			}
 			return (List<Object>) CopyUtil.deepCopy(groupList);
-		} catch (CharonException e) {
-			logger.error("Error in listing groups");
-			return  null;
-		} catch (BadRequestException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return  null;
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -414,12 +458,25 @@ public class LdapManager implements UserManager {
 	@Override
 	public Group updateGroup(Group group, Group group1, Map<String, Boolean> map)
 			throws NotImplementedException, BadRequestException, CharonException, NotFoundException {
-		if (group.getId() != null) {
-			inMemoryGroupList.replace(group.getId(), group);
-			return (Group) CopyUtil.deepCopy(group);
-		} else {
+		if (group.getId() == null) {
 			throw new NotFoundException("No user with the id : " + group.getId());
 		}
+
+		LDAPConnection lc = LdapConnectUtil.getConnection(false);
+		String dn = GroupConstants.cn+"="+group.getId()+","+LdapConstants.groupContainer;
+		try {
+			List<LDAPModification> modList = LdapUpdateHelper.getModifications(group,group1);	
+			LDAPModification[] mods = new LDAPModification[modList.size()];
+			mods = (LDAPModification[]) modList.toArray(mods);
+			lc.modify(dn, mods);
+			lc.disconnect();
+		}catch (LDAPException e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+			throw new NotFoundException(e.getLDAPErrorMessage());
+		}
+		return (Group) CopyUtil.deepCopy(group);
+
 	}
 
 	@Override

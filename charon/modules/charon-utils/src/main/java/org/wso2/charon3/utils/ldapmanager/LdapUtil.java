@@ -579,8 +579,8 @@ public class LdapUtil {
 		LDAPAttributeSet attributeSet = new LDAPAttributeSet();
 		attributeSet.add(new LDAPAttribute(LdapConstants.objectclass, LdapConstants.groupClass));
 		try {
+			attributeSet.add(new LDAPAttribute(GroupConstants.cn, group.getId()));
 			attributeSet.add(new LDAPAttribute(GroupConstants.name, group.getDisplayName()));
-			attributeSet.add(new LDAPAttribute(GroupConstants.groupID, group.getId()));
 			attributeSet.add(new LDAPAttribute(GroupConstants.location, group.getLocation()));
 			attributeSet.add(new LDAPAttribute(GroupConstants.createdDate, group.getCreatedDate().toString()));
 			attributeSet.add(new LDAPAttribute(GroupConstants.modifiedDate, group.getLastModified().toString()));

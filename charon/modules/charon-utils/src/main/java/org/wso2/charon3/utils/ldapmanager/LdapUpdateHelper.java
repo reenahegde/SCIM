@@ -1,16 +1,22 @@
 package org.wso2.charon3.utils.ldapmanager;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.wso2.charon3.core.attributes.Attribute;
 import org.wso2.charon3.core.attributes.ComplexAttribute;
 import org.wso2.charon3.core.attributes.MultiValuedAttribute;
 import org.wso2.charon3.core.attributes.SimpleAttribute;
+import org.wso2.charon3.core.exceptions.CharonException;
+import org.wso2.charon3.core.objects.Group;
 import org.wso2.charon3.core.objects.User;
 import org.wso2.charon3.core.schema.SCIMConstants.UserSchemaConstants;
 import org.wso2.charon3.core.schema.SCIMDefinitions;
+import org.wso2.charon3.utils.ldapmanager.LdapConstants.GroupConstants;
+import org.wso2.charon3.utils.ldapmanager.LdapConstants.UserConstants;
 
 import com.novell.ldap.LDAPAttribute;
 import com.novell.ldap.LDAPModification;
@@ -22,24 +28,65 @@ import com.novell.ldap.LDAPModification;
  */
 public class LdapUpdateHelper {
 
+	public static List<LDAPModification> getModifications(Group oldGrp, Group group) {
+		List<LDAPModification> modList = new ArrayList<LDAPModification>();
+		int op = LDAPModification.REPLACE;
+		try {
+			//modList = addOnlyChanged(op, GroupConstants.cn, group.getId(), oldGrp.getId(), modList);
+			modList = addOnlyChanged(op, GroupConstants.name, group.getDisplayName(), oldGrp.getDisplayName(), modList);
+			modList = addOnlyChanged(op, GroupConstants.createdDate, group.getCreatedDate().toString(), oldGrp.getCreatedDate().toString(), modList);
+			modList = addOnlyChanged(op, GroupConstants.modifiedDate, group.getLastModified().toString(), oldGrp.getLastModified().toString(), modList);
+			modList = addOnlyChanged(op, GroupConstants.location, group.getLocation(), oldGrp.getLocation(), modList);
+
+			List<Object> members = group.getMembers();
+			Set<String> addMembers = new HashSet<>();
+			if(members!=null) {
+				for(Object id: members){
+					String uid = (String) id;
+					String dn = UserConstants.uid+ "="+ uid+ "," +LdapConstants.userContainer;
+					addMembers.add(dn);
+				}
+				modList.add(new LDAPModification(LDAPModification.ADD, new LDAPAttribute(GroupConstants.member, addMembers.toArray(new String[addMembers.size()]))));
+			}
+			List<Object> oldGrpMembers = oldGrp.getMembers();
+			if(oldGrpMembers!=null) {
+				Set<String> remMembers = new HashSet<>();
+				for(Object id: oldGrpMembers){
+					String uid = (String) id;
+					String dn = UserConstants.uid+ "="+ uid+ "," +LdapConstants.userContainer;
+					if(!addMembers.contains(dn)){
+						remMembers.add(dn);
+					}
+				}
+				modList.add(new LDAPModification(LDAPModification.DELETE, new LDAPAttribute(GroupConstants.member, remMembers.toArray(new String[remMembers.size()]))));
+			}
+			
+		} catch (CharonException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return modList;
+	}
+
 	public static List<LDAPModification> getModifications(User user, int mode) {
 		List<LDAPModification> modifications = new ArrayList<LDAPModification>();
 		Map<String, Attribute> attributeList = user.getAttributeList();
 
 		for (Attribute attribute : attributeList.values()) {
-			
+
 			if (attribute instanceof SimpleAttribute) {
 				modifications = addSimpleAttribute(null, attribute, modifications, mode);
 			} else if (attribute instanceof ComplexAttribute) {
 				ComplexAttribute complexAttribute = (ComplexAttribute) attribute;
 				Map<String, Attribute> subAttributes = complexAttribute.getSubAttributesList();
-				
+
 				for (Attribute subAttribute : subAttributes.values()) {
-					
+
 					if (subAttribute instanceof SimpleAttribute) {
 						modifications = addSimpleAttribute(null, (Attribute) ((SimpleAttribute) subAttribute), modifications, mode);
 					} else if (subAttribute instanceof MultiValuedAttribute) {
-						
+
 						if (!subAttribute.getType().equals(SCIMDefinitions.DataType.COMPLEX)) {
 							modifications = addMultiValuedPrimitiveAttribute(((MultiValuedAttribute) subAttribute).getAttributePrimitiveValues(),
 									subAttribute.getName(),  modifications, mode);
@@ -51,7 +98,7 @@ public class LdapUpdateHelper {
 								Map<String, Attribute> subSubAttributes = complexSubAttribute.getSubAttributesList();
 
 								for (Attribute subSubAttribute : subSubAttributes.values()) {
-									
+
 									if (subSubAttribute instanceof SimpleAttribute) {
 										modifications =  addSimpleAttribute(null,(Attribute) ((SimpleAttribute) subSubAttribute), modifications, mode);
 									} else if (subSubAttribute instanceof MultiValuedAttribute) {
@@ -66,7 +113,7 @@ public class LdapUpdateHelper {
 						Map<String, Attribute> subSubAttributes = complexSubAttribute.getSubAttributesList();
 
 						for (Attribute subSubAttribute : subSubAttributes.values()) {
-							
+
 							if (subSubAttribute instanceof SimpleAttribute) {
 								modifications = addSimpleAttribute(null,(Attribute) ((SimpleAttribute) subSubAttribute), modifications, mode);
 
@@ -79,7 +126,7 @@ public class LdapUpdateHelper {
 				}
 			} else if (attribute instanceof MultiValuedAttribute) {
 				MultiValuedAttribute multiValuedAttribute = (MultiValuedAttribute) attribute;
-				
+
 				if (multiValuedAttribute.getType().equals(SCIMDefinitions.DataType.COMPLEX)) {
 					List<Attribute> subAttributeList  = multiValuedAttribute.getAttributeValues();
 					for (Attribute subAttribute : subAttributeList) {
@@ -112,10 +159,10 @@ public class LdapUpdateHelper {
 						}
 						//If address END-------
 						String parent = getAttributeName(subAttribute);
-						
+
 						for (Attribute subSubAttribute : subSubAttributes.values()) {
 							if (subSubAttribute instanceof SimpleAttribute) {
-								
+
 								if(subSubAttribute.getName().equals("value")) {
 									modifications = addSimpleAttribute(parent, (Attribute) ((SimpleAttribute) subSubAttribute), modifications, mode);
 								} 
@@ -202,4 +249,12 @@ public class LdapUpdateHelper {
 		}
 		return modList;
 	}
+	private static List<LDAPModification> addOnlyChanged(int op, String key, String value, String oldValue, List<LDAPModification> modList){
+		if(value != null && !value.isEmpty() && (oldValue==null || !oldValue.equals(value))){
+			LDAPAttribute attribute = new LDAPAttribute(key, value);
+			modList.add(new LDAPModification(op, attribute));
+		}
+		return modList;
+	}
+
 }
