@@ -36,7 +36,7 @@ public enum LdapScimAttrMap {
 	phoneNumbers_mobile(LdapIPersonConstants.facsimileTelephoneNumber),
 	emails_work(LdapIPersonConstants.mail), 
 	emails_home(LdapIPersonConstants.departmentNumber),
-	photos_photo(LdapIPersonConstants.localityName), 
+	photos_photo(LdapIPersonConstants.description), 
 	photos_thumbnail(LdapIPersonConstants.description), 
 	
 	resourceType(LdapIPersonConstants.carLicense), 

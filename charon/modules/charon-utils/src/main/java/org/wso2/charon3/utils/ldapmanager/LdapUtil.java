@@ -1,5 +1,6 @@
 package org.wso2.charon3.utils.ldapmanager;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -412,12 +413,11 @@ public class LdapUtil {
 		LDAPAttributeSet attributeSet = new LDAPAttributeSet();
 		attributeSet.add(new LDAPAttribute(LdapConstants.objectclass, LdapConstants.groupClass));
 		try {
-			attributeSet.add(new LDAPAttribute(GroupConstants.cn, group.getDisplayName()));
+			attributeSet.add(new LDAPAttribute(GroupConstants.name, group.getDisplayName()));
 			attributeSet.add(new LDAPAttribute(GroupConstants.groupID, group.getId()));
-			attributeSet.add(new LDAPAttribute(GroupConstants.localityname, group.getLocation()));
-			attributeSet.add(new LDAPAttribute(GroupConstants.revision, group.getCreatedDate().toString()));
-			attributeSet.add(new LDAPAttribute(GroupConstants.description, group.getLastModified().toString()));
-			//List<String> members = group.getMembersWithDisplayName();
+			attributeSet.add(new LDAPAttribute(GroupConstants.location, group.getLocation()));
+			attributeSet.add(new LDAPAttribute(GroupConstants.createdDate, group.getCreatedDate().toString()));
+			attributeSet.add(new LDAPAttribute(GroupConstants.modifiedDate, group.getLastModified().toString()));
 			List<Object> members = group.getMembers();
 			String[] groupMembers = new String[members.size()];
 			int i=0;
@@ -431,5 +431,25 @@ public class LdapUtil {
 			e.printStackTrace();
 		}
 		return attributeSet;
+	}
+	
+	/**
+	 * Parses LDAP date "EEE MMM dd HH:mm:ss z yyyy" to Scim date
+	 * @param dateStr
+	 * @return
+	 * @throws CharonException
+	 * @throws ParseException
+	 */
+	public static Date parseDate(String dateStr) throws CharonException, ParseException{
+		Date date;
+		SimpleDateFormat ldapFormat = new SimpleDateFormat(LdapConstants.LDAP_DATE_FORMAT);
+		SimpleDateFormat scimFormat = new SimpleDateFormat(LdapConstants.SCIM_DATE_FORMAT);
+		if (dateStr != null) {
+			date = ldapFormat.parse(dateStr);
+			dateStr = scimFormat.format(date);
+			date = AttributeUtil.parseDateTime(dateStr);
+			return date;
+		}
+		return null;
 	}
 }

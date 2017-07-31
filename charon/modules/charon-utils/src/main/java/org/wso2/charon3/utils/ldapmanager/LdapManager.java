@@ -18,6 +18,7 @@
 package org.wso2.charon3.utils.ldapmanager;
 
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -246,7 +247,7 @@ public class LdapManager implements UserManager {
 		}
 		return (User) CopyUtil.deepCopy(user);
 	}
-	
+
 	@Override
 	public User updateUser(User user, Map<String, Boolean> map)
 			throws NotImplementedException, CharonException, BadRequestException, NotFoundException {
@@ -263,7 +264,7 @@ public class LdapManager implements UserManager {
 		}
 		return (User) CopyUtil.deepCopy(user);
 	}
-	
+
 	@Override
 	public User getMe(String s, Map<String, Boolean> map)
 			throws CharonException, BadRequestException, NotFoundException {
@@ -295,8 +296,8 @@ public class LdapManager implements UserManager {
 		LDAPConnection lc = LdapConnectUtil.getConnection(false);
 		LDAPAttributeSet attributeSet = LdapUtil.copyGroupToLdap(group);
 
-		String cn = attributeSet.getAttribute(GroupConstants.cn).getStringValue();
-		String dn = GroupConstants.cn+"="+cn+","+LdapConstants.groupContainer;
+		String cn = attributeSet.getAttribute(GroupConstants.name).getStringValue();
+		String dn = GroupConstants.name+"="+cn+","+LdapConstants.groupContainer;
 		LDAPEntry entry = new LDAPEntry(dn, attributeSet);
 
 		try {
@@ -347,18 +348,67 @@ public class LdapManager implements UserManager {
 
 	private List<Object> listGroups(Map<String, Boolean> requiredAttributes) {
 		List<Object> groupList = new ArrayList<>();
-		groupList.add(0, 0);
-		for (Group group : inMemoryGroupList.values()) {
-			groupList.add(group);
-		}
-		groupList.set(0, groupList.size() - 1);
+
 		try {
+			LDAPConnection lc = LdapConnectUtil.getConnection(false);
+			LDAPSearchResults searchResults =lc.search(LdapConstants.groupContainer, LDAPConnection.SCOPE_ONE, "cn=*",null, false); 
+			groupList.add(searchResults.getCount());
+			Group group;
+			while (searchResults.hasMore()) {
+				LDAPEntry nextEntry = searchResults.next();
+				group =new Group();
+				LDAPAttributeSet attributeSet = nextEntry.getAttributeSet();
+				group.setDisplayName(attributeSet.getAttribute(GroupConstants.name).getStringValue());
+				if (attributeSet.getAttribute(GroupConstants.createdDate) != null) {
+					group.setCreatedDate(LdapUtil.parseDate(attributeSet.getAttribute(GroupConstants.createdDate).getStringValue()));
+				}
+				if (attributeSet.getAttribute(GroupConstants.modifiedDate) != null) {
+					group.setLastModified(LdapUtil.parseDate(attributeSet.getAttribute(GroupConstants.modifiedDate).getStringValue()));
+				}
+				if (attributeSet.getAttribute(GroupConstants.location) != null) {
+					group.setLocation(attributeSet.getAttribute(GroupConstants.location).getStringValue());
+				}
+				if (attributeSet.getAttribute(GroupConstants.groupID) != null) {
+					group.setId(attributeSet.getAttribute(GroupConstants.groupID).getStringValue());
+				}
+				if (attributeSet.getAttribute(GroupConstants.member) != null) {
+					String[] memIds = attributeSet.getAttribute(GroupConstants.member).getStringValueArray();
+					for(String dn :memIds){
+						try{
+							LDAPEntry entry = lc.read(dn);
+							LDAPAttributeSet userAttrSet = entry.getAttributeSet();
+							if (userAttrSet.getAttribute(LdapScimAttrMap.id.getValue()) != null) {
+								String uid = userAttrSet.getAttribute(LdapScimAttrMap.id.getValue()).getStringValue();
+								if (userAttrSet.getAttribute(LdapScimAttrMap.displayName.getValue()) != null) {
+									String name = userAttrSet.getAttribute(LdapScimAttrMap.displayName.getValue()).getStringValue();
+									group.setMember(uid, name);
+								}
+							}
+						}catch (Exception e) {
+							// TODO: handle exception
+							e.printStackTrace();
+						}
+					}
+				}
+				groupList.add(group);
+			}
 			return (List<Object>) CopyUtil.deepCopy(groupList);
 		} catch (CharonException e) {
 			logger.error("Error in listing groups");
 			return  null;
+		} catch (BadRequestException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return  null;
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return  null;
+		} catch (LDAPException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+			return  null;
 		}
-
 	}
 
 	@Override
