@@ -176,7 +176,7 @@ public class LdapManager implements UserManager {
 				try {
 
 					nextEntry = searchResults.next();
-					u = LdapUtil.convertLdapToUser(nextEntry);
+					u = LdapUtil.convertLdapToUserForList(nextEntry);
 					userList.add(u);
 
 				}
