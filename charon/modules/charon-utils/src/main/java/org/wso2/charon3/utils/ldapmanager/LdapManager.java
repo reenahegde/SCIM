@@ -36,7 +36,7 @@ import org.wso2.charon3.core.objects.User;
 import org.wso2.charon3.core.utils.CopyUtil;
 import org.wso2.charon3.core.utils.codeutils.Node;
 import org.wso2.charon3.core.utils.codeutils.SearchRequest;
-
+import org.wso2.charon3.utils.ldapmanager.LdapConstants.GroupConstants;
 
 import com.novell.ldap.LDAPAttributeSet;
 import com.novell.ldap.LDAPConnection;
@@ -216,6 +216,7 @@ public class LdapManager implements UserManager {
 	}
 
 	//@Override
+	//Not used!
 	public User updateUser1(User user, Map<String, Boolean> map)
 			throws NotImplementedException, CharonException, BadRequestException, NotFoundException {
 		String id = user.getId();
@@ -266,31 +267,46 @@ public class LdapManager implements UserManager {
 	@Override
 	public User getMe(String s, Map<String, Boolean> map)
 			throws CharonException, BadRequestException, NotFoundException {
-		return null;
+		return getUser(s, map);
 	}
 
 	@Override
 	public User createMe(User user, Map<String, Boolean> map)
 			throws CharonException, ConflictException, BadRequestException {
-		return null;
+		return createUser(user, map);
 	}
 
 	@Override
 	public void deleteMe(String s)
 			throws NotFoundException, CharonException, NotImplementedException, BadRequestException {
-
+		deleteUser(s);
 	}
 
 	@Override
 	public User updateMe(User user, Map<String, Boolean> map)
 			throws NotImplementedException, CharonException, BadRequestException, NotFoundException {
-		return null;
+		return updateUser(user, map);
 	}
 
 	@Override
 	public Group createGroup(Group group, Map<String, Boolean> map)
 			throws CharonException, ConflictException, NotImplementedException, BadRequestException {
-		inMemoryGroupList.put(group.getId(), group);
+
+		LDAPConnection lc = LdapConnectUtil.getConnection(false);
+		LDAPAttributeSet attributeSet = LdapUtil.copyGroupToLdap(group);
+
+		String cn = attributeSet.getAttribute(GroupConstants.cn).getStringValue();
+		String dn = GroupConstants.cn+"="+cn+","+LdapConstants.groupContainer;
+		LDAPEntry entry = new LDAPEntry(dn, attributeSet);
+
+		try {
+			lc.add(entry);
+			lc.disconnect();
+		} catch (LDAPException e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+			throw new ConflictException("Group with the id : " + cn + "already exists");
+		}
 		return (Group) CopyUtil.deepCopy(group);
 	}
 

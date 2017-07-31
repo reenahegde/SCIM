@@ -13,6 +13,7 @@ import org.wso2.charon3.core.attributes.MultiValuedAttribute;
 import org.wso2.charon3.core.attributes.SimpleAttribute;
 import org.wso2.charon3.core.exceptions.BadRequestException;
 import org.wso2.charon3.core.exceptions.CharonException;
+import org.wso2.charon3.core.objects.Group;
 import org.wso2.charon3.core.objects.User;
 import org.wso2.charon3.core.schema.AttributeSchema;
 import org.wso2.charon3.core.schema.SCIMConstants;
@@ -20,6 +21,8 @@ import org.wso2.charon3.core.schema.SCIMConstants.UserSchemaConstants;
 import org.wso2.charon3.core.schema.SCIMDefinitions;
 import org.wso2.charon3.core.schema.SCIMSchemaDefinitions;
 import org.wso2.charon3.core.utils.AttributeUtil;
+import org.wso2.charon3.utils.ldapmanager.LdapConstants.GroupConstants;
+import org.wso2.charon3.utils.ldapmanager.LdapConstants.UserConstants;
 
 import com.novell.ldap.LDAPAttribute;
 import com.novell.ldap.LDAPAttributeSet;
@@ -102,49 +105,49 @@ public class LdapUtil {
 
 			if(isNameSetInLdap(attributeSet)){
 				ComplexAttribute nameAttribute = createComplexAttribute(SCIMSchemaDefinitions.SCIMUserSchemaDefinition.NAME, 
-										SCIMConstants.UserSchemaConstants.NAME, user);
+						SCIMConstants.UserSchemaConstants.NAME, user);
 				if(attributeSet.getAttribute(LdapScimAttrMap.formatted.getValue()) != null ){
 					SimpleAttribute formattedNameAttribute = createSimpleSubAttribute(SCIMConstants.UserSchemaConstants.FORMATTED_NAME, 
-														attributeSet.getAttribute(LdapScimAttrMap.formatted.getValue()).getStringValue(),
-														SCIMSchemaDefinitions.SCIMUserSchemaDefinition.FORMATTED);
+							attributeSet.getAttribute(LdapScimAttrMap.formatted.getValue()).getStringValue(),
+							SCIMSchemaDefinitions.SCIMUserSchemaDefinition.FORMATTED);
 					nameAttribute.setSubAttribute(formattedNameAttribute);
 				}
-				
+
 				if(attributeSet.getAttribute(LdapScimAttrMap.familyName.getValue()) != null){
 					SimpleAttribute familyNameAttribute = createSimpleSubAttribute(SCIMConstants.UserSchemaConstants.FAMILY_NAME, 
-															attributeSet.getAttribute(LdapScimAttrMap.familyName.getValue()).getStringValue(),
-															SCIMSchemaDefinitions.SCIMUserSchemaDefinition.FAMILY_NAME);
+							attributeSet.getAttribute(LdapScimAttrMap.familyName.getValue()).getStringValue(),
+							SCIMSchemaDefinitions.SCIMUserSchemaDefinition.FAMILY_NAME);
 					nameAttribute.setSubAttribute(familyNameAttribute);
 				}
-				
+
 				if(attributeSet.getAttribute(LdapScimAttrMap.givenName.getValue()) !=null){			
 					SimpleAttribute givenNameAttribute = createSimpleSubAttribute(SCIMConstants.UserSchemaConstants.GIVEN_NAME, 
-															attributeSet.getAttribute(LdapScimAttrMap.givenName.getValue()).getStringValue(),
-															SCIMSchemaDefinitions.SCIMUserSchemaDefinition.GIVEN_NAME);
+							attributeSet.getAttribute(LdapScimAttrMap.givenName.getValue()).getStringValue(),
+							SCIMSchemaDefinitions.SCIMUserSchemaDefinition.GIVEN_NAME);
 					nameAttribute.setSubAttribute(givenNameAttribute);
 				}
-				
+
 				if(attributeSet.getAttribute(LdapScimAttrMap.middleName.getValue()) !=null){		
 					SimpleAttribute middleNameAttribute = createSimpleSubAttribute(SCIMConstants.UserSchemaConstants.MIDDLE_NAME, 
-															attributeSet.getAttribute(LdapScimAttrMap.middleName.getValue()).getStringValue(),
-														SCIMSchemaDefinitions.SCIMUserSchemaDefinition.MIDDLE_NAME);
+							attributeSet.getAttribute(LdapScimAttrMap.middleName.getValue()).getStringValue(),
+							SCIMSchemaDefinitions.SCIMUserSchemaDefinition.MIDDLE_NAME);
 					nameAttribute.setSubAttribute(middleNameAttribute);
 				}
-			
+
 				if(attributeSet.getAttribute(LdapScimAttrMap.honorificPrefix.getValue()) !=null){	
 					SimpleAttribute honoroficPrefixAttribute = createSimpleSubAttribute(SCIMConstants.UserSchemaConstants.HONORIFIC_PREFIX, 
-																attributeSet.getAttribute(LdapScimAttrMap.honorificPrefix.getValue()).getStringValue(),
-																SCIMSchemaDefinitions.SCIMUserSchemaDefinition.HONORIFIC_PREFIX);
-				nameAttribute.setSubAttribute(honoroficPrefixAttribute);
+							attributeSet.getAttribute(LdapScimAttrMap.honorificPrefix.getValue()).getStringValue(),
+							SCIMSchemaDefinitions.SCIMUserSchemaDefinition.HONORIFIC_PREFIX);
+					nameAttribute.setSubAttribute(honoroficPrefixAttribute);
 				}
-			
+
 				if(attributeSet.getAttribute(LdapScimAttrMap.honorificSuffix.getValue()) !=null){	
 					SimpleAttribute honoroficSuffixAttribute = createSimpleSubAttribute(SCIMConstants.UserSchemaConstants.HONORIFIC_SUFFIX, 
-																attributeSet.getAttribute(LdapScimAttrMap.honorificSuffix.getValue()).getStringValue(),
-																SCIMSchemaDefinitions.SCIMUserSchemaDefinition.HONORIFIC_SUFFIX);
+							attributeSet.getAttribute(LdapScimAttrMap.honorificSuffix.getValue()).getStringValue(),
+							SCIMSchemaDefinitions.SCIMUserSchemaDefinition.HONORIFIC_SUFFIX);
 					nameAttribute.setSubAttribute(honoroficSuffixAttribute);
 				}
-			
+
 				user.setAttribute(nameAttribute);
 			}
 
@@ -156,7 +159,7 @@ public class LdapUtil {
 
 	public static LDAPAttributeSet copyUserToLdap(User user) {
 		LDAPAttributeSet attributeSet = new LDAPAttributeSet();
-		attributeSet.add(new LDAPAttribute("objectclass", "inetOrgPerson"));
+		attributeSet.add(new LDAPAttribute(LdapConstants.objectclass, LdapConstants.userClass));
 		Map<String, Attribute> attributeList = user.getAttributeList();
 		for (Attribute attribute : attributeList.values()) {
 			if (attribute instanceof SimpleAttribute) {
@@ -255,9 +258,9 @@ public class LdapUtil {
 									attributeSet = addSimpleAttribute(parent, attributeSet,
 											(Attribute) ((SimpleAttribute) subSubAttribute));
 								} /*
-									 * if (UserSchemaConstants.ADDRESSES.equals(
-									 * parent)) { parent=parent+"_"+ }
-									 */
+								 * if (UserSchemaConstants.ADDRESSES.equals(
+								 * parent)) { parent=parent+"_"+ }
+								 */
 
 							} else if (subSubAttribute instanceof MultiValuedAttribute) {
 								attributeSet = addMultiValuedPrimitiveAttribute(
@@ -387,7 +390,7 @@ public class LdapUtil {
 		return simpleAttribute;
 
 	}
-	
+
 	private static boolean isNameSetInLdap(LDAPAttributeSet attributeSet){
 		if(attributeSet.getAttribute(LdapScimAttrMap.formatted.getValue()) != null )
 			return true;
@@ -403,5 +406,30 @@ public class LdapUtil {
 			return true;
 		else 
 			return false;
+	}
+
+	public static LDAPAttributeSet copyGroupToLdap(Group group) {
+		LDAPAttributeSet attributeSet = new LDAPAttributeSet();
+		attributeSet.add(new LDAPAttribute(LdapConstants.objectclass, LdapConstants.groupClass));
+		try {
+			attributeSet.add(new LDAPAttribute(GroupConstants.cn, group.getDisplayName()));
+			attributeSet.add(new LDAPAttribute(GroupConstants.groupID, group.getId()));
+			attributeSet.add(new LDAPAttribute(GroupConstants.localityname, group.getLocation()));
+			attributeSet.add(new LDAPAttribute(GroupConstants.revision, group.getCreatedDate().toString()));
+			attributeSet.add(new LDAPAttribute(GroupConstants.description, group.getLastModified().toString()));
+			//List<String> members = group.getMembersWithDisplayName();
+			List<Object> members = group.getMembers();
+			String[] groupMembers = new String[members.size()];
+			int i=0;
+			for(Object id: members){
+				String uid = (String) id;
+				String dn = UserConstants.uid+ "="+ uid+ "," +LdapConstants.userContainer;
+				groupMembers[i++] = dn;
+			}
+			attributeSet.add(new LDAPAttribute(GroupConstants.member, groupMembers));
+		} catch (CharonException e) {
+			e.printStackTrace();
+		}
+		return attributeSet;
 	}
 }
