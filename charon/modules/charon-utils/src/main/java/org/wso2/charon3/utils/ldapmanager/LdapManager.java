@@ -443,6 +443,7 @@ public class LdapManager implements UserManager {
 				}
 				groupList.add(group);
 			}
+			groupList.set(0, groupList.size() - 1);
 			return (List<Object>) CopyUtil.deepCopy(groupList);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
