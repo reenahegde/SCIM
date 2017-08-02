@@ -5,7 +5,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.wso2.charon3.core.attributes.Attribute;
 import org.wso2.charon3.core.attributes.ComplexAttribute;
@@ -39,23 +38,6 @@ import com.novell.ldap.LDAPEntry;
 
 public class LdapUtil {
 
-	public static LDAPEntry copyUserToLdap0(User user) throws CharonException {
-		System.out.println(user);
-		LDAPAttributeSet attributeSet = new LDAPAttributeSet();
-		attributeSet.add(new LDAPAttribute("uid", user.getId()));
-
-		Map<String, Attribute> attributes = user.getAttributeList();
-		Set<String> keys = attributes.keySet();
-		for (String key : keys) {
-			attributeSet.add(new LDAPAttribute(key, attributes.get(key).toString()));
-		}
-		String dn = "cn=" + user.getId() + ",ou=users,o=people";
-		LDAPEntry entry = new LDAPEntry(dn, attributeSet);
-		// attributeSet.addAll((Collection) user.getAttributeList());
-		// (LDAPAttributeSet) CopyUtil.deepCopy(map);
-		return entry;
-	}
-	
 	public static User convertLdapToUserForList(LDAPEntry entry) {
 		User user = new User();
 		try {
@@ -95,12 +77,12 @@ public class LdapUtil {
 				user.setLocation("http://localhost:8080/scim/v2/Users/" + user.getId());
 			}
 		} catch (Exception e) {
-			System.out.println(e);
+			e.printStackTrace();
 		}
 		return user;
 
 	}
-	
+
 
 	/**
 	 * Converts LDAP Entry object in to SCIM object
@@ -255,7 +237,7 @@ public class LdapUtil {
 			}
 
 		} catch (Exception e) {
-			System.out.println(e);
+			e.printStackTrace();
 		}
 		return user;
 	}
@@ -339,9 +321,9 @@ public class LdapUtil {
 									if (simpleAttribute.getValue().equals(UserSchemaConstants.HOME)) {
 										isHome = true;
 									} else {
-										if (LdapScimAttrMap.addresses.isSet()) {
+										/*if (LdapScimAttrMap.addresses.isSet()) {
 											continue;
-										}
+										}*/
 										break;
 									}
 								} else if (subSubAttribute.getName().equals("formatted")) {
@@ -350,25 +332,36 @@ public class LdapUtil {
 							}
 							if (isHome) {
 								attributeSet.add(new LDAPAttribute(LdapIPersonConstants.homePostalAddress, value));
+							} else {
+								for (Attribute subSubAttribute : subSubAttributes.values()) {
+									if (subSubAttribute.getName().equals(LdapScimAttrMap.streetAddress.name())
+											||subSubAttribute.getName().equals(LdapScimAttrMap.locality.name())
+											||subSubAttribute.getName().equals(LdapScimAttrMap.region.name())
+											||subSubAttribute.getName().equals(LdapScimAttrMap.postalCode.name())
+											||subSubAttribute.getName().equals(LdapScimAttrMap.country.name())) {
+										attributeSet = addSimpleAttribute(null, attributeSet,
+												(Attribute) ((SimpleAttribute) subSubAttribute));
+									}
+								}
 							}
-							continue;
-						}
-						// If address END-------
-						String parent = getAttributeName(subAttribute);
-						for (Attribute subSubAttribute : subSubAttributes.values()) {
-							if (subSubAttribute instanceof SimpleAttribute) {
-								if (subSubAttribute.getName().equals("value")) {
-									attributeSet = addSimpleAttribute(parent, attributeSet,
-											(Attribute) ((SimpleAttribute) subSubAttribute));
-								} /*
-								 * if (UserSchemaConstants.ADDRESSES.equals(
-								 * parent)) { parent=parent+"_"+ }
-								 */
+							// If address END-------
+						} else {
+							String parent = getAttributeName(subAttribute);
+							for (Attribute subSubAttribute : subSubAttributes.values()) {
+								if (subSubAttribute instanceof SimpleAttribute) {
+									if (subSubAttribute.getName().equals("value")) {
+										attributeSet = addSimpleAttribute(parent, attributeSet,
+												(Attribute) ((SimpleAttribute) subSubAttribute));
+									} /*
+									 * if (UserSchemaConstants.ADDRESSES.equals(
+									 * parent)) { parent=parent+"_"+ }
+									 */
 
-							} else if (subSubAttribute instanceof MultiValuedAttribute) {
-								attributeSet = addMultiValuedPrimitiveAttribute(
-										((MultiValuedAttribute) subSubAttribute).getAttributePrimitiveValues(),
-										subSubAttribute.getName(), attributeSet);
+								} else if (subSubAttribute instanceof MultiValuedAttribute) {
+									attributeSet = addMultiValuedPrimitiveAttribute(
+											((MultiValuedAttribute) subSubAttribute).getAttributePrimitiveValues(),
+											subSubAttribute.getName(), attributeSet);
+								}
 							}
 						}
 					}
@@ -393,7 +386,6 @@ public class LdapUtil {
 			} else {
 				name = LdapScimAttrMap.valueOf(simpleAttribute.getName());
 			}
-
 			if (name != null && attributeSet != null) {
 				attributeSet.add(new LDAPAttribute(name.getValue(), simpleAttribute.getValue().toString()));
 			}
@@ -598,7 +590,7 @@ public class LdapUtil {
 		}
 		return attributeSet;
 	}
-	
+
 	/**
 	 * Parses LDAP date "EEE MMM dd HH:mm:ss z yyyy" to Scim date
 	 * @param dateStr
