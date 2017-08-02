@@ -40,27 +40,33 @@ public class LdapUpdateHelper {
 
 			List<Object> members = group.getMembers();
 			Set<String> addMembers = new HashSet<>();
+			Set<String> remMembers = new HashSet<>();
 			if(members!=null) {
 				for(Object id: members){
 					String uid = (String) id;
 					String dn = UserConstants.uid+ "="+ uid+ "," +LdapConstants.userContainer;
 					addMembers.add(dn);
 				}
-				modList.add(new LDAPModification(LDAPModification.ADD, new LDAPAttribute(GroupConstants.member, addMembers.toArray(new String[addMembers.size()]))));
 			}
 			List<Object> oldGrpMembers = oldGrp.getMembers();
 			if(oldGrpMembers!=null) {
-				Set<String> remMembers = new HashSet<>();
+
 				for(Object id: oldGrpMembers){
 					String uid = (String) id;
 					String dn = UserConstants.uid+ "="+ uid+ "," +LdapConstants.userContainer;
 					if(!addMembers.contains(dn)){
 						remMembers.add(dn);
+					} else {
+						addMembers.remove(dn);
 					}
 				}
-				modList.add(new LDAPModification(LDAPModification.DELETE, new LDAPAttribute(GroupConstants.member, remMembers.toArray(new String[remMembers.size()]))));
 			}
-			
+			if(remMembers!=null && !remMembers.isEmpty())
+				modList.add(new LDAPModification(LDAPModification.DELETE, new LDAPAttribute(GroupConstants.member, remMembers.toArray(new String[remMembers.size()]))));
+			if(addMembers!=null && !addMembers.isEmpty())
+				modList.add(new LDAPModification(LDAPModification.ADD, new LDAPAttribute(GroupConstants.member, addMembers.toArray(new String[addMembers.size()]))));
+
+
 		} catch (CharonException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

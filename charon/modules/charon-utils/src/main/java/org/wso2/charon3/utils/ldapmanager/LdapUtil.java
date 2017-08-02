@@ -591,6 +591,44 @@ public class LdapUtil {
 		return attributeSet;
 	}
 
+	public static Group copyLdapToGroup(LDAPEntry entry, List<LDAPEntry> member) throws CharonException, BadRequestException {
+		Group group =new Group();
+		group.setSchemas();
+		LDAPAttributeSet attributeSet = entry.getAttributeSet();
+		group.setId(attributeSet.getAttribute(GroupConstants.cn).getStringValue());
+		try {
+			if (attributeSet.getAttribute(GroupConstants.createdDate) != null) {
+				group.setCreatedDate(LdapUtil.parseDate(attributeSet.getAttribute(GroupConstants.createdDate).getStringValue()));
+			}
+			if (attributeSet.getAttribute(GroupConstants.modifiedDate) != null) {
+				group.setLastModified(LdapUtil.parseDate(attributeSet.getAttribute(GroupConstants.modifiedDate).getStringValue()));
+			}
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (attributeSet.getAttribute(GroupConstants.location) != null) {
+			group.setLocation(attributeSet.getAttribute(GroupConstants.location).getStringValue());
+		}
+		if (attributeSet.getAttribute(GroupConstants.name) != null) {
+			group.setDisplayName(attributeSet.getAttribute(GroupConstants.name).getStringValue());
+		}
+		if (attributeSet.getAttribute(GroupConstants.member) != null) {
+			for(LDAPEntry memEntry :member){
+				LDAPAttributeSet userAttrSet = memEntry.getAttributeSet();
+				String uid, name;
+				if (userAttrSet.getAttribute(LdapScimAttrMap.id.getValue()) != null) {
+					uid = userAttrSet.getAttribute(LdapScimAttrMap.id.getValue()).getStringValue();
+					if (userAttrSet.getAttribute(LdapScimAttrMap.displayName.getValue()) != null) {
+						name = userAttrSet.getAttribute(LdapScimAttrMap.displayName.getValue()).getStringValue();
+						group.setMember(uid, name);
+					}
+				}
+			}
+		}
+		return group;
+	}
+
 	/**
 	 * Parses LDAP date "EEE MMM dd HH:mm:ss z yyyy" to Scim date
 	 * @param dateStr

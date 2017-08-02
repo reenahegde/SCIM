@@ -23,8 +23,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.wso2.charon3.core.exceptions.BadRequestException;
 import org.wso2.charon3.core.exceptions.CharonException;
 import org.wso2.charon3.core.exceptions.ConflictException;
@@ -49,7 +47,7 @@ import com.novell.ldap.LDAPSearchResults;
  * This is a ldap user store.
  */
 public class LdapManager implements UserManager {
-	private static final Logger logger = LoggerFactory.getLogger(LdapManager.class);
+	//private static final Logger logger = LoggerFactory.getLogger(LdapManager.class);
 	//in memory user manager stores users
 	//ConcurrentHashMap<String, User> inMemoryUserList = new ConcurrentHashMap<String, User>();
 	//ConcurrentHashMap<String, Group> inMemoryGroupList = new ConcurrentHashMap<String, Group>();
@@ -317,49 +315,26 @@ public class LdapManager implements UserManager {
 		try {
 			LDAPConnection lc = LdapConnectUtil.getConnection(false);
 			LDAPEntry entry =lc.read(GroupConstants.cn+"="+id+","+LdapConstants.groupContainer); 
-				group =new Group();
-				LDAPAttributeSet attributeSet = entry.getAttributeSet();
-				group.setId(attributeSet.getAttribute(GroupConstants.cn).getStringValue());
-				if (attributeSet.getAttribute(GroupConstants.createdDate) != null) {
-					group.setCreatedDate(LdapUtil.parseDate(attributeSet.getAttribute(GroupConstants.createdDate).getStringValue()));
-				}
-				if (attributeSet.getAttribute(GroupConstants.modifiedDate) != null) {
-					group.setLastModified(LdapUtil.parseDate(attributeSet.getAttribute(GroupConstants.modifiedDate).getStringValue()));
-				}
-				if (attributeSet.getAttribute(GroupConstants.location) != null) {
-					group.setLocation(attributeSet.getAttribute(GroupConstants.location).getStringValue());
-				}
-				if (attributeSet.getAttribute(GroupConstants.name) != null) {
-					group.setDisplayName(attributeSet.getAttribute(GroupConstants.name).getStringValue());
-				}
-				if (attributeSet.getAttribute(GroupConstants.member) != null) {
-					String[] memIds = attributeSet.getAttribute(GroupConstants.member).getStringValueArray();
-					for(String dn :memIds){
-						try{
-							LDAPEntry userEntry = lc.read(dn);
-							LDAPAttributeSet userAttrSet = userEntry.getAttributeSet();
-							String uid, name;
-							if (userAttrSet.getAttribute(LdapScimAttrMap.id.getValue()) != null) {
-								uid = userAttrSet.getAttribute(LdapScimAttrMap.id.getValue()).getStringValue();
-								if (userAttrSet.getAttribute(LdapScimAttrMap.displayName.getValue()) != null) {
-									name = userAttrSet.getAttribute(LdapScimAttrMap.displayName.getValue()).getStringValue();
-									group.setMember(uid, name);
-								}
-							}
-						}catch (Exception e) {
-							// TODO: handle exception
-							e.printStackTrace();
-						}
+			List<LDAPEntry> memEntry = new ArrayList<>();
+			LDAPAttributeSet attributeSet = entry.getAttributeSet();
+			if (attributeSet.getAttribute(GroupConstants.member) != null) {
+				String[] memIds = attributeSet.getAttribute(GroupConstants.member).getStringValueArray();
+				for(String dn :memIds){
+					try{
+						LDAPEntry userEntry = lc.read(dn);
+						memEntry.add(userEntry);
+					}catch (Exception e) {
+						// TODO: handle exception
+						e.printStackTrace();
 					}
 				}
-				group.setSchemas();
-			
+			}
+			group = LdapUtil.copyLdapToGroup(entry, memEntry);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		
 		if(group ==null) {
-			throw new NotFoundException("No user with the id : " + id);
+			throw new NotFoundException("No group with the id : " + id);
 		} else {
 			return (Group) CopyUtil.deepCopy(group);
 		}
@@ -380,7 +355,7 @@ public class LdapManager implements UserManager {
 			System.out.println("Error:  " + e.toString());
 			throw new NotFoundException("No Group with the id : " + id);
 		} 
-	
+
 	}
 
 	@Override
@@ -477,8 +452,7 @@ public class LdapManager implements UserManager {
 			System.out.println(e.getMessage());
 			throw new NotFoundException(e.getLDAPErrorMessage());
 		}
-		return (Group) CopyUtil.deepCopy(group);
-
+		return getGroup(group.getId(), map);
 	}
 
 	@Override
