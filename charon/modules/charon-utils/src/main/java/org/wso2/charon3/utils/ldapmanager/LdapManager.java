@@ -305,6 +305,12 @@ public class LdapManager implements UserManager {
 			System.out.println(e.getMessage());
 			throw new ConflictException("Group with the id : " + cn + "already exists");
 		}
+		try {
+			group = getGroup(cn, map);
+		} catch (NotFoundException e) {
+			// TODO Auto-generated catch block
+			throw new CharonException(e.getMessage());
+		}
 		return (Group) CopyUtil.deepCopy(group);
 	}
 
@@ -384,7 +390,7 @@ public class LdapManager implements UserManager {
 				LDAPEntry nextEntry = searchResults.next();
 				group =new Group();
 				LDAPAttributeSet attributeSet = nextEntry.getAttributeSet();
-				group.setDisplayName(attributeSet.getAttribute(GroupConstants.cn).getStringValue());
+				group.setId(attributeSet.getAttribute(GroupConstants.cn).getStringValue());
 				if (attributeSet.getAttribute(GroupConstants.createdDate) != null) {
 					group.setCreatedDate(LdapUtil.parseDate(attributeSet.getAttribute(GroupConstants.createdDate).getStringValue()));
 				}
@@ -395,7 +401,7 @@ public class LdapManager implements UserManager {
 					group.setLocation(attributeSet.getAttribute(GroupConstants.location).getStringValue());
 				}
 				if (attributeSet.getAttribute(GroupConstants.name) != null) {
-					group.setId(attributeSet.getAttribute(GroupConstants.name).getStringValue());
+					group.setDisplayName(attributeSet.getAttribute(GroupConstants.name).getStringValue());
 				}
 				if (attributeSet.getAttribute(GroupConstants.member) != null) {
 					String[] memIds = attributeSet.getAttribute(GroupConstants.member).getStringValueArray();
