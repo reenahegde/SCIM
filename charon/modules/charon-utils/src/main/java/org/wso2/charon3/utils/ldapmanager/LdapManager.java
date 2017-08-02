@@ -352,6 +352,7 @@ public class LdapManager implements UserManager {
 						}
 					}
 				}
+				group.setSchemas();
 			
 		} catch(Exception e) {
 			e.printStackTrace();
