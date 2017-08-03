@@ -43,9 +43,10 @@ public class DefaultCharonManager {
     private static JSONDecoder jsonDecoder = new JSONDecoder();
     private static JSONEncoder jsonEncoder = new JSONEncoder();
 
-    private static final String USERS_URL = "http://localhost:8080/scim/Users";
-    private static final String GROUPS_URL = "http://localhost:8080/scim/Groups";
-
+    private static final String USERS_URL = "http://localhost:8080/scim/v2/Users";
+    private static final String GROUPS_URL = "http://localhost:8080/scim/v2/Groups";
+    private static final String SERVICE_URL = "http://localhost:8080/scim/v2/ServiceProviderConfig";
+    private static final String RESOURCE_URL = "http://localhost:8080/scim/v2/ResourceType";
     /**
      * Perform initialization.
      */
@@ -53,6 +54,8 @@ public class DefaultCharonManager {
         //Define endpoint urls to be used in Location Header
         endpointURLs.put(SCIMConstants.USER_ENDPOINT, USERS_URL);
         endpointURLs.put(SCIMConstants.GROUP_ENDPOINT, GROUPS_URL);
+        endpointURLs.put(SCIMConstants.SERVICE_PROVIDER_CONFIG_ENDPOINT, SERVICE_URL);
+        endpointURLs.put(SCIMConstants.RESOURCE_TYPE_ENDPOINT, RESOURCE_URL);
         //register endpoint URLs in AbstractResourceEndpoint since they are called with in the API
         registerEndpointURLs();
     }

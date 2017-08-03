@@ -375,7 +375,7 @@ public class LdapUtil {
 		}
 		return attributeSet;
 	}
-
+	
 	private static LDAPAttributeSet addSimpleAttribute(String parentName, LDAPAttributeSet attributeSet,
 			Attribute attribute) {
 		SimpleAttribute simpleAttribute = (SimpleAttribute) attribute;
