@@ -235,6 +235,56 @@ public class LdapUtil {
 				user.setAttribute(addressAttribute);
 
 			}
+			if(isEmailSetInLdap(attributeSet)){
+				SimpleAttribute emailType;
+				SimpleAttribute emailValue;
+				MultiValuedAttribute emailAttribute = createMultiValuedAttribute(
+						SCIMSchemaDefinitions.SCIMUserSchemaDefinition.EMAILS,
+						SCIMConstants.UserSchemaConstants.EMAILS, user);
+				if (attributeSet.getAttribute(LdapScimAttrMap.emails_home.getValue()) != null) {
+					String homeEmailcomplexAttributeName = SCIMConstants.UserSchemaConstants.EMAILS + "_"
+							+ SCIMConstants.UserSchemaConstants.HOME;
+					ComplexAttribute homeEmailcomplexAttribute = createComplexAttribute(
+							SCIMSchemaDefinitions.SCIMUserSchemaDefinition.EMAILS, homeEmailcomplexAttributeName,
+							user, false);
+					homeEmailcomplexAttribute.setMultiValued(false);
+					
+					emailType = createSimpleSubAttribute(SCIMConstants.CommonSchemaConstants.TYPE,
+							SCIMConstants.UserSchemaConstants.HOME,
+							SCIMSchemaDefinitions.SCIMUserSchemaDefinition.EMAIL_TYPE);
+					homeEmailcomplexAttribute.setSubAttribute(emailType);
+
+					emailValue = createSimpleSubAttribute(
+							SCIMConstants.CommonSchemaConstants.VALUE,
+							attributeSet.getAttribute(LdapScimAttrMap.emails_home.getValue()).getStringValue(),
+							SCIMSchemaDefinitions.SCIMUserSchemaDefinition.EMAIL_VALUE);
+					homeEmailcomplexAttribute.setSubAttribute(emailValue);
+					emailAttribute.setAttributeValue(homeEmailcomplexAttribute);
+				}
+				
+				if (attributeSet.getAttribute(LdapScimAttrMap.emails_work.getValue()) != null) {
+					String workEmailcomplexAttributeName = SCIMConstants.UserSchemaConstants.EMAILS + "_"
+							+ SCIMConstants.UserSchemaConstants.WORK;
+					ComplexAttribute workEmailcomplexAttribute = createComplexAttribute(
+							SCIMSchemaDefinitions.SCIMUserSchemaDefinition.EMAILS, workEmailcomplexAttributeName,
+							user, false);
+					workEmailcomplexAttribute.setMultiValued(false);
+					
+					emailType = createSimpleSubAttribute(SCIMConstants.CommonSchemaConstants.TYPE,
+							SCIMConstants.UserSchemaConstants.WORK,
+							SCIMSchemaDefinitions.SCIMUserSchemaDefinition.EMAIL_TYPE);
+					workEmailcomplexAttribute.setSubAttribute(emailType);
+
+					emailValue = createSimpleSubAttribute(
+							SCIMConstants.CommonSchemaConstants.VALUE,
+							attributeSet.getAttribute(LdapScimAttrMap.emails_work.getValue()).getStringValue(),
+							SCIMSchemaDefinitions.SCIMUserSchemaDefinition.EMAIL_VALUE);
+					workEmailcomplexAttribute.setSubAttribute(emailValue);
+					emailAttribute.setAttributeValue(workEmailcomplexAttribute);
+				}
+				user.setAttribute(emailAttribute);
+				
+			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -469,7 +519,7 @@ public class LdapUtil {
 	}
 
 	/**
-	 * Creates simple subAttribute for SCIM
+	 * Creates simple Attribute for SCIM
 	 * 
 	 * @param createdDate
 	 * @throws CharonException
@@ -485,6 +535,15 @@ public class LdapUtil {
 
 	}
 
+	/**
+	 * Creates Multi-Valued Attribute for SCIM
+	 * @param schema
+	 * @param mvAttrName
+	 * @param user
+	 * @return
+	 * @throws CharonException
+	 * @throws BadRequestException
+	 */
 	private static MultiValuedAttribute createMultiValuedAttribute(AttributeSchema schema, String mvAttrName, User user)
 			throws CharonException, BadRequestException {
 		MultiValuedAttribute mvAttribute;
