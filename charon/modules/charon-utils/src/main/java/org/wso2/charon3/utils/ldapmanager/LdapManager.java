@@ -31,8 +31,11 @@ import org.wso2.charon3.core.exceptions.NotImplementedException;
 import org.wso2.charon3.core.extensions.UserManager;
 import org.wso2.charon3.core.objects.Group;
 import org.wso2.charon3.core.objects.User;
+import org.wso2.charon3.core.schema.SCIMConstants;
 import org.wso2.charon3.core.utils.CopyUtil;
+import org.wso2.charon3.core.utils.codeutils.ExpressionNode;
 import org.wso2.charon3.core.utils.codeutils.Node;
+import org.wso2.charon3.core.utils.codeutils.OperationNode;
 import org.wso2.charon3.core.utils.codeutils.SearchRequest;
 import org.wso2.charon3.utils.ldapmanager.LdapConstants.GroupConstants;
 
@@ -51,6 +54,11 @@ public class LdapManager implements UserManager {
 	//in memory user manager stores users
 	//ConcurrentHashMap<String, User> inMemoryUserList = new ConcurrentHashMap<String, User>();
 	//ConcurrentHashMap<String, Group> inMemoryGroupList = new ConcurrentHashMap<String, Group>();
+	
+	//private static final String SPACE = " ";
+	private static final String LEFT_BRACKET = "(";
+	private static final String RIGHT_BRACKET = ")";
+	private static final String COLON = ":";
 
 	@Override
 	public User createUser(User user, Map<String, Boolean> map)
@@ -368,22 +376,58 @@ public class LdapManager implements UserManager {
 	public List<Object> listGroupsWithGET(Node rootNode, int startIndex, int count, String sortBy,
 			String sortOrder, Map<String, Boolean> requiredAttributes)
 					throws CharonException, NotImplementedException, BadRequestException {
+		String search ="";
 		if (sortBy != null || sortOrder != null) {
 			throw new NotImplementedException("Sorting is not supported");
 		}  else if (startIndex != 1) {
 			throw new NotImplementedException("Pagination is not supported");
 		} else if (rootNode != null) {
-			throw new NotImplementedException("Filtering is not supported");
+			search = getLdapSearch(rootNode, search, SCIMConstants.GROUP_CORE_SCHEMA_URI);
+			return listGroups(requiredAttributes, search);
+			//throw new NotImplementedException("Filtering is not supported");
 		} else {
 			return listGroups(requiredAttributes);
 		}
 	}
 
+	private String getLdapSearch(Node node, String search, String schema) {
+
+		if(node == null)  {
+			return search;
+		}
+
+		search = getLdapSearch(node.getLeftNode(), search, schema);
+		search = getLdapSearch(node.getRightNode(), search, schema);
+		//Terminal node
+		if(node.getLeftNode() == null && node.getRightNode() == null)  {
+			ExpressionNode expNode = (ExpressionNode) node;
+			LdapScimOpMap op = LdapScimOpMap.valueOf(expNode.getOperation());
+			String attr = expNode.getAttributeValue();
+			attr = LdapScimGroupMap.valueOf(attr.split(schema+COLON)[1]).getValue();
+			String value = expNode.getValue();
+			search += LEFT_BRACKET+attr+op.getValue()+value+RIGHT_BRACKET;
+		} else {
+			OperationNode opNodes = (OperationNode) node;
+			LdapScimOpMap op = LdapScimOpMap.valueOf(opNodes.getOperation());
+			search = LEFT_BRACKET+op.getValue() +search+RIGHT_BRACKET;
+		}
+		
+
+		return search;
+	}
 	private List<Object> listGroups(Map<String, Boolean> requiredAttributes) throws CharonException, BadRequestException {
+		return listGroups(requiredAttributes, null);
+	}
+	private List<Object> listGroups(Map<String, Boolean> requiredAttributes, String searchString) throws CharonException, BadRequestException {
 		List<Object> groupList = new ArrayList<>();
+		if(searchString == null) {
+			searchString = "cn=*";
+		} /*else {
+			searchString="cn=* & "+searchString;
+		}*/
 		try {
 			LDAPConnection lc = LdapConnectUtil.getConnection(false);
-			LDAPSearchResults searchResults =lc.search(LdapConstants.groupContainer, LDAPConnection.SCOPE_ONE, "cn=*",null, false); 
+			LDAPSearchResults searchResults =lc.search(LdapConstants.groupContainer, LDAPConnection.SCOPE_ONE, searchString,null, false); 
 			groupList.add(searchResults.getCount());
 			Group group;
 			while (searchResults.hasMore()) {
