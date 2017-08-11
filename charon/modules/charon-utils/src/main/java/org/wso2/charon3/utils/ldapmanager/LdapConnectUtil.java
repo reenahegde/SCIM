@@ -28,9 +28,9 @@ public class LdapConnectUtil {
 
 		String ldapHost, loginDN, password;
 		if (!isTest) {
-			ldapHost       = "192.168.1.11";
+			ldapHost       = "192.168.1.10";
 			loginDN        = "cn=admin,ou=services,o=system";
-			password       = "admin123";
+			password       = "ldapPass";
 		} else {
 			ldapHost       = "10.0.8.54";
 			loginDN        = "cn=admin,ou=services,o=system";
